@@ -1,0 +1,63 @@
+<h1 class="page-header">Lista de Afianzadoras</h1>
+
+<div class="col-md-12 col-sm-12">
+	<tabset>
+		 <tab heading="Listar Afianzadoras">
+		 	<div class="row">
+		 		<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
+		 			<div loading-container="tableParams.settings().$loading">
+			 			<table ng-table="tableParams" class="table table-striped table-hover" show-filter="true">
+			 				<tr ng-repeat="afianzadora in items" style="cursor: pointer;">
+			 					<td data-title="'Nombre'" sortable="'Nombre'" filter="{ 'Nombre': 'text' }">
+			 						{{afianzadora.Nombre}}
+			 					</td>
+			 					<td data-title="'Acciones'">
+			 						<button class="btn btn-default" type="button" ng-click="mdlEditar(afianzadora)">
+			 							Editar
+			 						</button>
+			 						<button class="btn btn-warning" type="button" ng-click="mdlEliminar(afianzadora)">
+			 							Eliminar
+			 						</button>
+			 					</td>
+			 				</tr>
+			 			</table>
+			 			<alert type="info" ng-show="items.length<=0">No se encontraron registros</alert>
+		 			</div>
+		 		</div>
+		 	</div>
+		 </tab>
+
+		 <tab heading="Agregar Afianzadora">
+		 	<div class="row">
+		 		<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
+		 			<form ng-submit="nuevo()">
+		 				<div class="form-group has-{{ (!afianzadora.Nombre ? 'warning' : 'success') }} has-feedback">
+					 		<label class="control-label" for="txtAfianzadoraNombre">Nombre de Afianzadora</label>
+					 		<input ng-model="afianzadora.Nombre" placeholder="Nombre de Afianzadora" type="text" class="form-control" id="txtAfianzadoraNombre">
+
+					 		<span ng-show="afianzadora.Nombre" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					 		<span ng-show="!afianzadora.Nombre" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+					 		<span class="sr-only"></span>
+					 	</div>
+					 	<button ng-disabled="!afianzadora.Nombre" class="btn btn-primary btn-block" type="submit">
+					 		Guardar
+					 	</button>
+		 			</form>
+		 		</div>
+		 	</div>
+		 </tab>
+	</tabset>
+</div>
+
+<script type="text/ng-template" id="mdlConfirm.html">
+	<div class="modal-header">
+		<h3 class="modal-title">{{ miParam }}</h3>
+     </div>
+     <div class="modal-body">
+       {{ msg }}
+     <div class="modal-footer">
+       <button class="btn btn-primary" ng-click="test()">Aceptar</button>
+       <button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+     </div>
+</script>
