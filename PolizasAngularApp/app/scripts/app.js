@@ -38,6 +38,10 @@ angular
         templateUrl: view + 'views/notfound.html',
         controller: 'NotfoundCtrl'
       })
+      .when('/Areas', {
+        templateUrl: 'views/areas.html',
+        controller: 'AreasCtrl'
+      })
       .otherwise({
         redirectTo: '/notfound'
       });

@@ -49,6 +49,7 @@
               <li class="active"><a href="#/">Home</a></li>
               <li><a ng-href="#/about">About</a></li>
               <li><a ng-href="#/Afianzadoras">Afianzadoras</a></li>
+              <li><a ng-href="#/Areas">Areas</a></li>
             </ul>
           </div>
         </div>
@@ -68,7 +69,7 @@
       </div>
     </div>
 
-    <script type="text/ng-template" id="mdlConfirm.html">
+    <script type="text/ng-template" id="mdlDefaultModal.html">
       <div class="modal-header">
         <h3 class="modal-title">{{ title }}</h3>
       </div>
@@ -117,9 +118,14 @@
         <script src="scripts/controllers/notfound.js"></script>
         <script src="scripts/services/api.js"></script>
         <script src="scripts/services/afianzadoraservice.js"></script>
-        <script src="scripts/controllers/modalinstance.js"></script>
+        <script src="scripts/controllers/defaultmodalinstance.js"></script>
         <script src="scripts/services/cbk.js"></script>
         <script src="scripts/controllers/afianzadoras.editar.modal.js"></script>
+        <script src="scripts/directives/loadingcontainer.js"></script>
+        <script src="scripts/services/tokenservice.js"></script>
+        <script src="scripts/controllers/areas.js"></script>
+        <script src="scripts/services/areasservice.js"></script>
+        <script src="scripts/services/datatable.js"></script>
         <!-- endbuild -->
 </body>
 </html>

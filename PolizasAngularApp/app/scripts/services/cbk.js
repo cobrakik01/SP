@@ -14,9 +14,10 @@ angular.module('polizasAngularAppApp')
 
     var factory = {};
     factory.alert = function(params) {
+
       var modalInstance = $modal.open({
-        templateUrl: (typeof params.template == 'undefined') ? 'mdlConfirm.html': params.template,
-        controller: (typeof params.controller == 'undefined') ? 'ModalinstancectrlCtrl' : params.controller,
+        templateUrl: 'mdlDefaultModal.html',
+        controller: 'DefaultModalInstanceCtrl',
         size: (typeof params.size == 'undefined') ? 'sm' : params.size,
         resolve: {
           params: function () {
@@ -25,18 +26,15 @@ angular.module('polizasAngularAppApp')
               title: (typeof params.title == 'undefined') ? 'Titulo' : params.title,
               data: (typeof params.data == 'undefined') ? undefined : params.data,
               accept: function(data) {
-                if(typeof params.url != 'undefined') {
-                  location.href = params.url;
-                }
                 if(typeof params.accept != 'undefined')
                 {
-                  params.accept({data: data, ctx: modalInstance});
+                  params.accept(data);
                 }
               },
               cancel: function(data) {
                 if(typeof params.cancel != 'undefined')
                 {
-                  params.cancel({data: data, ctx: modalInstance});
+                  params.cancel(data);
                 }
                 else
                 {
