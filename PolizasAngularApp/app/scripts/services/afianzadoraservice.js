@@ -42,5 +42,11 @@ angular.module('polizasAngularAppApp')
         fn(data);
       });
     };
+
+    service.edit = function(model, fn) {
+      $http.patch(url, model).success(function(data) {
+        fn(data);
+      });
+    };
   	return service;
   });

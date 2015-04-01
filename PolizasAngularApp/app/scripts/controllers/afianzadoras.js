@@ -13,7 +13,8 @@ angular.module('polizasAngularAppApp')
     AfianzadoraService,
     toaster, 
     DataTable,
-    cbk)
+    cbk,
+    $modal)
   {
 
     var self = $scope;
@@ -41,12 +42,17 @@ angular.module('polizasAngularAppApp')
     };
 
     self.mdlEditar = function(model) {
-        cbk.alert({
-            title: "Editar", 
-            msg: "Este es mi mensaje", 
-            data: model,
-            accept: function(data) {
-                console.log(data);
+        var modalInstance = $modal.open({
+            templateUrl: 'mdlEditarAfianzadora.html',
+            controller: 'AfianzadorasEditarModalCtrl',
+            size: 'sm',
+            resolve: {
+                params: function () {
+                    return {
+                        model: model,
+                        table: self.table
+                    };
+                }
             }
         });
     };
