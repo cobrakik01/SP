@@ -20,7 +20,7 @@ angular.module('polizasAngularAppApp')
     var self = $scope;
 
     self.afianzadora = {
-    	Nombre: ''
+    	nombre: ''
     };
 
     self.table = DataTable.params({
@@ -42,7 +42,7 @@ angular.module('polizasAngularAppApp')
     };
 
     self.mdlEditar = function(model) {
-        var modalInstance = $modal.open({
+        $modal.open({
             templateUrl: 'mdlEditarAfianzadora.html',
             controller: 'AfianzadorasEditarModalCtrl',
             size: 'sm',

@@ -18,7 +18,9 @@ angular
     'ngTouch',
     'ngTable',// https://github.com/esvit/ng-table/
     'toaster',// https://github.com/jirikavi/AngularJS-Toaster
-    'ui.bootstrap' // https://angular-ui.github.io/bootstrap/
+    'ui.bootstrap', // https://angular-ui.github.io/bootstrap/
+    'ui.utils', // http://angular-ui.github.io/ui-utils/#/routing
+    // 'ui.router' // https://github.com/angular-ui/ui-router
   ])
   .config(function ($routeProvider, view) {
     $routeProvider
@@ -30,7 +32,7 @@ angular
         templateUrl: view + 'views/about.html',
         controller: 'AboutCtrl'
       })
-      .when('/Afianzadoras', {
+      .when('/administrar/afianzadoras', {
         templateUrl: view + 'views/afianzadoras.html',
         controller: 'AfianzadorasCtrl'
       })
@@ -38,8 +40,8 @@ angular
         templateUrl: view + 'views/notfound.html',
         controller: 'NotfoundCtrl'
       })
-      .when('/Areas', {
-        templateUrl: 'views/areas.html',
+      .when('/administrar/areas', {
+        templateUrl: 'views/areas/areas.html',
         controller: 'AreasCtrl'
       })
       .otherwise({

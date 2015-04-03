@@ -46,10 +46,18 @@
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/Afianzadoras">Afianzadoras</a></li>
-              <li><a ng-href="#/Areas">Areas</a></li>
+              <li ui-route="#/" ng-class="{active: $uiRoute}">
+                <a ng-href="#/">Home</a>
+              </li>
+              <li ui-route="#/about" ng-class="{active: $uiRoute}">
+                <a ng-href="#/about">About</a>
+              </li>
+              <li ui-route="#/administrar/afianzadoras" ng-class="{active: $uiRoute}">
+                <a ng-href="#/administrar/afianzadoras">Afianzadoras</a>
+              </li>
+              <li ui-route="#/administrar/areas" ng-class="{active: $uiRoute}">
+                <a ng-href="#/administrar/areas">Areas</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -108,6 +116,8 @@
     <script src="bower_components/angularjs-toaster/toaster.js"></script>
     <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -115,18 +125,18 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/afianzadoras.js"></script>
         <script src="scripts/controllers/notfound.js"></script>
+        <script src="scripts/controllers/afianzadoras/afianzadoras.js"></script>
+        <script src="scripts/controllers/afianzadoras/afianzadoras.editar.modal.js"></script>
+        <script src="scripts/controllers/defaultmodalinstance.js"></script>
+        <script src="scripts/controllers/areas/areas.js"></script>
         <script src="scripts/services/api.js"></script>
         <script src="scripts/services/afianzadoraservice.js"></script>
-        <script src="scripts/controllers/defaultmodalinstance.js"></script>
         <script src="scripts/services/cbk.js"></script>
-        <script src="scripts/controllers/afianzadoras.editar.modal.js"></script>
-        <script src="scripts/directives/loadingcontainer.js"></script>
-        <script src="scripts/services/tokenservice.js"></script>
-        <script src="scripts/controllers/areas.js"></script>
         <script src="scripts/services/areasservice.js"></script>
         <script src="scripts/services/datatable.js"></script>
+        <script src="scripts/services/tokenservice.js"></script>
+        <script src="scripts/directives/loadingcontainer.js"></script>
         <!-- endbuild -->
 </body>
 </html>

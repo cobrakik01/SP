@@ -8,7 +8,12 @@
  * Controller of the polizasAngularAppApp
  */
 angular.module('polizasAngularAppApp')
-  .controller('AreasCtrl', function ($scope, AreasService) {
+  .controller('AreasCtrl', function (
+    $scope,
+    AreasService,toaster, 
+    DataTable,
+    cbk,
+    $modal) {
   	
   	$scope.load = function(){
   		$scope.items = AreasService.query(function(data){

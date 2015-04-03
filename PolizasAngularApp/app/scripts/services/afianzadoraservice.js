@@ -30,7 +30,7 @@ angular.module('polizasAngularAppApp')
     };
 
   	service.create = function(model, fn) {
-  		var data = {Nombre: model.Nombre};
+  		var data = {nombre: model.nombre};
   		$http.post(url, data).success(function(data) {
         fn(data);
       });

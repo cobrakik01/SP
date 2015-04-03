@@ -19,10 +19,9 @@ angular.module('polizasAngularAppApp')
 
   	$scope.editar = function() {
   		AfianzadoraService.edit($scope.af, function(data) {
-  			if(data.Message)
-    		{
-    			toaster.pop(data.Message.Type, data.Message.Title, data.Message.Message);
-                params.table.params.reload();
+  			if (data.Message) {
+          toaster.pop(data.Message.Type, data.Message.Title, data.Message.Message);
+          params.table.params.reload();
     		}
   		});
   		$modalInstance.dismiss();
