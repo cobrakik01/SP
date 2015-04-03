@@ -1,7 +1,67 @@
-<form ng-submit="create()">
-	<input type="text" ng-model="nombre">
-	<input type="submit" value="Crear">
-</form>
-<ul>
-	<li ng-repeat="item in items">{{ item.Nombre }}</li>
-</ul>
+<h1 class="page-header">Administrar Areas</h1>
+
+<div class="col-md-12 col-sm-12">
+	<tabset>
+		<tab heading="Listar Areas">
+			<div class="row">
+				<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
+					<div class="clearfix"></div>
+					<div loading-container="table.params.settings().$loading">
+						<table ng-table="table.params" class="table table-striped table-hover" show-filter="true">
+							<tr ng-repeat="item in table.items" style="cursor: pointer;">
+								<td data-title="'Nombre'" sortable="'Nombre'" filter="{ 'Nombre': 'text' }">
+									{{ item.Nombre }}
+								</td>
+								<td data-title="'Acciones'">
+									<button class="btn btn-default" type="button" ng-click="mdlEditar(item)">
+										Editar
+									</button>
+									<button class="btn btn-warning" type="button" ng-click="mdlEliminar(item)">
+										Eliminar
+									</button>
+								</td>
+							</tr>
+						</table>
+						<alert type="info" ng-show="table.items.length<=0">No se encontraron registros</alert>
+					</div>
+				</div>
+			</div>
+		</tab>
+
+		<tab heading="Agregar Area">
+		 	<div class="row">
+		 		<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
+		 			<form ng-submit="nuevo()">
+		 				<div class="form-group has-{{ (!area.nombre ? 'warning' : 'success') }} has-feedback">
+					 		<label class="control-label" for="txtAreaNombre">Nombre de Area</label>
+					 		<input ng-model="area.nombre" placeholder="Nombre de Area" type="text" class="form-control" id="txtAreaNombre">
+
+					 		<span ng-show="area.nombre" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					 		<span ng-show="!area.nombre" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+					 		<span class="sr-only"></span>
+					 	</div>
+					 	<button ng-disabled="!area.nombre" class="btn btn-primary btn-block" type="submit">
+					 		Guardar
+					 	</button>
+		 			</form>
+		 		</div>
+		 	</div>
+		 </tab>
+	</tabset>
+</div>
+
+<script type="text/ng-template" id="mdlEditarArea.html">
+	<form ng-submit="editar()">
+		<div class="modal-header">
+			<h3 class="modal-title">{{ title }}</h3>
+		</div>
+	    <div class="modal-body">
+	    	<input type="text" ng-model="item.nombre" class="form-control" placeholder="Nombre de Area" />
+	    </div>
+	    <div class="modal-footer">
+		    <button class="btn btn-primary" type="submit">Aceptar</button>
+		    <button class="btn btn-warning" type="button" ng-click="cancelar()">Cancelar</button>
+	    </div>
+    </form>
+</script>

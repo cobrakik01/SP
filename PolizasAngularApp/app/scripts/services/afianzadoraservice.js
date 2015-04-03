@@ -8,9 +8,8 @@
  * Service in the polizasAngularAppApp.
  */
 angular.module('polizasAngularAppApp')
-  .service('AfianzadoraService', function ($resource, $http, api, toaster, TokenService) {
+  .service('AfianzadoraService', function ($http, api, toaster) {
     var url = api + 'Afianzadoras/';
-
   	var service = {};
 
     service.error = function(a, status, c, d) {

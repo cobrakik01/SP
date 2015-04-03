@@ -1,4 +1,4 @@
-<h1 class="page-header">Lista de Afianzadoras</h1>
+<h1 class="page-header">Administrar Afianzadoras</h1>
 
 <div class="col-md-12 col-sm-12">
 	<tabset>
@@ -8,7 +8,7 @@
 		 			<div class="clearfix"></div>
 		 			<div loading-container="table.params.settings().$loading">
 			 			<table ng-table="table.params" class="table table-striped table-hover" show-filter="true">
-			 				<tr ng-repeat="afianzadora in table.items" ng-animate="'repeat'" style="cursor: pointer;">
+			 				<tr ng-repeat="afianzadora in table.items" style="cursor: pointer;">
 			 					<td data-title="'Nombre'" sortable="'Nombre'" filter="{ 'Nombre': 'text' }">
 			 						{{ afianzadora.Nombre }}
 			 					</td>

@@ -9,32 +9,43 @@
  */
 angular.module('polizasAngularAppApp')
   .service('AreasService', function ($http, api, toaster) {
-  	var url = api + 'AreasApi';
-  	console.log(url);
+  	var url = api + 'Areas/';
   	var service = {};
 
-  	service.query = function(fn) {
-  		$http.get(url).success(function(data) {
-  			fn(data);
-  		});
-  	};
-  	service.create = function(nombre, fn) {
-  		$http.post(url, {
-  			"area_Nombre": nombre,
-  			"area.Nombre": nombre,
-  			Nombre: nombre
-  		}).success(function(data){
-  			fn(data);
-  		}).error(function(data) {
-  			console.log("Error");
-  			console.log(data);
-  			if(data != null)
-  			{
-  				if(typeof data.Message != 'undefined') {
-	  				toaster.pop('error', 'Error', data.Message + ", " + data.MessageDetail);
-	  			}
-  			}
-  		});
-  	};
+    service.error = function(a, status, c, d) {
+      toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
+      console.log(a);
+      console.log(status);
+      console.log(c);
+      console.log(d);
+    };
+
+  	service.query = function(par, fn) {
+      var params = "?count=" + par.count + "&filter=" + par.filter + "&page=" + par.page + "&sorting=" + par.sorting;
+      var _url = url + params;
+      $http.get(_url).success(function(data) {
+        fn(data);
+      });
+    };
+    
+  	service.create = function(model, fn) {
+      var data = {nombre: model.nombre};
+      $http.post(url, data).success(function(data) {
+        fn(data);
+      });
+    };
+
+    service.delete = function(model, fn) {
+      var _url = url + '?id=' + model.id;
+      $http.delete(_url).success(function(data) {
+        fn(data);
+      });
+    };
+
+    service.edit = function(model, fn) {
+      $http.patch(url, model).success(function(data) {
+        fn(data);
+      });
+    };
   	return service;
   });
