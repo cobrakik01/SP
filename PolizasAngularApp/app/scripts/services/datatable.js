@@ -36,9 +36,10 @@ angular.module('polizasAngularAppApp')
           var par = _params.url();
           par.filter = _params.filter().Nombre;
           par.sorting = _params.sorting().Nombre;
-          
+          data.items = [];
           data.items = service.query(par, function(a) {
             $timeout(function() {
+                      data.items = [];
                       data.items = a.result;
                       _params.total(a.total); // Total de registros
                       $defer.resolve(a.result); // Datos de todas las paginas

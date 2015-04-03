@@ -77,10 +77,9 @@ angular
         templateUrl: view + 'views/areas/areas.html',
         controller: 'AreasCtrl'
       })
-      .state('areas.list', {
-        templateUrl: view + 'views/areas/list.html',
-        controller: function($scope) {
-          $scope.miModelo = "Este es un modelo.";
-        }
+      .state('autoridades', {
+        url: '/administrar/autoridades',
+        templateUrl: view + 'views/autoridades/home.html',
+        controller: 'AutoridadesCtrl'
       });
   });
