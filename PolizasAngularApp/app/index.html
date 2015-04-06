@@ -2,9 +2,10 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <title>Sistema de polizas | PGJ</title>
+    <meta name="description" content="Sistema de polizas">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="fragment" content="!" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -26,7 +27,7 @@
 
     <!-- Add your site or application content here -->
     <div class="header">
-      <div class="navbar navbar-default" role="navigation">
+      <div class="navbar navbar-cbk" role="navigation">
         <div class="container">
           <div class="navbar-header">
 
@@ -37,41 +38,82 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">
+            <a class="navbar-brand" href="#!/" ng-click="resetMenuSelect()">
               <img src="images/cdmx.png" alt="Ciudad de México" height="50" style="margin-top: -15px; float: left;" />
               <img src="images/pgj_df.png" alt="Ciudad de México" height="50" style="margin-top: -15px; float: left;" />
             </a>
           </div>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
+          <div class="collapse navbar-collapse" style="border-bottom: solid 1px rgb(100, 100, 100);">
             <ul class="nav navbar-nav">
               <li ui-route="#/" ng-class="{active: $uiRoute}">
-                <a ng-href="#/">Home</a>
+                <a ng-href="#!/" ng-click="resetMenuSelect()">Inicio</a>
               </li>
-              <li ui-route="#/about" ng-class="{active: $uiRoute}">
-                <a ng-href="#/about">About</a>
+              <li ng-class="{active: $uiRoute}">
+                <a href ng-click="resetMenuSelect(); operaciones = !operaciones;">
+                  Operaciones <!-- <span class="caret"></span> -->
+                </a>
+                <!--
+                <ul class="dropdown-menu" role="menu">
+                  <li ui-route="#/polizas" ng-class="{active: $uiRoute}">
+                    <a ng-href="#!/polizas">Polizas</a>
+                  </li>
+                  <li ui-route="#/administrar/afianzadoras" ng-class="{active: $uiRoute}">
+                    <a ng-href="#!/administrar/afianzadoras">Afianzadoras</a>
+                  </li>
+                  <li ui-route="#/administrar/autoridades" ng-class="{active: $uiRoute}">
+                    <a ng-href="#!/administrar/autoridades">Autoridades</a>
+                  </li>
+                </ul>
+              -->
               </li>
-              <li ui-route="#/administrar/afianzadoras" ng-class="{active: $uiRoute}">
-                <a ng-href="#/administrar/afianzadoras">Afianzadoras</a>
-              </li>
-              <li ui-route="#/administrar/areas" ng-class="{active: $uiRoute}">
-                <a ng-href="#/administrar/areas">Areas</a>
-              </li>
-              <li ui-route="#/administrar/autoridades" ng-class="{active: $uiRoute}">
-                <a ng-href="#/administrar/autoridades">Autoridades</a>
+              <li ng-class="{active: $uiRoute}">
+                <a href ng-click="resetMenuSelect(); administracion = !administracion;">
+                  Administración
+                </a>
               </li>
             </ul>
+            <!-- <p class="navbar-text navbar-right">{{ currentTime }}</p> -->
           </div>
+
+
+          <div class="collapse navbar-collapse">
+            <ul ng-show="operaciones" class="nav navbar-nav animate-show">
+              <li ui-route="#/polizas" ng-class="{active: $uiRoute}">
+                <a ui-sref="polizas.listar">Listar Polizas</a>
+              </li>
+              <li ui-route="#/polizas/agregar" ng-class="{active: $uiRoute}">
+                <a ui-sref="polizas.agregar">Agregar Polizas</a>
+              </li>
+            </ul>
+            <!-- <p class="navbar-text navbar-right">{{ currentTime }}</p> -->
+          </div>
+
+          <div class="collapse navbar-collapse">
+            <ul ng-show="administracion" class="nav navbar-nav animate-show">
+              <li ui-route="#/administrar/areas" ng-class="{active: $uiRoute}">
+                <a ng-href="#!/administrar/areas">Areas</a>
+              </li>
+              <li ui-route="#/administrar/afianzadoras" ng-class="{active: $uiRoute}">
+              <a ng-href="#!/administrar/afianzadoras">Afianzadoras</a>
+              </li>
+              <li ui-route="#/administrar/autoridades" ng-class="{active: $uiRoute}">
+                <a ng-href="#!/administrar/autoridades">Autoridades</a>
+              </li>
+            </ul>
+            <!-- <p class="navbar-text navbar-right">{{ currentTime }}</p> -->
+          </div>
+
+
         </div>
       </div>
     </div>
 
     <toaster-container toaster-options="{'close-button': true}"></toaster-container>
     <div class="container">
-      <div class="view-animate-container">
-        <div ui-view="" class="view-animate"></div>
-      </div>
+        <div class="view-animate-container">
+          <div ui-view class="view-animate"></div>
+        </div>
     </div>
 
     <div class="footer">
@@ -121,13 +163,13 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ng-loaders/ngLoader.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/notfound.js"></script>
         <script src="scripts/controllers/afianzadoras/afianzadoras.js"></script>
         <script src="scripts/controllers/afianzadoras/afianzadoras.editar.modal.js"></script>
@@ -138,12 +180,16 @@
         <script src="scripts/services/cbk.js"></script>
         <script src="scripts/services/areasservice.js"></script>
         <script src="scripts/services/datatable.js"></script>
-        <script src="scripts/services/tokenservice.js"></script>
         <script src="scripts/directives/loadingcontainer.js"></script>
         <script src="scripts/controllers/areas/areaseditarmodal.js"></script>
         <script src="scripts/controllers/autoridades/autoridades.js"></script>
         <script src="scripts/services/autoridadesservice.js"></script>
         <script src="scripts/controllers/autoridades/autoridadeseditarmodal.js"></script>
+        <script src="scripts/controllers/polizas/polizas.js"></script>
+        <script src="scripts/controllers/polizas/polizas.agregar.js"></script>
+        <script src="scripts/controllers/polizas/polizasagregarafianzadomodal.js"></script>
+        <script src="scripts/controllers/polizas/polizas.agregar.afianzado.modal.js"></script>
+        <script src="scripts/controllers/polizas/polizas.agregar.depositante.modal.js"></script>
         <!-- endbuild -->
 </body>
 </html>

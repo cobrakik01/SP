@@ -18,14 +18,14 @@ angular.module('polizasAngularAppApp')
     };
 
   	$scope.accept = function() {
-      if(typeof params.accept != 'undefined')
+      if(typeof params.accept !== 'undefined')
       {
         params.accept($scope.data);
       }
   	};
 
   	$scope.cancel = function() {
-      if(typeof params.cancel != 'undefined')
+      if(typeof params.cancel !== 'undefined')
       {
         params.cancel($scope.data);
       }

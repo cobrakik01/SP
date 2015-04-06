@@ -125,3 +125,89 @@ h6 {
   margin-left: -50px;
   margin-top: -50px;
 }
+
+
+
+
+
+
+.navbar-cbk {
+  background-color: #513069;
+  border-color: #E7E7E7;
+  border-bottom: #120718;
+}
+
+/* title */
+.navbar-cbk .navbar-brand { 
+  color: #777;
+} 
+
+.navbar-cbk .navbar-brand:hover, 
+.navbar-cbk .navbar-brand:focus { 
+  color: #5E5E5E;
+}
+
+/* link */
+.navbar-cbk .navbar-nav > li > a {
+  /*color: #777;*/
+  color: #EFEFEF;
+}
+.navbar-cbk .navbar-nav > li > a:hover,
+.navbar-cbk .navbar-nav > li > a:focus {
+  /*color: #333;*/
+  background-color: #4A345B;
+}
+.navbar-cbk .navbar-nav > .active > a, 
+.navbar-cbk .navbar-nav > .active > a:hover, 
+.navbar-cbk .navbar-nav > .active > a:focus {
+  /*color: #555;*/
+  /*background-color: #E7E7E7;*/
+  color: #F9F9F9;
+  background-color: #4A345B;
+}
+.navbar-cbk .navbar-nav > .open > a,
+.navbar-cbk .navbar-nav > .open > a:hover,
+.navbar-cbk .navbar-nav > .open > a:focus {
+  /*color: #555;*/
+  /*background-color: #D5D5D5;*/
+  color: #F9F9F9;
+  background-color: #4A345B;
+}
+
+/* caret */
+.navbar-cbk .navbar-nav > .dropdown > a .caret {
+  border-top-color: #777; border-bottom-color: #777;
+}
+.navbar-cbk .navbar-nav > .dropdown > a:hover .caret, 
+.navbar-cbk .navbar-nav > .dropdown > a:focus .caret {
+  border-top-color: #333;
+  border-bottom-color: #333;
+} 
+.navbar-cbk .navbar-nav > .open > a .caret,
+.navbar-cbk .navbar-nav > .open > a:hover .caret,
+.navbar-cbk .navbar-nav > .open > a:focus .caret {
+  border-top-color: #555;
+  border-bottom-color: #555;
+}
+
+/* mobile version */
+.navbar-cbk .navbar-toggle {
+  border-color: #DDD;
+}
+.navbar-cbk .navbar-toggle:hover,
+.navbar-cbk .navbar-toggle:focus {
+  background-color: #DDD;
+}
+.navbar-cbk .navbar-toggle .icon-bar {
+  background-color: #CCC;
+}
+
+@media (max-width: 767px) {
+  .navbar-cbk .navbar-nav .open .dropdown-menu > li > a {
+    color: #777;
+  }
+  .navbar-cbk .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-cbk .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #333;
+  }
+}

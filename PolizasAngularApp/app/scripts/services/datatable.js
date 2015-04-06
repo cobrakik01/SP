@@ -16,7 +16,8 @@ angular.module('polizasAngularAppApp')
     factory.params = function(params, service) {
       var data = {};
       data.items = [];
-      data.params = new ngTableParams({
+      var NgTable = ngTableParams;
+      data.params = new NgTable({
           page: 1,            // show first page
           count: 10,
           /*
@@ -27,8 +28,8 @@ angular.module('polizasAngularAppApp')
               Nombre: ''       // initial filter
           }
           */
-          sorting: (typeof params.sorting == 'undefined') ? { } : params.sorting,
-          filter: (typeof params.filter == 'undefined') ? { } : params.filter
+          sorting: (typeof params.sorting === 'undefined') ? { } : params.sorting,
+          filter: (typeof params.filter === 'undefined') ? { } : params.filter
       },
       {
         total: 0, // length of data
