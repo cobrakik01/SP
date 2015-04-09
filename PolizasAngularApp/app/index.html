@@ -85,6 +85,9 @@
               <li ui-route="#/polizas/agregar" ng-class="{active: $uiRoute}">
                 <a ui-sref="polizas.agregar">Agregar Polizas</a>
               </li>
+              <li ui-route="#/afianzados/listar" ng-class="{active: $uiRoute}">
+                <a ui-sref="afianzados.listar">Afianzados</a>
+              </li>
             </ul>
             <!-- <p class="navbar-text navbar-right">{{ currentTime }}</p> -->
           </div>
@@ -190,6 +193,11 @@
         <script src="scripts/controllers/polizas/polizasagregarafianzadomodal.js"></script>
         <script src="scripts/controllers/polizas/polizas.agregar.afianzado.modal.js"></script>
         <script src="scripts/controllers/polizas/polizas.agregar.depositante.modal.js"></script>
+        <script src="scripts/services/polizasservice.js"></script>
+        <script src="scripts/controllers/afianzados/home.js"></script>
+        <script src="scripts/controllers/afianzados/listar.js"></script>
+        <script src="scripts/controllers/afianzados/nuevo.js"></script>
+        <script src="scripts/services/afianzadosservice.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -19,7 +19,7 @@ angular.module('polizasAngularAppApp')
   	};
 
   	$scope.disabled = function() {
-  		return !($scope.afianzado.apellidoMaterno && $scope.afianzado.apellidoPaterno && $scope.afianzado.nombre);
+  		return !($scope.afianzado.ApellidoMaterno && $scope.afianzado.ApellidoPaterno && $scope.afianzado.Nombre);
   	};
 
   	$scope.cancelar = function () {

@@ -9,14 +9,14 @@
 					<div class="row">
 						<div class="col-md-12 clearfix">
 							<div class="col-md-12">
-								<div class="form-group has-{{ poliza.averiguacionPrevia ? 'success' : 'warning' }} has-feedback">
+								<div class="form-group has-{{ data.poliza.AveriguacionPrevia ? 'success' : 'warning' }} has-feedback">
 									<label class="control-label" for="txtAveriguacionPrevia">Averiguación Previa:</label>
-									<input ng-model="poliza.averiguacionPrevia" name="pNombre" id="txtAveriguacionPrevia" type="text" class="form-control" required="" placeholder="Averiguación Previa" aria-describedby="txtAveriguacionPreviaStatus" />
-									<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="poliza.averiguacionPrevia"></span>
-									<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!poliza.averiguacionPrevia"></span>
+									<input ng-model="data.poliza.AveriguacionPrevia" name="pNombre" id="txtAveriguacionPrevia" type="text" class="form-control" required="" placeholder="Averiguación Previa" aria-describedby="txtAveriguacionPreviaStatus" />
+									<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.poliza.AveriguacionPrevia"></span>
+									<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.poliza.AveriguacionPrevia"></span>
 									<span id="txtAveriguacionPreviaStatus" class="sr-only">(warning)</span>
 
-									<div ng-show="frmPoliza.$submitted && !poliza.averiguacionPrevia" class="text-warning">
+									<div ng-show="frmPoliza.$submitted && !data.poliza.AveriguacionPrevia" class="text-warning">
 										Es requerido el campo de averiguación previa.
 									</div>
 								</div>
@@ -24,45 +24,46 @@
 						</div>
 						<div class="col-md-12 clearfix">
 							<div class="col-md-6">
-								<div class="form-group has-{{ poliza.afianzado ? 'success' : 'warning' }} has-feedback">
+								<div class="form-group has-{{ data.afianzado ? 'success' : 'warning' }} has-feedback">
 									<label class="control-label" for="txtAfianzado">Afianzado:</label>
-									<input ng-model="nombreCompletoAfianzado" ng-show="poliza.afianzado" class="form-control" type="text" placeholder="Sin Afianzador" required="" aria-describedby="txtAfianzadoStatus" readonly />
-									<button ng-click="agregarAfianzado(poliza.afianzado)" type="button" class="btn btn-default btn-block">
-										<span class="glyphicon glyphicon-alert" ng-show="!poliza.afianzado"></span> Agregar Afianzado
+									<input ng-model="nombreCompletoAfianzado" ng-show="data.afianzado" class="form-control" type="text" placeholder="Sin Afianzador" required="" aria-describedby="txtAfianzadoStatus" readonly />
+									<!-- <a ui-sref="polizas.agregar.afianzado" ng-click="agregarAfianzado(data.afianzado)">Ok</a> -->
+									<button ng-click="agregarAfianzado(data.afianzado)" type="button" class="btn btn-default btn-block">
+										<span class="glyphicon glyphicon-alert" ng-show="!data.afianzado"></span> Agregar Afianzado
 									</button>
 
-									<div ng-show="frmPoliza.$submitted && !poliza.afianzado" class="text-warning">
+									<div ng-show="frmPoliza.$submitted && !data.afianzado" class="text-warning">
 										Es requerido el campo de afianzado.
 									</div>
 								</div>
 
-								<div class="form-group has-{{ poliza.cantidad ? 'success' : 'warning' }} has-feedback">
+								<div class="form-group has-{{ data.cantidad ? 'success' : 'warning' }} has-feedback">
 									<label class="control-label" for="txtCantidad">Cantidad:</label>
-									<input ng-model="poliza.cantidad" name="pNombre" id="txtCantidad" type="text" class="form-control" required="" placeholder="Cantidad" aria-describedby="txtCantidadStatus" />
-									<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="poliza.cantidad"></span>
-									<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!poliza.cantidad"></span>
+									<input ng-model="data.cantidad" name="pNombre" id="txtCantidad" type="text" class="form-control" required="" placeholder="Cantidad" aria-describedby="txtCantidadStatus" />
+									<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.cantidad"></span>
+									<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.cantidad"></span>
 									<span id="txtCantidadStatus" class="sr-only">(warning)</span>
 
-									<div ng-show="frmPoliza.$submitted && !poliza.cantidad" class="text-warning">
+									<div ng-show="frmPoliza.$submitted && !data.cantidad" class="text-warning">
 										Es requerido el campo cantidad.
 									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
-								<div class="form-group has-{{ poliza.depositante ? 'success' : 'warning' }} has-feedback">
+								<div class="form-group has-{{ data.depositante ? 'success' : 'warning' }} has-feedback">
 									<label class="control-label" for="txtDepositante">Depositante:</label>
-									<input ng-model="nombreCompletoDepositante" ng-show="poliza.depositante" id="txtDepositante" class="form-control" type="text" placeholder="Sin Depositante" required="" readonly />
-									<button ng-click="agregarDepositante(poliza.depositante)" type="button" class="btn btn-default btn-block">
-										<span class="glyphicon glyphicon-alert" ng-show="!poliza.depositante"></span> Agregar Depositante
+									<input ng-model="nombreCompletoDepositante" ng-show="data.depositante" id="txtDepositante" class="form-control" type="text" placeholder="Sin Depositante" required="" readonly />
+									<button ng-click="agregarDepositante(data.depositante)" type="button" class="btn btn-default btn-block">
+										<span class="glyphicon glyphicon-alert" ng-show="!data.depositante"></span> Agregar Depositante
 									</button>
 
-									<div ng-show="frmPoliza.$submitted && !poliza.depositante" class="text-warning">
+									<div ng-show="frmPoliza.$submitted && !data.depositante" class="text-warning">
 										Es requerido el campo de depositante.
 									</div>
 								</div>
 
 								<div class="clearfix">
-									<div class="form-group has-{{ poliza.afianzadora ? 'success' : 'warning' }} has-feedback">
+									<div class="form-group has-{{ data.afianzadora ? 'success' : 'warning' }} has-feedback">
 										<loader
 										    working="loaderAfianzadora"
 										    message="cargando..."
@@ -73,17 +74,17 @@
 											id="lstAfianzadora"
 											name="lstAfianzadora"
 											class="form-control" 
-											ng-model="poliza.afianzadora" 
+											ng-model="data.afianzadora" 
 											ng-options="afianzadora.Nombre for afianzadora in afianzadoras">
 												<option value="">[ Afianzadora ]</option>
 											</select>
 										</label>
 
-										<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="poliza.afianzadora"></span>
-										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!poliza.afianzadora"></span>
+										<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.afianzadora"></span>
+										<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.afianzadora"></span>
 										<span id="txtAfianzadoStatus" class="sr-only">(warning)</span>
 
-										<div ng-show="frmPoliza.$submitted && !poliza.afianzadora" class="text-warning">
+										<div ng-show="frmPoliza.$submitted && !data.afianzadora" class="text-warning">
 											Es requerida la seleccion de una afianzadora.
 										</div>
 									</div>
@@ -93,19 +94,19 @@
 								<label for="txtDescripcion">
 									Descripción
 								</label>
-								<textarea rows="5" id="txtDescripcion" class="form-control" placeholder="Descripción" style="display: block; width:100%;"></textarea>
+								<textarea ng-model="data.poliza.Descripcion" rows="5" id="txtDescripcion" class="form-control" placeholder="Descripción" style="display: block; width:100%;"></textarea>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="panel-footer clearfix">
 						<div class="col-md-6">
-							<button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="disabled(poliza)">
+							<button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="disabled(data)">
 								Agregar
 							</button>
 						</div>
 						<div class="col-md-6">
-							<button type="reset" ng-click="reset(poliza)" class="btn btn-primary btn-block btn-lg" ng-disabled="">
+							<button type="reset" ng-click="reset(data)" class="btn btn-primary btn-block btn-lg" ng-disabled="">
 								Limpiar
 							</button>
 						</div>
@@ -114,55 +115,7 @@
 		</form>
 	</div>
 </div>
-
-<script type="text/ng-template" id="agregarAfianzado.html">
-	<form name="frmAfianzado" ng-submit="agregar()" novalidate>
-		<div class="modal-header">
-			<h3 class="modal-title">Afianzado</h3>
-		</div>
-		<div class="modal-body">
-			<div class="form-group has-{{ afianzado.nombre ? 'success' : 'warning' }} has-feedback">
-				<label class="control-label" for="txtAfianzadoNombre">Nombre:</label>
-				<input ng-model="afianzado.nombre" name="pNombre" id="txtAfianzadoNombre" type="text" class="form-control" required="" placeholder="Nombre de depositante" aria-describedby="txtAfianzadoNombreStatus" />
-				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="afianzado.nombre"></span>
-				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!afianzado.nombre"></span>
-				<span id="txtAfianzadoNombreStatus" class="sr-only">(warning)</span>
-
-				<div ng-show="frmAfianzado.$submitted && !afianzado.nombre" class="text-warning">
-					Es requerido el campo nombre del afianzado.
-				</div>
-			</div>
-
-			<div class="form-group has-{{ afianzado.apellidoPaterno ? 'success' : 'warning' }} has-feedback">
-				<label class="control-label" for="txtAfianzadoApellidoPaterno">Apellido Paterno:</label>
-				<input ng-model="afianzado.apellidoPaterno" name="pNombre" id="txtAfianzadoApellidoPaterno" type="text" class="form-control" required="" placeholder="Apellido Paterno" aria-describedby="txtAfianzadoApellidoPaternoStatus" />
-				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="afianzado.apellidoPaterno"></span>
-				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!afianzado.apellidoPaterno"></span>
-				<span id="txtAfianzadoApellidoPaternoStatus" class="sr-only">(warning)</span>
-				
-				<div ng-show="frmAfianzado.$submitted && !afianzado.apellidoPaterno" class="text-warning">
-					Es requerido el campo apellido paterno del afianzado.
-				</div>
-			</div>
-
-			<div class="form-group has-{{ afianzado.apellidoMaterno ? 'success' : 'warning' }} has-feedback">
-				<label class="control-label" for="txtAfianzadoApellidoMaterno">Apellido Materno:</label>
-				<input ng-model="afianzado.apellidoMaterno" name="pNombre" id="txtAfianzadoApellidoMaterno" type="text" class="form-control" required="" placeholder="Apellido Materno" aria-describedby="txtAfianzadoApellidoMaternoStatus" />
-				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="afianzado.apellidoMaterno"></span>
-				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!afianzado.apellidoMaterno"></span>
-				<span id="txtAfianzadoApellidoMaternoStatus" class="sr-only">(warning)</span>
-				
-				<div ng-show="frmAfianzado.$submitted && !afianzado.apellidoMaterno" class="text-warning">
-					Es requerido el campo apellido materno del afianzado.
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button class="btn btn-primary" type="submit" ng-disabled="disabled()">Agregar</button>
-			<button class="btn btn-warning" ng-click="cancelar()" type="button">Cancelar</button>
-		</div>
-	</form>
-</script>
+<div ui-view></div>
 
 
 <script type="text/ng-template" id="agregarDepositante.html">
@@ -171,38 +124,38 @@
 			<h3 class="modal-title">Depositante</h3>
 		</div>
 		<div class="modal-body">
-			<div class="form-group has-{{ depositante.nombre ? 'success' : 'warning' }} has-feedback">
+			<div class="form-group has-{{ depositante.Nombre ? 'success' : 'warning' }} has-feedback">
 				<label class="control-label" for="txtDepositanteNombre">Nombre:</label>
-				<input ng-model="depositante.nombre" name="pNombre" id="txtDepositanteNombre" type="text" class="form-control" required="" placeholder="Nombre de depositante" aria-describedby="txtDepositanteNombreStatus" />
-				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="depositante.nombre"></span>
-				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!depositante.nombre"></span>
+				<input ng-model="depositante.Nombre" name="pNombre" id="txtDepositanteNombre" type="text" class="form-control" required="" placeholder="Nombre de depositante" aria-describedby="txtDepositanteNombreStatus" />
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="depositante.Nombre"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!depositante.Nombre"></span>
 				<span id="txtDepositanteNombreStatus" class="sr-only">(warning)</span>
 
-				<div ng-show="frmDepositante.$submitted && !depositante.nombre" class="text-warning">
+				<div ng-show="frmDepositante.$submitted && !depositante.Nombre" class="text-warning">
 					Es requerido el campo nombre del depositante.
 				</div>
 			</div>
 
-			<div class="form-group has-{{ depositante.apellidoPaterno ? 'success' : 'warning' }} has-feedback">
+			<div class="form-group has-{{ depositante.ApellidoPaterno ? 'success' : 'warning' }} has-feedback">
 				<label class="control-label" for="txtDepositanteApellidoPaterno">Apellido Paterno:</label>
-				<input ng-model="depositante.apellidoPaterno" name="pNombre" id="txtDepositanteApellidoPaterno" type="text" class="form-control" required="" placeholder="Apellido Paterno" aria-describedby="txtDepositanteApellidoPaternoStatus" />
-				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="depositante.apellidoPaterno"></span>
-				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!depositante.apellidoPaterno"></span>
+				<input ng-model="depositante.ApellidoPaterno" name="pNombre" id="txtDepositanteApellidoPaterno" type="text" class="form-control" required="" placeholder="Apellido Paterno" aria-describedby="txtDepositanteApellidoPaternoStatus" />
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="depositante.ApellidoPaterno"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!depositante.ApellidoPaterno"></span>
 				<span id="txtDepositanteApellidoPaternoStatus" class="sr-only">(warning)</span>
 				
-				<div ng-show="frmDepositante.$submitted && !depositante.apellidoPaterno" class="text-warning">
+				<div ng-show="frmDepositante.$submitted && !depositante.ApellidoPaterno" class="text-warning">
 					Es requerido el campo apellido paterno del depositante.
 				</div>
 			</div>
 
-			<div class="form-group has-{{ depositante.apellidoMaterno ? 'success' : 'warning' }} has-feedback">
+			<div class="form-group has-{{ depositante.ApellidoMaterno ? 'success' : 'warning' }} has-feedback">
 				<label class="control-label" for="txtDepositanteApellidoMaterno">Apellido Materno:</label>
-				<input ng-model="depositante.apellidoMaterno" name="pNombre" id="txtDepositanteApellidoMaterno" type="text" class="form-control" required="" placeholder="Apellido Materno" aria-describedby="txtDepositanteApellidoMaternoStatus" />
-				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="depositante.apellidoMaterno"></span>
-				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!depositante.apellidoMaterno"></span>
+				<input ng-model="depositante.ApellidoMaterno" name="pNombre" id="txtDepositanteApellidoMaterno" type="text" class="form-control" required="" placeholder="Apellido Materno" aria-describedby="txtDepositanteApellidoMaternoStatus" />
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="depositante.ApellidoMaterno"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!depositante.ApellidoMaterno"></span>
 				<span id="txtDepositanteApellidoMaternoStatus" class="sr-only">(warning)</span>
 				
-				<div ng-show="frmDepositante.$submitted && !depositante.apellidoMaterno" class="text-warning">
+				<div ng-show="frmDepositante.$submitted && !depositante.ApellidoMaterno" class="text-warning">
 					Es requerido el campo apellido materno del depositante.
 				</div>
 			</div>
@@ -213,3 +166,56 @@
 		</div>
 	</form>
 </script>
+
+
+
+<!-- Modal Afianzado -->
+<script type="text/ng-template" id="agregarAfianzado.html">
+	<form name="frmAfianzado" ng-submit="agregar()" novalidate>
+		<div class="modal-header">
+			<h3 class="modal-title">Afianzado</h3>
+		</div>
+		<div class="modal-body">
+			<div class="form-group has-{{ afianzado.Nombre ? 'success' : 'warning' }} has-feedback">
+				<label class="control-label" for="txtAfianzadoNombre">Nombre:</label>
+				<input ng-model="afianzado.Nombre" id="txtAfianzadoNombre" type="text" class="form-control" required="" placeholder="Nombre de depositante" aria-describedby="txtAfianzadoNombreStatus" />
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="afianzado.Nombre"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!afianzado.Nombre"></span>
+				<span id="txtAfianzadoNombreStatus" class="sr-only">(warning)</span>
+
+				<div ng-show="frmAfianzado.$submitted && !afianzado.Nombre" class="text-warning">
+					Es requerido el campo nombre del afianzado.
+				</div>
+			</div>
+
+			<div class="form-group has-{{ afianzado.ApellidoPaterno ? 'success' : 'warning' }} has-feedback">
+				<label class="control-label" for="txtAfianzadoApellidoPaterno">Apellido Paterno:</label>
+				<input ng-model="afianzado.ApellidoPaterno" name="pNombre" id="txtAfianzadoApellidoPaterno" type="text" class="form-control" required="" placeholder="Apellido Paterno" aria-describedby="txtAfianzadoApellidoPaternoStatus" />
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="afianzado.ApellidoPaterno"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!afianzado.ApellidoPaterno"></span>
+				<span id="txtAfianzadoApellidoPaternoStatus" class="sr-only">(warning)</span>
+				
+				<div ng-show="frmAfianzado.$submitted && !afianzado.ApellidoPaterno" class="text-warning">
+					Es requerido el campo apellido paterno del afianzado.
+				</div>
+			</div>
+
+			<div class="form-group has-{{ afianzado.ApellidoMaterno ? 'success' : 'warning' }} has-feedback">
+				<label class="control-label" for="txtAfianzadoApellidoMaterno">Apellido Materno:</label>
+				<input ng-model="afianzado.ApellidoMaterno" name="pNombre" id="txtAfianzadoApellidoMaterno" type="text" class="form-control" required="" placeholder="Apellido Materno" aria-describedby="txtAfianzadoApellidoMaternoStatus" />
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="afianzado.ApellidoMaterno"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!afianzado.ApellidoMaterno"></span>
+				<span id="txtAfianzadoApellidoMaternoStatus" class="sr-only">(warning)</span>
+				
+				<div ng-show="frmAfianzado.$submitted && !afianzado.ApellidoMaterno" class="text-warning">
+					Es requerido el campo apellido materno del afianzado.
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="submit" ng-disabled="disabled()">Agregar</button>
+			<button class="btn btn-warning" ng-click="cancelar()" type="button">Cancelar</button>
+		</div>
+	</form>
+</script>
+<!-- Fin Modal Afianzado -->

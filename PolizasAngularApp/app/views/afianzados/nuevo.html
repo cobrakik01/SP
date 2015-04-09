@@ -1,0 +1,61 @@
+<form name="frmDepositante" ng-submit="nuevo()">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1 class="panel-title">Nuevo</h1>
+		</div>
+		<div class="panel-body">
+            <div class="form-group has-{{ data.afianzado.Nombre ? 'success' : 'warning' }} has-feedback">
+            	<label class="control-label" for="data.afianzado.Nombre">Nombre:</label>
+            	<input ng-model="data.afianzado.Nombre" id="data.afianzado.Nombre" type="text" class="form-control" required="" placeholder="Nombre" aria-describedby="data.afianzado.Nombre.Status" />
+            	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.afianzado.Nombre"></span>
+            	<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.afianzado.Nombre"></span>
+            	<span id="data.afianzado.Nombre.Status" class="sr-only">(warning)</span>
+
+            	<div ng-show="frmDepositante.$submitted && !data.afianzado.Nombre" class="text-warning">
+            		Es requerido el campo de nombre.
+            	</div>
+            </div>
+
+            <div class="form-group has-{{ data.afianzado.ApellidoPaterno ? 'success' : 'warning' }} has-feedback">
+            	<label class="control-label" for="data.afianzado.ApellidoPaterno">Apellido Paterno:</label>
+            	<input ng-model="data.afianzado.ApellidoPaterno" id="data.afianzado.ApellidoPaterno" type="text" class="form-control" required="" placeholder="Apellido Paterno" aria-describedby="data.afianzado.ApellidoPaterno.Status" />
+            	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.afianzado.ApellidoPaterno"></span>
+            	<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.afianzado.ApellidoPaterno"></span>
+            	<span id="data.afianzado.ApellidoPaterno.Status" class="sr-only">(warning)</span>
+
+            	<div ng-show="frmDepositante.$submitted && !data.afianzado.ApellidoPaterno" class="text-warning">
+            		Es requerido el campo de apellido paterno.
+            	</div>
+            </div>
+
+            <div class="form-group has-{{ data.afianzado.ApellidoMaterno ? 'success' : 'warning' }} has-feedback">
+            	<label class="control-label" for="data.afianzado.ApellidoMaterno">Apellido Materno:</label>
+            	<input ng-model="data.afianzado.ApellidoMaterno" id="data.afianzado.ApellidoMaterno" type="text" class="form-control" required="" placeholder="Apellido Materno" aria-describedby="data.afianzado.ApellidoMaterno.Status" />
+            	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.afianzado.ApellidoMaterno"></span>
+            	<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.afianzado.ApellidoMaterno"></span>
+            	<span id="data.afianzado.ApellidoMaterno.Status" class="sr-only">(warning)</span>
+
+            	<div ng-show="frmDepositante.$submitted && !data.afianzado.ApellidoMaterno" class="text-warning">
+            		Es requerido el campo de apellido materno.
+            	</div>
+            </div>
+
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{ format }}" ng-model="data.afianzado.FechaDeNacimiento" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="AAAA/MM/DD" readonly="" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+		</div>
+		<div class="panel-footer">
+			<div class="row">
+				<div class="col-md-6">
+					<input class="btn btn-primary btn-block" type="submit" value="Nuevo" ng-disabled="formDisabled()">
+				</div>
+				<div class="col-md-6">
+					<input class="btn btn-primary btn-block" type="button" value="Limpiar">
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

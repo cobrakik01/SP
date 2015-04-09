@@ -58,32 +58,6 @@ angular
 
   })
   .config(function ($routeProvider, view, $stateProvider, $urlRouterProvider, $locationProvider) {
-    /*
-    $routeProvider
-      .when('/', {
-        templateUrl: view + 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: view + 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .when('/administrar/afianzadoras', {
-        templateUrl: view + 'views/afianzadoras.html',
-        controller: 'AfianzadorasCtrl'
-      })
-      .when('/notfound', {
-        templateUrl: view + 'views/notfound.html',
-        controller: 'NotfoundCtrl'
-      })
-      .when('/administrar/areas', {
-        templateUrl: 'views/areas/areas.html',
-        controller: 'AreasCtrl'
-      })
-      .otherwise({
-        redirectTo: '/notfound'
-      });
-    */
     $locationProvider.html5Mode(false).hashPrefix('!');
     $urlRouterProvider.otherwise('/');
     $stateProvider
@@ -130,5 +104,25 @@ angular
         url: '/agregar',
         templateUrl: view + 'views/polizas/agregar.html',
         controller: 'PolizasAgregarCtrl'
+      })
+      .state('polizas.agregar.afianzado', {
+        url: '/afianzado',
+        templateUrl: view + 'views/polizas/agregarafianzadomodal.html',
+        controller: 'PolizasAgregarCtrl'
+      })
+      .state('afianzados', {
+        url: '/afianzados',
+        templateUrl: view + 'views/afianzados/home.html',
+        controller: 'AfianzadosHomeCtrl'
+      })
+      .state('afianzados.listar', {
+        url: '/listar',
+        templateUrl: view + 'views/afianzados/listar.html',
+        controller: 'AfianzadosListarCtrl'
+      })
+      .state('afianzados.nuevo', {
+        url: '/nuevo',
+        templateUrl: view + 'views/afianzados/nuevo.html',
+        controller: 'AfianzadosNuevoCtrl'
       });
   });

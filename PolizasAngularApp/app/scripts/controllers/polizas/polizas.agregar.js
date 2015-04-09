@@ -8,16 +8,26 @@
  * Controller of the polizasAngularAppApp
  */
 angular.module('polizasAngularAppApp')
-  .controller('PolizasAgregarCtrl', function ($scope, $modal, $log) {
-  	$scope.poliza = {};
+  .controller('PolizasAgregarCtrl', function ($scope, $modal, PolizasService, $log) {
+
+    $scope.data = {
+      poliza: undefined,
+      afianzado: undefined,
+      depositante: undefined,
+      afianzadora: undefined,
+      cantidad: 0
+    };
+
+    // $scope.data.poliza.AveriguacionPrevia;
   	$scope.nombreCompletoAfianzado = undefined;
     $scope.nombreCompletoDepositante = undefined;
-  	$scope.poliza.afianzado = undefined;
-  	$scope.poliza.depositante = undefined;
 
   	$scope.agregar = function() {
   		if(!$scope.disabled()) {
-        $log.info("Se enviara.");
+        PolizasService.test($scope.data, function(data) {
+          console.log("Parametros resividos.");
+          console.log(data);
+        });
       }
   	};
 
@@ -30,7 +40,7 @@ angular.module('polizasAngularAppApp')
   				form.$setUntouched();
   			}
   		}
-  		$scope.poliza = {};
+  		$scope.data = {};
   	};
 
   	$scope.agregarAfianzado = function(afianzado) {
@@ -46,10 +56,10 @@ angular.module('polizasAngularAppApp')
 	    });
 
 	    modalInstance.result.then(function (afianzado) {
-	      $scope.poliza.afianzado = afianzado;
-	      $scope.nombreCompletoAfianzado = ($scope.poliza.afianzado.apellidoPaterno 
-	      									+ ' ' + $scope.poliza.afianzado.apellidoMaterno 
-	      									+ ' ' + $scope.poliza.afianzado.nombre);
+	      $scope.data.afianzado = afianzado;
+	      $scope.nombreCompletoAfianzado = ($scope.data.afianzado.ApellidoPaterno 
+	      									+ ' ' + $scope.data.afianzado.ApellidoMaterno 
+	      									+ ' ' + $scope.data.afianzado.Nombre);
 	    });
   	};
 
@@ -66,19 +76,18 @@ angular.module('polizasAngularAppApp')
       });
 
       modalInstance.result.then(function (depositante) {
-        $scope.poliza.depositante = depositante;
-        $scope.nombreCompletoDepositante = ($scope.poliza.depositante.apellidoPaterno 
-                          + ' ' + $scope.poliza.depositante.apellidoMaterno 
-                          + ' ' + $scope.poliza.depositante.nombre);
+        $scope.data.depositante = depositante;
+        $scope.nombreCompletoDepositante = ($scope.data.depositante.ApellidoPaterno 
+                          + ' ' + $scope.data.depositante.ApellidoMaterno 
+                          + ' ' + $scope.data.depositante.Nombre);
       });
     };
 
   	$scope.disabled = function() {
-  		return !(
-           $scope.poliza.averiguacionPrevia
-        && $scope.nombreCompletoAfianzado
-        && $scope.nombreCompletoDepositante
-        && $scope.poliza.cantidad
-        && $scope.poliza.afianzadora);
+      return !($scope.data.poliza 
+        && $scope.data.afianzado
+        && $scope.data.depositante
+        && $scope.data.afianzadora 
+        && $scope.data.cantidad);
   	};
   });

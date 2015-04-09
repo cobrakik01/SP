@@ -10,4 +10,5 @@
 angular.module('polizasAngularAppApp')
   .constant('api', 'http://localhost:49531/api/')
   //.constant('view', 'Content/')
-  .constant('view', '');
+  .constant('view', '')
+  .constant('loader', '../images/loading.GIF');

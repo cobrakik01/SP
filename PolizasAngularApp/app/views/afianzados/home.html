@@ -1,0 +1,20 @@
+<h1>Afianzados {{ $state.go() }} </h1>
+<div class="row">
+	<div class="col-md-12">
+		<div class="col-md-3">
+			<ul class="nav nav-pills nav-stacked">
+			  <li ui-route="#/afianzados/listar" ng-class="{active: $uiRoute}">
+			  	<a ui-sref="afianzados.listar">Listar</a>
+			  </li>
+			  <li ui-route="#/afianzados/nuevo" ng-class="{active: $uiRoute}">
+			  	<a ui-sref="afianzados.nuevo">Nuevo</a>
+			  </li>
+			</ul>
+		</div>
+		<div class="col-md-9">
+			<div ui-view class="slide">
+				Afianzados
+			</div>
+		</div>
+	</div>
+</div>
