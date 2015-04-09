@@ -1,4 +1,4 @@
-<form name="frmDepositante" ng-submit="nuevo()">
+<form name="frmDepositante" ng-submit="nuevo()" novalidate>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h1 class="panel-title">Nuevo</h1>
@@ -50,10 +50,10 @@
 		<div class="panel-footer">
 			<div class="row">
 				<div class="col-md-6">
-					<input class="btn btn-primary btn-block" type="submit" value="Nuevo" ng-disabled="formDisabled()">
+					<input class="btn btn-primary btn-block" type="submit" value="Nuevo">
 				</div>
 				<div class="col-md-6">
-					<input class="btn btn-primary btn-block" type="button" value="Limpiar">
+					<input class="btn btn-primary btn-block" type="button" value="Limpiar" ng-click="limpiar()">
 				</div>
 			</div>
 		</div>

@@ -54,7 +54,7 @@ angular.module('polizasAngularAppApp')
   	$scope.nuevo = function() {
       if(!$scope.formDisabled()) {
         AfianzadosService.create($scope.data.afianzado, function(data) {
-          $scope.data.afianzado = undefined;
+          $scope.limpiar();
           if(data.Message) {
             toaster.pop(data.Message.Type, data.Message.Title, data.Message.Message);
           }
@@ -62,8 +62,11 @@ angular.module('polizasAngularAppApp')
       }
   	};
 
-    $scope.formDisabled = function() {
+    $scope.limpiar = function() {
+      $scope.data.afianzado = undefined;
+    };
 
+    $scope.formDisabled = function() {
       return !($scope.data.afianzado !== undefined && 
             ($scope.data.afianzado.Nombre
             && $scope.data.afianzado.ApellidoPaterno

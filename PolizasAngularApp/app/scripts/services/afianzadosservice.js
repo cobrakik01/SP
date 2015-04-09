@@ -30,7 +30,6 @@ angular.module('polizasAngularAppApp')
     };
 
   	service.create = function(model, fn) {
-  		console.log(model);
   		$http.post(url, { afianzado: model }).success(function(data) {
         fn(data);
       }).error(service.error);
