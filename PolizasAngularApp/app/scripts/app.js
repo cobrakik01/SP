@@ -23,28 +23,10 @@ angular
     'ui.router', // https://github.com/angular-ui/ui-router
     'ngLoader' // https://github.com/jfeigel/ngLoader
   ])
-  .run(function($rootScope, $interval) {
-    $interval(function(){
-      var meses = [
-        'Enero', 
-        'Febrero', 
-        'Marzo', 
-        'Abril', 
-        'Mayo', 
-        'Junio', 
-        'Julio', 
-        'Agosto', 
-        'Septiembre', 
-        'Octubre', 
-        'Noviembre',
-        'Diciembre'];
-      var dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-      var f = new Date();
+  .run(function($rootScope, $interval, utils) {
+    $interval(function() {
+      $rootScope.currentTime = utils.currentTime();
 
-      function n(n) {
-        return n > 9 ? '' + n: '0' + n;
-      }
-      $rootScope.currentTime =  dias[f.getDay()] + ' ' + n(f.getDate()) + ' de ' + meses[f.getMonth()] + ' del ' + f.getFullYear() + ' ' + n(f.getHours()) + ':' + n(f.getMinutes()) + ':' + n(f.getSeconds());
     }, 1000);
 
     $rootScope.operaciones = false;

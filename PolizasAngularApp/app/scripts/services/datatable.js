@@ -35,10 +35,41 @@ angular.module('polizasAngularAppApp')
         total: 0, // length of data
         getData: function($defer, _params) {
           var par = _params.url();
-          par.filter = _params.filter().Nombre;
-          par.sorting = _params.sorting().Nombre;
+          var filterObject = { filterObject: _params.filter() };
+          //console.log(params);
+          // console.log('incia for');
+          var strFilterObject = '';
+          for(var obj in filterObject.filterObject) {
+            strFilterObject += 'filterObject.' + obj + '=' + filterObject.filterObject[obj] + '&';
+          }
+          strFilterObject = strFilterObject.substr(0, strFilterObject.length - 1);
+          // console.log('termina for');
+          //console.log(_params.sorting());
+
+          var _strSorting = '';
+          for(var s in _params.sorting()) {
+            _strSorting = 'sortingField=' + s + '&sorting=' + _params.sorting()[s];
+          }
+          
+          par.filter = filterObject;
+          // par.sorting = _params.sorting().Nombre;
+          par.sorting = _strSorting;
           data.items = [];
-          data.items = service.query(par, function(a) {
+
+          var __params = '';
+          if(typeof params.data !== 'undefined' && typeof params.data.filerObject !== 'undefined') {
+            // __params = 'count=' + par.count + '&page=' + par.page + '&sorting=' + par.sorting + '&' + strFilterObject;
+            __params = 'count=' + par.count + '&page=' + par.page + '&' + strFilterObject + '&' + _strSorting;
+          } else if(typeof params.filter !== 'undefined') {
+            var _filter = '';
+            for(var obj in params.filter) {
+              _filter = typeof params.filter[obj] === 'undefined' ? '' : params.filter[obj];
+            } 
+            // __params = 'count=' + par.count + '&filter=' + _filter + '&page=' + par.page + '&sorting=' + par.sorting;
+            __params = 'count=' + par.count + '&filter=' + _filter + '&page=' + par.page + '&' + _strSorting;
+          }
+
+          data.items = service.query(__params, function(a) {
             $timeout(function() {
                       data.items = [];
                       data.items = a.result;
