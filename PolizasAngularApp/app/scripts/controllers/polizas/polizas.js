@@ -8,7 +8,9 @@
  * Controller of the polizasAngularAppApp
  */
 angular.module('polizasAngularAppApp')
-  .controller('PolizasCtrl', function ($scope, AfianzadoraService) {
+  .controller('PolizasCtrl', function ($scope, AfianzadoraService, AuthService) {
+
+  	AuthService.auth();
 
     $scope.loaderAfianzadora = true;
     $scope.afianzadoras = AfianzadoraService.all(function(data) {

@@ -24,19 +24,6 @@
 						</div>
 						<div class="col-md-12 clearfix">
 							<div class="col-md-6">
-								<div class="form-group has-{{ data.afianzado ? 'success' : 'warning' }} has-feedback">
-									<label class="control-label" for="txtAfianzado">Afianzado:</label>
-									<input ng-model="nombreCompletoAfianzado" ng-show="data.afianzado" class="form-control" type="text" placeholder="Sin Afianzador" required="" aria-describedby="txtAfianzadoStatus" readonly />
-									<!-- <a ui-sref="polizas.agregar.afianzado" ng-click="agregarAfianzado(data.afianzado)">Ok</a> -->
-									<button ng-click="agregarAfianzado(data.afianzado)" type="button" class="btn btn-default btn-block">
-										<span class="glyphicon glyphicon-alert" ng-show="!data.afianzado"></span> Agregar Afianzado
-									</button>
-
-									<div ng-show="frmPoliza.$submitted && !data.afianzado" class="text-warning">
-										Es requerido el campo de afianzado.
-									</div>
-								</div>
-
 								<div class="form-group has-{{ data.cantidad ? 'success' : 'warning' }} has-feedback">
 									<label class="control-label" for="txtCantidad">Cantidad:</label>
 									<input ng-model="data.cantidad" name="pNombre" id="txtCantidad" type="text" class="form-control" required="" placeholder="Cantidad" aria-describedby="txtCantidadStatus" />
@@ -101,12 +88,12 @@
 				</div>
 				<div class="panel-footer clearfix">
 						<div class="col-md-6">
-							<button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="disabled(data)">
+							<button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="disabled()">
 								Agregar
 							</button>
 						</div>
 						<div class="col-md-6">
-							<button type="reset" ng-click="reset(data)" class="btn btn-primary btn-block btn-lg" ng-disabled="">
+							<button type="reset" ng-click="reset(data)" class="btn btn-primary btn-block btn-lg">
 								Limpiar
 							</button>
 						</div>

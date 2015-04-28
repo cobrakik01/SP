@@ -8,7 +8,9 @@
  * Controller of the polizasAngularAppApp
  */
 angular.module('polizasAngularAppApp')
-  .controller('PolizasAgregarCtrl', function ($scope, $modal, PolizasService, $log) {
+  .controller('PolizasAgregarCtrl', function ($scope, $modal, PolizasService, $log, AuthService) {
+    
+    AuthService.auth();
 
     $scope.data = {
       poliza: undefined,
@@ -85,7 +87,7 @@ angular.module('polizasAngularAppApp')
 
   	$scope.disabled = function() {
       return !($scope.data.poliza 
-        && $scope.data.afianzado
+        // && $scope.data.afianzado
         && $scope.data.depositante
         && $scope.data.afianzadora 
         && $scope.data.cantidad);

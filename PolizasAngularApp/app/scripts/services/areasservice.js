@@ -48,5 +48,13 @@ angular.module('polizasAngularAppApp')
         fn(data);
       }).error(service.error);
     };
+
+    service.all = function(fn) {
+      var _url = url + 'All';
+      $http({ method: 'GET', url: _url, cache: false }).success(function(data) {
+        fn(data);
+      }).error(service.error);
+    };
+    
   	return service;
   });

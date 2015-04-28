@@ -1,0 +1,107 @@
+<h1 class="page-header">Perfil de {{ user.UserName }}</h1>
+
+<div class="col-md-12 col-sm-12">
+	<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
+		<form ng-submit="actualizar()" name="frmDetalles">
+			<div class="form-group has-{{ (!data.detalles.Nombre ? 'warning' : 'success') }} has-feedback">
+				<label class="control-label" for="txtNombre">Nombre</label>
+				<input ng-model="data.detalles.Nombre" placeholder="Nombre" type="text" class="form-control" id="txtNombre">
+
+		 		<span ng-show="data.detalles.Nombre" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+		 		<span ng-show="!data.detalles.Nombre" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+		 		<span class="sr-only"></span>
+
+		 		<div ng-show="frmDetalles.$submitted && !data.detalles.Nombre" class="text-warning">
+					Es requerido el campo Nombre.
+				</div>
+		 	</div>
+
+		 	<div class="form-group has-{{ (!data.detalles.ApellidoPaterno ? 'warning' : 'success') }} has-feedback">
+				<label class="control-label" for="txtApellidoPaterno">Apellido Paterno</label>
+				<input ng-model="data.detalles.ApellidoPaterno" placeholder="Apellido Paterno" type="text" class="form-control" id="txtApellidoPaterno">
+
+		 		<span ng-show="data.detalles.ApellidoPaterno" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+		 		<span ng-show="!data.detalles.ApellidoPaterno" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+		 		<span class="sr-only"></span>
+
+		 		<div ng-show="frmDetalles.$submitted && !data.detalles.ApellidoPaterno" class="text-warning">
+					Es requerido el campo Apellido Paterno.
+				</div>
+		 	</div>
+
+		 	<div class="form-group has-{{ (!data.detalles.ApellidoMaterno ? 'warning' : 'success') }} has-feedback">
+				<label class="control-label" for="txtApellidoMaterno">Apellido Materno</label>
+				<input ng-model="data.detalles.ApellidoMaterno" placeholder="Apellido Materno" type="text" class="form-control" id="txtApellidoMaterno">
+
+		 		<span ng-show="data.detalles.ApellidoMaterno" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+		 		<span ng-show="!data.detalles.ApellidoMaterno" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+		 		<span class="sr-only"></span>
+
+		 		<div ng-show="frmDetalles.$submitted && !data.detalles.ApellidoMaterno" class="text-warning">
+					Es requerido el campo Apellido Materno.
+				</div>
+		 	</div>
+
+		 	<div class="form-group has-{{ (!data.detalles.FechaDeNacimiento ? 'warning' : 'success') }} has-feedback">
+				<label class="control-label" for="txtFechaDeNacimiento">Fecha de Nacimiento</label>
+				<input ng-model="data.detalles.FechaDeNacimiento" placeholder="Fecha de Nacimiento" type="text" class="form-control" id="txtFechaDeNacimiento">
+
+		 		<span ng-show="data.detalles.FechaDeNacimiento" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+		 		<span ng-show="!data.detalles.FechaDeNacimiento" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+		 		<span class="sr-only"></span>
+
+		 		<div ng-show="frmDetalles.$submitted && !data.detalles.FechaDeNacimiento" class="text-warning">
+					Es requerido el campo Fecha de Nacimiento.
+				</div>
+		 	</div>
+
+		 	<div class="form-group has-{{ (!data.detalles.NumeroDeEmpleado ? 'warning' : 'success') }} has-feedback">
+				<label class="control-label" for="txtNumeroDeEmpleado">Número de Empleado</label>
+				<input ng-model="data.detalles.NumeroDeEmpleado" placeholder="Número de Empleado" type="text" class="form-control" id="txtNumeroDeEmpleado">
+
+		 		<span ng-show="data.detalles.NumeroDeEmpleado" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+		 		<span ng-show="!data.detalles.NumeroDeEmpleado" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+		 		<span class="sr-only"></span>
+
+		 		<div ng-show="frmDetalles.$submitted && !data.detalles.NumeroDeEmpleado" class="text-warning">
+					Es requerido el campo Número de Empleado.
+				</div>
+		 	</div>
+
+		 	<div class="form-group has-{{ data.area.Nombre ? 'success' : 'warning' }} has-feedback">
+		 		<loader
+			 		working="loaderAfianzadora"
+			 		message="cargando..."
+			 		template="8">
+			 	</loader>
+
+			 	<label class="control-label" for="lstAreas">Area:</label>
+			 	<select 
+		 			id="lstAreas"
+		 			name="lstAreas"
+					class="form-control" 
+					ng-model="data.area" 
+					ng-options="area.Nombre for area in data.areas">
+						<option value="">[ Area ]</option>
+				</select>
+
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.area.Nombre"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.area.Nombre"></span>
+				<span id="txtAfianzadoStatus" class="sr-only">(warning)</span>
+
+				<div ng-show="frmDetalles.$submitted && !data.area.Nombre" class="text-warning">
+					Es requerida la selección de un area.
+				</div>
+			</div>
+
+		 	<button class="btn btn-primary btn-block" type="submit">
+		 		Guardar
+		 	</button>
+		</form>
+	</div>
+</div>

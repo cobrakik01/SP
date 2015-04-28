@@ -45,7 +45,7 @@
           </div>
 
           <div class="collapse navbar-collapse" style="border-bottom: solid 1px rgb(100, 100, 100);">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" ng-show="session.loginActive">
               <li ui-route="#/" ng-class="{active: $uiRoute}">
                 <a ng-href="#!/" ng-click="resetMenuSelect()">Inicio</a>
               </li>
@@ -72,6 +72,16 @@
                   Administración
                 </a>
               </li>
+              <li ng-class="{active: $uiRoute}">
+                <a ui-sref="perfil">
+                  Perfil | {{ user.UserName }}
+                </a>
+              </li>
+              <li ng-class="{active: $uiRoute}">
+                <a ui-sref="home" ng-click="session.logout()">
+                  Salir
+                </a>
+              </li>
             </ul>
             <!-- <p class="navbar-text navbar-right">{{ currentTime }}</p> -->
           </div>
@@ -79,7 +89,7 @@
 
           <div class="collapse navbar-collapse">
             <ul ng-show="operaciones" class="nav navbar-nav animate-show">
-              <li ui-route="#/polizas" ng-class="{active: $uiRoute}">
+              <li ui-route="#/polizas/listar" ng-class="{active: $uiRoute}">
                 <a ui-sref="polizas.listar">Listar Polizas</a>
               </li>
               <li ui-route="#/polizas/agregar" ng-class="{active: $uiRoute}">
@@ -199,6 +209,11 @@
         <script src="scripts/controllers/afianzados/nuevo.js"></script>
         <script src="scripts/services/afianzadosservice.js"></script>
         <script src="scripts/services/utils.js"></script>
+        <script src="scripts/controllers/session/login.js"></script>
+        <script src="scripts/services/authservice.js"></script>
+        <script src="scripts/services/authprovider.js"></script>
+        <script src="scripts/controllers/polizas/polizas.listar.js"></script>
+        <script src="scripts/controllers/perfil/perfil.home.js"></script>
         <!-- endbuild -->
 </body>
 </html>
