@@ -13,9 +13,9 @@ angular.module('polizasAngularAppApp')
     var url = api + 'Usuarios/';
     var service = {};
 
-    service.login= function(model, fnSuccess) {
+    service.login= function(model, fnSuccess, fnError) {
         var _url = url + 'Login';
-        $http.post(_url, model).success(fnSuccess);
+        $http.post(_url, model).success(fnSuccess).error(fnError);
     };
 
     service.logout = function() {
@@ -28,12 +28,12 @@ angular.module('polizasAngularAppApp')
 
     service.loginActive = false;
 
-    service.check = function(fnSuccess) {
+    service.check = function(fnSuccess, fnError) {
         var _url = url + 'IsLogin';
         $http.post(_url, {}).success(function(data) {
             service.loginActive = data.Login;
             fnSuccess(data);
-        });
+        }).error(fnError);
     };
 
     service.auth = function() {
@@ -43,6 +43,8 @@ angular.module('polizasAngularAppApp')
                 // console.log('Path: ' + $location.path());
                 $state.transitionTo('login');
             }
+        }, function() {
+            $state.transitionTo('login');
         });
         // console.log('Auth');
     };
@@ -50,6 +52,22 @@ angular.module('polizasAngularAppApp')
     service.user = function(fnSuccess) {
         var _url = url + 'UserInfo';
         $http.post(_url, {}).success(function(data) {
+            fnSuccess(data);
+        });  
+    };
+
+    service.update = function(userId, detalles, area, fnSuccess) {
+        var _url = url + 'UpdateUserDetails';
+        var data = {userId: userId, detalles: detalles, area: area};
+        $http.post(_url, data).success(function(data) {
+            fnSuccess(data);
+        });  
+    };
+
+    service.details = function(userId, fnSuccess) {
+        var _url = url + 'UserDetails';
+        var data = {userId: userId};
+        $http.post(_url, data).success(function(data) {
             fnSuccess(data);
         });  
     };

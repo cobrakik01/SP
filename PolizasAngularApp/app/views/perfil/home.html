@@ -1,6 +1,14 @@
 <h1 class="page-header">Perfil de {{ user.UserName }}</h1>
 
 <div class="col-md-12 col-sm-12">
+
+	<div ng-show="starting" style="position: absolute; background-color: rgba(250, 250, 250, 0.7); width: 100%; height: 100%; z-index: 10;">
+		<div style="position: relative; left: 50%; top: 50%; margin-left: -50px; margin-top: -50px; width: 100px; height: 100px;">
+			<img src="{{ loader }}" width="50" height="50" align="center" /> <br />
+			Obteniendo info...
+		</div>
+	</div>
+
 	<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
 		<form ng-submit="actualizar()" name="frmDetalles">
 			<div class="form-group has-{{ (!data.detalles.Nombre ? 'warning' : 'success') }} has-feedback">
