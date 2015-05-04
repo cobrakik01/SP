@@ -53,9 +53,27 @@
 				</div>
 		 	</div>
 
-		 	<div class="form-group has-{{ (!data.detalles.FechaDeNacimiento ? 'warning' : 'success') }} has-feedback">
+            <div class="form-group has-{{ (!data.detalles.FechaDeNacimiento ? 'warning' : 'success') }} has-feedback">
 				<label class="control-label" for="txtFechaDeNacimiento">Fecha de Nacimiento</label>
-				<input ng-model="data.detalles.FechaDeNacimiento" placeholder="Fecha de Nacimiento" type="text" class="form-control" id="txtFechaDeNacimiento">
+
+
+				<input type="text"
+					placeholder="Fecha de Nacimiento"
+					id="txtFechaDeNacimiento"
+              		class="form-control"
+              		datepicker-popup="{{ format }}"
+              		ng-model="data.detalles.FechaDeNacimiento"
+              		is-open="opened"
+              		datepicker-options="dateOptions"
+              		ng-required="true"
+              		close-text="Close"
+              		placeholder="AAAA/MM/DD"
+              		readonly="" />
+              	<span class="input-group-btn">
+              		<button type="button" class="btn btn-default" ng-click="open($event)">
+              			<i class="glyphicon glyphicon-calendar"></i>
+              		</button>
+              	</span>
 
 		 		<span ng-show="data.detalles.FechaDeNacimiento" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
 		 		<span ng-show="!data.detalles.FechaDeNacimiento" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>

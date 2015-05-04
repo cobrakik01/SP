@@ -23,8 +23,7 @@ angular.module('polizasAngularAppApp')
       AuthService.user(function(userData) {
         AuthService.details(userData.UserId, function(data) {
           $scope.data.detalles = data.detalles;
-          $scope.data.detalles.FechaDeNacimiento = utils.strToDate(data.detalles.FechaDeNacimiento);
-          // $scope.data.area = data.area;
+          $scope.data.detalles.FechaDeNacimiento = utils.formatDate(utils.toDate(data.detalles.FechaDeNacimiento));
 
           angular.forEach($scope.data.areas, function(value, key) {
             if(data.area.Id === value.Id) {
@@ -72,5 +71,48 @@ angular.module('polizasAngularAppApp')
         });
   		}
   	};
+
+
+    /*
+    |*****************************************
+    |         Controles de Fecha de nacimiento
+    |*****************************************
+    */
+
+    $scope.today = function() {
+      $scope.data.detalles.FechaDeNacimiento = new Date();
+    };
+    // $scope.today();
+
+    $scope.clear = function () {
+      $scope.data.detalles.FechaDeNacimiento = null;
+    };
+
+    // Disable weekend selection
+    $scope.disabled = function(date, mode) {
+      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    };
+
+    $scope.toggleMin = function() {
+      // $scope.minDate = $scope.minDate ? null : new Date();
+      var d = new Date();
+      $scope.minDate = new Date((d.getFullYear() - 80) + "/07/30");
+    };
+
+    $scope.toggleMin();
+
+    $scope.open = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.opened = true;
+    };
+
+    $scope.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[1];
 
   });

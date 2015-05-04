@@ -141,6 +141,30 @@ angular
       onEnter: auth
     };
 
+    var afianzados = {
+      name: 'afianzados',
+      url: '/afianzados',
+      templateUrl: view + 'views/afianzados/home.html',
+      onEnter: auth,
+      controller: 'AfianzadosHomeCtrl'
+    };
+
+    var afianzadosListar = {
+      name: 'afianzados.listar',
+      url: '/listar',
+      templateUrl: view + 'views/afianzados/listar.html',
+      onEnter: auth,
+      controller: 'AfianzadosListarCtrl'
+    };
+
+    var afianzadosNuevo = {
+      name: 'afianzados.nuevo',
+      url: '/nuevo',
+      templateUrl: view + 'views/afianzados/nuevo.html',
+      onEnter: auth,
+      controller: 'AfianzadosNuevoCtrl'
+    };
+
     $stateProvider
       .state(notfound)
       .state(home)
@@ -151,30 +175,8 @@ angular
       .state(autoridades)
       .state(polizas)
       .state(polizasListar)
-      .state(polizasAgregar);
-      /*
-      .state('polizas.agregar.afianzado', {
-        url: '/afianzado',
-        templateUrl: view + 'views/polizas/agregarafianzadomodal.html',
-        controller: 'PolizasAgregarCtrl'
-      })
-      .state('afianzados', {
-        url: '/afianzados',
-        templateUrl: view + 'views/afianzados/home.html',
-        onEnter: auth,
-        controller: 'AfianzadosHomeCtrl'
-      })
-      .state('afianzados.listar', {
-        url: '/listar',
-        templateUrl: view + 'views/afianzados/listar.html',
-        onEnter: auth,
-        controller: 'AfianzadosListarCtrl'
-      })
-      .state('afianzados.nuevo', {
-        url: '/nuevo',
-        templateUrl: view + 'views/afianzados/nuevo.html',
-        onEnter: auth,
-        controller: 'AfianzadosNuevoCtrl'
-      });
-      */
+      .state(polizasAgregar)
+      .state(afianzados)
+      .state(afianzadosListar)
+      .state(afianzadosNuevo);
   });
