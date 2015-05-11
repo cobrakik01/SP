@@ -13,13 +13,16 @@ angular.module('polizasAngularAppApp')
   	$scope.afianzado = {};
   	
   	$scope.agregar = function () {
-  		if(!$scope.disabled()) {
+  		if(!$scope.disabledForm()) {
   			$modalInstance.close($scope.afianzado);
   		}
   	};
 
-  	$scope.disabled = function() {
-  		return !($scope.afianzado.ApellidoMaterno && $scope.afianzado.ApellidoPaterno && $scope.afianzado.Nombre);
+  	$scope.disabledForm = function() {
+  		return !($scope.afianzado.ApellidoMaterno 
+            && $scope.afianzado.ApellidoPaterno 
+            && $scope.afianzado.Nombre 
+            && $scope.afianzado.FechaDeNacimiento);
   	};
 
   	$scope.cancelar = function () {

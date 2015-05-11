@@ -20,9 +20,16 @@ angular.module('polizasAngularAppApp')
       console.log(d);
     };
 
-    service.test = function(par, fn) {
-    	console.log("Parametros enviados.");
-    	console.log(par);
+    service.all = function(fn) {
+      // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
+      // var _url = url + params;
+      var _url = url + '/All';
+      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
+        fn(data);
+      }).error(service.error);
+    };
+
+    service.create = function(par, fn) {
     	$http.post(url, par)
     	.success(function(data) {
     		fn(data);
@@ -39,12 +46,14 @@ angular.module('polizasAngularAppApp')
       }).error(service.error);
     };
     
+    /*
   	service.create = function(model, fn) {
       var data = {nombre: model.nombre};
       $http.post(url, data).success(function(data) {
         fn(data);
       }).error(service.error);
     };
+    */
 
     service.delete = function(model, fn) {
       var _url = url + '?id=' + model.id;

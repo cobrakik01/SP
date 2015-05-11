@@ -8,15 +8,15 @@
  * Controller of the polizasAngularAppApp
  */
 angular.module('polizasAngularAppApp')
-  .controller('PolizasAgregarCtrl', function ($scope, $modal, PolizasService, $log, AuthService) {
+  .controller('PolizasAgregarCtrl', function ($scope, $modal, PolizasService, $log, AuthService, toaster) {
     
     AuthService.auth();
 
     $scope.data = {
-      poliza: undefined,
-      afianzado: undefined,
       depositante: undefined,
+      afianzado: undefined,
       afianzadora: undefined,
+      poliza: undefined,
       cantidad: 0
     };
 
@@ -26,9 +26,13 @@ angular.module('polizasAngularAppApp')
 
   	$scope.agregar = function() {
   		if(!$scope.disabled()) {
-        PolizasService.test($scope.data, function(data) {
-          console.log("Parametros resividos.");
-          console.log(data);
+        PolizasService.create($scope.data, function(data) {
+          if (data.Message) {
+            toaster.pop(data.Message.Type, data.Message.Title, data.Message.Message);
+            if(data.Message.Type === 'success') {
+              $scope.reset();
+            }
+          }
         });
       }
   	};
@@ -87,7 +91,8 @@ angular.module('polizasAngularAppApp')
 
   	$scope.disabled = function() {
       return !($scope.data.poliza 
-        // && $scope.data.afianzado
+        && $scope.data.poliza.AveriguacionPrevia
+        && $scope.data.afianzado
         && $scope.data.depositante
         && $scope.data.afianzadora 
         && $scope.data.cantidad);

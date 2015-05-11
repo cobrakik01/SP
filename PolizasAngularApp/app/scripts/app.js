@@ -23,7 +23,12 @@ angular
     'ui.router', // https://github.com/angular-ui/ui-router
     'ngLoader' // https://github.com/jfeigel/ngLoader
   ])
-  .run(function($rootScope, $interval, utils, AuthService) {
+  .run(function($rootScope, $interval, utils, AuthService, img, $state, $stateParams) {
+
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+
+    $rootScope.img = img;
 
     $interval(function() {
       $rootScope.currentTime = utils.currentTime();
@@ -53,18 +58,32 @@ angular
     $locationProvider.html5Mode(false).hashPrefix('!');
     $urlRouterProvider.otherwise('/');
 
-    var auth = function(AuthService) {
-      AuthService.auth();
-      console.log('Auth desde config.');
+    var auth = function(AuthService, $location, $state) {
+      AuthService.check(function() {
+        if(AuthService.loginActive) {
+          AuthService.user(function(user) {
+            AuthService.details(user.UserId, function(userDetails) {
+              if((!userDetails.detalles || !userDetails.detalles.Id) && ($location.path() !== '/administrar/areas'))
+              {
+                $state.transitionTo('perfil');
+              }
+            });
+          });
+        } else {
+          $state.transitionTo('login');
+        }
+      }, function() {
+        $state.transitionTo('login');
+      });
     };
 
     var home = {
       name: 'home',
       url: '/',
       templateUrl: view + 'views/main.html',
-      onEnter: auth,
-      controller: 'MainCtrl'
-      // ,deepStateRedirect: true
+      controller: 'MainCtrl',
+      deepStateRedirect: true,
+      onEnter: auth
     };
 
     var notfound = {
@@ -84,36 +103,37 @@ angular
     var afianzadoras = {
       name: 'afianzadoras',
       url: '/administrar/afianzadoras',
-      onEnter: auth,
       templateUrl: view + 'views/afianzadoras/afianzadoras.html',
-      controller: 'AfianzadorasCtrl'
-      // , deepStateRedirect: true
+      controller: 'AfianzadorasCtrl',
+      deepStateRedirect: true,
+      onEnter: auth
     };
 
     var areas = {
       name: 'areas',
       url: '/administrar/areas',
-      onEnter: auth,
       templateUrl: view + 'views/areas/areas.html',
-      controller: 'AreasCtrl'
-      // ,deepStateRedirect: true
+      controller: 'AreasCtrl',
+      deepStateRedirect: true,
+      onEnter: auth,
     };
 
     var autoridades = {
       name: 'autoridades',
-      onEnter: auth,
       url: '/administrar/autoridades',
       controller: 'AutoridadesCtrl',
       templateUrl: view + 'views/autoridades/home.html',
-      // deepStateRedirect: true
+      deepStateRedirect: true,
+      onEnter: auth
     };
 
     var polizas = {
       name: 'polizas',
       url: '/polizas',
       controller: 'PolizasCtrl',
-      templateUrl: view + 'views/polizas/home.html'
-      // , deepStateRedirect: true
+      templateUrl: view + 'views/polizas/home.html',
+      deepStateRedirect: true,
+      onEnter: auth
     };
 
     var polizasListar = {
@@ -121,7 +141,8 @@ angular
       url: '/listar',
       controller: 'PolizasListarCtrl',
       templateUrl: view + 'views/polizas/list.html',
-      deepStateRedirect: true
+      deepStateRedirect: true,
+      onEnter: auth
     };
 
     var polizasAgregar = {
@@ -129,7 +150,8 @@ angular
       url: '/agregar',
       templateUrl: view + 'views/polizas/agregar.html',
       controller: 'PolizasAgregarCtrl',
-      deepStateRedirect: true
+      deepStateRedirect: true,
+      onEnter: auth
     };
 
     var perfil = {
@@ -145,24 +167,40 @@ angular
       name: 'afianzados',
       url: '/afianzados',
       templateUrl: view + 'views/afianzados/home.html',
-      onEnter: auth,
-      controller: 'AfianzadosHomeCtrl'
+      controller: 'AfianzadosHomeCtrl',
+      onEnter: auth
     };
 
     var afianzadosListar = {
       name: 'afianzados.listar',
       url: '/listar',
       templateUrl: view + 'views/afianzados/listar.html',
-      onEnter: auth,
-      controller: 'AfianzadosListarCtrl'
+      controller: 'AfianzadosListarCtrl',
+      onEnter: auth
     };
 
     var afianzadosNuevo = {
       name: 'afianzados.nuevo',
       url: '/nuevo',
       templateUrl: view + 'views/afianzados/nuevo.html',
-      onEnter: auth,
-      controller: 'AfianzadosNuevoCtrl'
+      controller: 'AfianzadosNuevoCtrl',
+      onEnter: auth
+    };
+
+    var usuarios = {
+      name: 'usuarios',
+      url: '/usuarios',
+      templateUrl: view + 'views/usuarios/home.html',
+      controller: 'UsuariosHomeCtrl',
+      onEnter: auth
+    };
+
+    var usuariosDetalles = {
+      name: 'usuarios.detalles',
+      url: '/:id/detalles',
+      templateUrl: view + 'views/usuarios/detalles.html',
+      controller: 'UsuariosDetallesCtrl',
+      onEnter: auth
     };
 
     $stateProvider
@@ -170,6 +208,12 @@ angular
       .state(home)
       .state(login)
       .state(perfil)
+
+      /*
+      |************************************
+      |     Administracion
+      |************************************
+      */
       .state(areas)
       .state(afianzadoras)
       .state(autoridades)
@@ -178,5 +222,7 @@ angular
       .state(polizasAgregar)
       .state(afianzados)
       .state(afianzadosListar)
-      .state(afianzadosNuevo);
+      .state(afianzadosNuevo)
+      .state('usuarios', usuarios)
+      .state(usuariosDetalles);
   });

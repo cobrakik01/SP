@@ -2,8 +2,21 @@
 	<div class="col-md-12">
 		<form name="frmPoliza" ng-submit="agregar()" novalidate>
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h1 class="panel-title">Agregar Polizas</h1>
+				<div class="panel-heading clearfix">
+
+					<h3 class="nav navbar-nav">Agregar Polizas</h3>
+					
+					<div class="col-md-8">
+						<div class="btn-group nav navbar-nav navbar-right" role="group" aria-label="Herramientas de administración">
+							<button type="submit" class="btn btn-primary" ng-disabled="disabled()">
+								Nueva
+							</button>
+							<button type="reset" class="btn btn-default" ng-click="reset(data)">
+								Limpiar
+							</button>
+						</div>
+					</div>
+
 				</div>
 				<div class="panel-body">
 					<div class="row">
@@ -24,6 +37,21 @@
 						</div>
 						<div class="col-md-12 clearfix">
 							<div class="col-md-6">
+
+								<!-- Inicio - Boton Afianzado -->
+								<div class="form-group has-{{ data.afianzado ? 'success' : 'warning' }} has-feedback">
+									<label class="control-label" for="txtAfianzado">Afianzado:</label>
+									<input ng-model="nombreCompletoAfianzado" ng-show="data.afianzado" id="txtAfianzado" class="form-control" type="text" placeholder="Sin Depositante" required="" readonly />
+									<button ng-click="agregarAfianzado(data.afianzado)" type="button" class="btn btn-default btn-block">
+										<span class="glyphicon glyphicon-alert" ng-show="!data.afianzado"></span> Agregar Afianzado
+									</button>
+
+									<div ng-show="frmPoliza.$submitted && !data.afianzado" class="text-warning">
+										Es requerido el campo de afianzado.
+									</div>
+								</div>
+								<!-- Fin - Boton Afianzado -->
+
 								<div class="form-group has-{{ data.cantidad ? 'success' : 'warning' }} has-feedback">
 									<label class="control-label" for="txtCantidad">Cantidad:</label>
 									<input ng-model="data.cantidad" name="pNombre" id="txtCantidad" type="text" class="form-control" required="" placeholder="Cantidad" aria-describedby="txtCantidadStatus" />
@@ -85,18 +113,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="panel-footer clearfix">
-						<div class="col-md-6">
-							<button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="disabled()">
-								Agregar
-							</button>
-						</div>
-						<div class="col-md-6">
-							<button type="reset" ng-click="reset(data)" class="btn btn-primary btn-block btn-lg">
-								Limpiar
-							</button>
-						</div>
 				</div>
 			</div>
 		</form>
@@ -198,9 +214,28 @@
 					Es requerido el campo apellido materno del afianzado.
 				</div>
 			</div>
+
+			<div class="form-group has-{{ (!afianzado.FechaDeNacimiento ? 'warning' : 'success') }} has-feedback">
+				<label class="control-label" for="txtFechaDeNacimiento">Fecha de Nacimiento</label>
+
+              	<cbk-calendar 
+			 		cbk-id="'txtFechaDeNacimiento'"
+			 		cbk-model="afianzado.FechaDeNacimiento" 
+			 		cbk-placeholder="'Fecha de Nacimiento'">
+			 	</cbk-calendar>
+
+		 		<span ng-show="afianzado.FechaDeNacimiento" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+		 		<span ng-show="!afianzado.FechaDeNacimiento" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+		 		<span class="sr-only"></span>
+
+		 		<div ng-show="frmAfianzado.$submitted && !afianzado.FechaDeNacimiento" class="text-warning">
+					Es requerido el campo Fecha de Nacimiento.
+				</div>
+		 	</div>
 		</div>
 		<div class="modal-footer">
-			<button class="btn btn-primary" type="submit" ng-disabled="disabled()">Agregar</button>
+			<button class="btn btn-primary" type="submit" ng-disabled="disabledForm()">Agregar</button>
 			<button class="btn btn-warning" ng-click="cancelar()" type="button">Cancelar</button>
 		</div>
 	</form>

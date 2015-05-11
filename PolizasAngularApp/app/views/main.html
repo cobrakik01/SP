@@ -2,13 +2,12 @@
 <div class="row">
   <div class="col-md-12">
     <div class="col-md-6">
-      <p class="text-center">{{ currentTime }}</p>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h1 class="panel-title">INFORME DEL SISTEMA DE POLIZAS  </h1>
         </div>
         <div class="panel-body">
-          <strong>Ingresos:</strong> {{ 'ingresos' }}<br />
+          <strong>Ingresos:</strong> {{ ingresos }}<br />
           <strong>Egresos:</strong> {{ 'egresos' }}<br />
           <strong>Ingresos 2012:</strong> {{ 'ingresos 2012' }}<br />
           <strong>Egresos 2012:</strong> {{ 'egresos 2012' }}<br />
@@ -16,7 +15,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      Imagen
+      <img src="{{ img.home }}" alt="Home" />
     </div>
   </div>
 </div>

@@ -1,13 +1,13 @@
 <h1 class="page-header">Administrar Afianzadoras</h1>
 
-<div class="col-md-12 col-sm-12">
+<div class="col-md-12 col-sm-12 clearfix">
 	<tabset>
 		 <tab heading="Listar Afianzadoras">
 		 	<div class="row">
-		 		<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
+		 		<div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px;">
 		 			<div class="clearfix"></div>
 		 			<div loading-container="table.params.settings().$loading">
-			 			<table ng-table="table.params" class="table table-striped table-hover" show-filter="true">
+			 			<table ng-table="table.params" class="table table-striped table-hover clearfix" show-filter="true">
 			 				<tr ng-repeat="afianzadora in table.items" style="cursor: pointer;">
 			 					<td data-title="'Nombre'" sortable="'Nombre'" filter="{ 'Nombre': 'text' }">
 			 						{{ afianzadora.Nombre }}

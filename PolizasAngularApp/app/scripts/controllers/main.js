@@ -8,10 +8,9 @@
  * Controller of the polizasAngularAppApp
  */
 angular.module('polizasAngularAppApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, IngresosService, img) {
+  	$scope.img = img;
+    $scope.ingresos = IngresosService.count({}, function(data) {
+    	$scope.ingresos = data.cont;
+    });
   });

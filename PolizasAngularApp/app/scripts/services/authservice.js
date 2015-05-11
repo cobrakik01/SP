@@ -13,6 +13,14 @@ angular.module('polizasAngularAppApp')
     var url = api + 'Usuarios/';
     var service = {};
 
+    service.error = function(a, status, c, d) {
+      toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
+      console.log(a);
+      console.log(status);
+      console.log(c);
+      console.log(d);
+    };
+
     service.login= function(model, fnSuccess, fnError) {
         var _url = url + 'Login';
         $http.post(_url, model).success(fnSuccess).error(fnError);
@@ -70,6 +78,23 @@ angular.module('polizasAngularAppApp')
         $http.post(_url, data).success(function(data) {
             fnSuccess(data);
         });  
+    };
+
+    service.query = function(par, fn) {
+      var _url = url + '?' + par;
+      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
+        fn(data);
+      }).error(service.error);
+    };
+
+    service.userInRole = function(UserName, fnSuccess) {
+        var _url = url + 'UserInRoles?UserName=' + UserName;
+        $http({method: 'GET', url: _url, cache: false}).success(fnSuccess).error(service.error);
+    };
+
+    service.changePassword = function(oldPassword, newPassword, fnSuccess) {
+        var _url = url + 'ChangePassword';
+        $http({ method: 'POST', url: _url, data: { oldPassword: oldPassword, newPassword: newPassword } }).success(fnSuccess).error(service.error);
     };
 
     return service;

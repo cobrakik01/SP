@@ -46,7 +46,8 @@ angular.module('polizasAngularAppApp')
     };
 
     factory.formatDate = function(date) {
-        return date.getFullYear() + '/' + factory.f(date.getMonth() + 1) + '/' + factory.f(date.getDate());
+        // return date.getFullYear() + '/' + factory.f(date.getMonth() + 1) + '/' + factory.f(date.getDate());
+        return factory.f(date.getDate()) + '/' + factory.f(date.getMonth() + 1) + '/' + date.getFullYear();
     };
 
     factory.parseDateTime = function(date) {

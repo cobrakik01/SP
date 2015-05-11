@@ -1,11 +1,15 @@
 <!doctype html>
 <html class="no-js">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Sistema de polizas | PGJ</title>
-    <meta name="description" content="Sistema de polizas">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Sistema de polizas" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="fragment" content="!" />
+    
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/ico" />
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -15,9 +19,9 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/animations.css">
-    <link rel="stylesheet" href="styles/sticky-footer.css">
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/animations.css" />
+    <link rel="stylesheet" href="styles/sticky-footer.css" />
     <!-- endbuild -->
   </head>
   <body ng-app="polizasAngularAppApp">
@@ -26,114 +30,116 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-cbk" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
+    <img src="{{ img.header }}" alt="Header" width="100%" height="80px;" />
+    <nav class="navbar navbar-static-top navbar-cbk" ng-show="session.loginActive">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" style="color: white;">PGJ</a>
+        </div>
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="#!/" ng-click="resetMenuSelect()">
-              <img src="images/cdmx.png" alt="Ciudad de México" height="50" style="margin-top: -15px; float: left;" />
-              <img src="images/pgj_df.png" alt="Ciudad de México" height="50" style="margin-top: -15px; float: left;" />
-            </a>
-          </div>
-
-          <div class="collapse navbar-collapse" style="border-bottom: solid 1px rgb(100, 100, 100);">
-            <ul class="nav navbar-nav" ng-show="session.loginActive">
-              <li ui-route="#/" ng-class="{active: $uiRoute}">
-                <a ng-href="#!/" ng-click="resetMenuSelect()">Inicio</a>
+        <div id="js-navbar-collapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{active: $state.includes('home')}">
+                <a ui-sref="home">Inicio</a>
               </li>
-              <li ng-class="{active: $uiRoute}">
-                <a href ng-click="resetMenuSelect(); operaciones = !operaciones;">
-                  Operaciones <!-- <span class="caret"></span> -->
+              <li class="dropdown" ng-class="{active: $state.includes('polizas') || $state.includes('afianzados')}">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                  Operaciones <span class="caret"></span>
                 </a>
-                <!--
                 <ul class="dropdown-menu" role="menu">
-                  <li ui-route="#/polizas" ng-class="{active: $uiRoute}">
-                    <a ng-href="#!/polizas">Polizas</a>
+                  <li ui-route="#/polizas/agregar" ng-class="{active: $state.includes('polizas')}">
+                    <a ui-sref="polizas.agregar">Administrar Polizas</a>
                   </li>
-                  <li ui-route="#/administrar/afianzadoras" ng-class="{active: $uiRoute}">
-                    <a ng-href="#!/administrar/afianzadoras">Afianzadoras</a>
-                  </li>
-                  <li ui-route="#/administrar/autoridades" ng-class="{active: $uiRoute}">
-                    <a ng-href="#!/administrar/autoridades">Autoridades</a>
+                  <li ui-route="#/afianzados/listar" ng-class="{active: $state.includes('afianzados')}">
+                    <a ui-sref="afianzados.listar">Afianzados</a>
                   </li>
                 </ul>
+              </li>
+              <li class="dropdown" ng-class="{active: $state.includes('areas') || $state.includes('afianzadoras') || $state.includes('autoridades') || $state.includes('usuarios')}">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                  Administración <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li ui-route="#/administrar/areas" ng-class="{active: $state.includes('areas')}">
+                    <a ng-href="#!/administrar/areas">Areas</a>
+                  </li>
+                  <li ui-route="#/administrar/afianzadoras" ng-class="{active: $state.includes('afianzadoras')}">
+                  <a ng-href="#!/administrar/afianzadoras">Afianzadoras</a>
+                  </li>
+                  <li ui-route="#/administrar/autoridades" ng-class="{active: $state.includes('autoridades')}">
+                    <a ng-href="#!/administrar/autoridades">Autoridades</a>
+                  </li>
+                  <li ui-route="#/usuarios" ng-class="{active: $state.includes('usuarios')}">
+                    <a ui-sref="usuarios">Usuarios</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <!--
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
               -->
+              <li>
+                <p class="navbar-text">
+                  <span style="color: white;">
+                    {{ currentTime }}
+                  </span>
+                </p>
               </li>
-              <li ng-class="{active: $uiRoute}">
-                <a href ng-click="resetMenuSelect(); administracion = !administracion;">
-                  Administración
-                </a>
-              </li>
-              <li ng-class="{active: $uiRoute}">
+              <li ui-route="#/perfil" ng-class="{active: $uiRoute}">
                 <a ui-sref="perfil">
-                  Perfil | {{ user.UserName }}
+                  Sesion de {{ user.UserName }}
                 </a>
               </li>
-              <li ng-class="{active: $uiRoute}">
-                <a ui-sref="home" ng-click="session.logout()">
-                  Salir
+              <li>
+                <a ui-sref="login" ng-click="session.logout()">
+                  <span class="glyphicon glyphicon-log-out"></span> Salir
                 </a>
               </li>
-            </ul>
-            <!-- <p class="navbar-text navbar-right">{{ currentTime }}</p> -->
-          </div>
-
-
-          <div class="collapse navbar-collapse">
-            <ul ng-show="operaciones" class="nav navbar-nav animate-show">
-              <li ui-route="#/polizas/listar" ng-class="{active: $uiRoute}">
-                <a ui-sref="polizas.listar">Listar Polizas</a>
-              </li>
-              <li ui-route="#/polizas/agregar" ng-class="{active: $uiRoute}">
-                <a ui-sref="polizas.agregar">Agregar Polizas</a>
-              </li>
-              <li ui-route="#/afianzados/listar" ng-class="{active: $uiRoute}">
-                <a ui-sref="afianzados.listar">Afianzados</a>
+              <li>
+                <p class="navbar-text">&nbsp;</p>
               </li>
             </ul>
-            <!-- <p class="navbar-text navbar-right">{{ currentTime }}</p> -->
           </div>
-
-          <div class="collapse navbar-collapse">
-            <ul ng-show="administracion" class="nav navbar-nav animate-show">
-              <li ui-route="#/administrar/areas" ng-class="{active: $uiRoute}">
-                <a ng-href="#!/administrar/areas">Areas</a>
-              </li>
-              <li ui-route="#/administrar/afianzadoras" ng-class="{active: $uiRoute}">
-              <a ng-href="#!/administrar/afianzadoras">Afianzadoras</a>
-              </li>
-              <li ui-route="#/administrar/autoridades" ng-class="{active: $uiRoute}">
-                <a ng-href="#!/administrar/autoridades">Autoridades</a>
-              </li>
-            </ul>
-            <!-- <p class="navbar-text navbar-right">{{ currentTime }}</p> -->
-          </div>
-
-
-        </div>
       </div>
-    </div>
+    </nav>
 
     <toaster-container toaster-options="{'close-button': true}"></toaster-container>
-    <div class="container">
-        <div class="view-animate-container">
-          <div ui-view class="view-animate"></div>
+    <div class="col-md-10 col-md-offset-1 clearfix">
+      <div class="container-fluid">
+        <div class="view-animate-container clearfix">
+          <div ui-view class="view-animate clearfix"></div>
         </div>
-    </div>
-
-    <div class="footer">
-      <div class="container">
-        <p>Procuraduría General De Justicia</p>
       </div>
     </div>
+
+    <!-- <div class="footer clearfix"> -->
+    <!--
+    <div class="col-md-12 clearfix" style="margin-top: 20px;">
+      <div class="row">
+        <footer class="footer">
+          <p>Procuraduría General De Justicia</p>
+        </footer>
+      </div>
+    </div>
+  -->
+    <!-- </div> -->
 
     <script type="text/ng-template" id="mdlDefaultModal.html">
       <div class="modal-header">
@@ -215,6 +221,10 @@
         <script src="scripts/controllers/polizas/polizas.listar.js"></script>
         <script src="scripts/controllers/perfil/perfil.home.js"></script>
         <script src="scripts/services/perfilservice.js"></script>
+        <script src="scripts/services/ingresosservice.js"></script>
+        <script src="scripts/directives/calendar.js"></script>
+        <script src="scripts/controllers/usuarios/usuarios.home.js"></script>
+        <script src="scripts/controllers/usuarios/usuarios.detalles.js"></script>
         <!-- endbuild -->
 </body>
 </html>

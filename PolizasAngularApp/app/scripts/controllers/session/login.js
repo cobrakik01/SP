@@ -8,7 +8,9 @@
  * Controller of the polizasAngularAppApp
  */
 angular.module('polizasAngularAppApp')
-  .controller('LoginCtrl', function ($scope, $state, AuthService, $timeout, $rootScope, loader, toaster) {
+  .controller('LoginCtrl', function ($scope, $state, AuthService, $timeout, $rootScope, loader, img, toaster) {
+
+    $scope.img = img;
 
     $scope.loader = loader;
 
