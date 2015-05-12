@@ -21,7 +21,7 @@ angular
     'ui.bootstrap', // https://angular-ui.github.io/bootstrap/
     'ui.utils', // http://angular-ui.github.io/ui-utils/#/routing
     'ui.router', // https://github.com/angular-ui/ui-router
-    'ngLoader' // https://github.com/jfeigel/ngLoader
+    'ngLoader' // https://github.com/jfeigel/ngLoader,
   ])
   .run(function($rootScope, $interval, utils, AuthService, img, $state, $stateParams) {
 
@@ -203,6 +203,14 @@ angular
       onEnter: auth
     };
 
+    var usuariosNuevo = {
+      name: 'usuarios.nuevo',
+      url: '/nuevo',
+      templateUrl: view + 'views/usuarios/nuevo.html',
+      controller: 'UsuariosNuevoCtrl',
+      onEnter: auth
+    };
+
     $stateProvider
       .state(notfound)
       .state(home)
@@ -224,5 +232,6 @@ angular
       .state(afianzadosListar)
       .state(afianzadosNuevo)
       .state('usuarios', usuarios)
+      .state(usuariosNuevo)
       .state(usuariosDetalles);
   });

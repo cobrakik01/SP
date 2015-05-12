@@ -8,28 +8,21 @@
  * Controller of the polizasAngularAppApp
  */
 angular.module('polizasAngularAppApp')
-  .controller('UsuariosHomeCtrl', function ($scope, $state, AuthService, toaster, DataTable) {
+  .controller('UsuariosHomeCtrl', function ($scope, $state, AuthService, toaster, DataTable, UsuariosFactory) {
 
     $scope.table = DataTable.params({
         sorting: { UserName: 'asc' },
-        filter: { UserName: '' }
+        filter: { 'filterObject.UserName': '' }
     }, AuthService);
 
     $scope.table.params.reload();
 
     $scope.roles = [];
 
-    /*
-    $scope.role = function(UserName) {
-        AuthService.userInRole(UserName, function(data) {
-            $scope.roles = data;
-        });
-        return '';
-    };
-    */
-
     $scope.mdlEditar = function(item) {
     	$state.go("usuarios.detalles", { id: item.UserId });
     };
+
+    UsuariosFactory.setController($scope);
 
   });

@@ -1,6 +1,19 @@
 <h2 class="page-header">Administración de usuarios</h2>
 <div class="row">
-	<div class="col-md-5">
+	<div class="col-md-8 col-md-offset-2">
+
+		<div class="btn-group" role="group">
+			<a ui-sref="usuarios.nuevo" class="btn btn-default" ng-class="{ active: $state.includes('usuarios.nuevo') }">
+				Crar nuevo usuario
+			</a>
+			<!--
+			<a href="" class="btn btn-default">Middle</a>
+			<a href="" class="btn btn-default">Right</a>
+			-->
+		</div>
+
+		<div ui-view class="slide-down-in clearfix"></div>
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h1 class="panel-title">Lista de usuarios</h1>
@@ -10,9 +23,10 @@
 				<div loading-container="table.params.settings().$loading">
 					<table ng-table="table.params" class="table table-striped table-hover" show-filter="true">
 						<tr ng-repeat="item in table.items" style="cursor: pointer;">
-							<td data-title="'Nombre de usuario'" sortable="'UserName'" filter="{ 'UserName': 'text' }">
+							<td data-title="'Nombre de usuario'" sortable="'UserName'" filter="{ 'filterObject.UserName': 'text' }">
 								{{ item.UserName }}
 							</td>
+							<!--
 							<td data-title="'Acciones'">
 								<button class="btn btn-default" type="button" ng-click="mdlEditar(item)">
 									Editar
@@ -21,17 +35,11 @@
 									Eliminar
 								</button>
 							</td>
+							-->
 						</tr>
 					</table>
 					<alert type="info" ng-show="table.items.length<=0">No se encontraron registros</alert>
 				</div>	
-			</div>
-		</div>
-	</div>
-	<div class="col-md-7">
-		<div ui-view class="slide">
-			<div class="alert alert-info">
-				Selecciona un usuario para ver sus detalles.
 			</div>
 		</div>
 	</div>

@@ -32,10 +32,9 @@ angular.module('polizasAngularAppApp')
   		var login = function() {
         if($scope.ready()) {
           AuthService.login($scope.data.usuario, function(data) {
-            console.log(data);
             if(attemp === 2)
             {
-              if(data.UserId !== 1)
+              if(data.UserId <= 0)
               {
                 $scope.fail = true;
                 $scope.starting = false;

@@ -1,0 +1,59 @@
+<div class="col-md-12 clearfix">
+	<div class="row">
+		<alert type="default" close="$state.go('usuarios')" class="panel panel-default panel-body">
+			<div class="form-group has-{{ ((userExists == 0 || !data.UserName) ? 'default' : (userExists == 1 ? 'warning' : 'success')) }} has-feedback">
+				<label class="control-label" for="txtNombreDeUsuario">Nombre de usuario</label>
+				<input ng-model-options='{ debounce: 500 }' ng-model="data.UserName" ng-change="findUserByName()" placeholder="Escriba el nombre de usuario para verificar su disponibilidad" type="text" class="form-control" id="txtNombreDeUsuario">
+
+		 		<span ng-show="data.UserName && (userExists > 1)" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+		 		<span ng-show="userExists == 1" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+		 		<span class="sr-only"></span>
+
+		 		<div ng-show="data.UserName && (userExists > 1)" class="text-success">
+					El nombre de usuario esta disponible.
+				</div>
+		 		<div ng-show="data.UserName && (userExists == 1)" class="text-warning">
+					El nombre de usuario ya esta en uso.
+				</div>
+		 	</div>
+
+			<div class="col-md-12 clearfix" ng-show="data.UserName">
+				<div class="row clearfix">
+					<div class="col-md-12">
+						<button ng-disabled="!(userExists > 1 && (data.selectedRoles.length > 0))" class="btn btn-primary btn-block btn-lg" ng-click="createUserAccount()">
+							Crear usuario con los roles especificados
+						</button>
+					</div>
+				</div>
+				<div class="row clearfix" style="margin-top: 20px;">
+					<div class="col-md-6">
+						<alert type="{{ (userExists > 1 ? 'success' : 'warning') }}" close="removerUsuario()">
+							{{ data.UserName }}
+						</alert>
+					</div>
+					<div class="col-md-6">
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button ng-disabled="userExists == 1" class="btn btn-default" type="button" ng-click="addRoleToUser(data.rolSelected)">
+									<span class="glyphicon glyphicon-arrow-left"></span> Asignar Rol
+								</button>
+							</span>
+
+							<select 
+								ng-disabled="userExists == 1"
+								class="form-control" 
+								ng-model="data.rolSelected" 
+								ng-options="rol.Name for rol in data.roles">
+								<option value="">[ Seleccione un rol ]</option>
+							</select>
+						</div>
+						<alert class="slide-down-in" ng-repeat="rol in data.selectedRoles" type="info" close="removeRolSelected(rol)">
+							{{ rol.Name }}
+						</alert>
+					</div>
+				</div>
+			</div>
+		</alert>
+	</div>
+</div>
