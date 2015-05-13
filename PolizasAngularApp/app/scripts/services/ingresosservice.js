@@ -21,11 +21,16 @@ angular.module('polizasAngularAppApp')
     };
 
   	service.count = function(par, fn) {
-      // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
       var _url = url + 'Count?anio=' + par.anio + '&mes=' + par.mes + '&dia' + par.dia;
       $http.get(_url).success(function(data) {
         fn(data);
       }).error(service.error);
+    };
+
+    service.all = function(id, fnSuccess) {
+      var _url = url + 'All?id=' + id;
+      console.log(_url);
+      $http.get(_url).success(fnSuccess).error(service.error);
     };
 
     return service;

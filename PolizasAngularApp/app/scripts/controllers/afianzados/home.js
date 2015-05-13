@@ -9,5 +9,5 @@
  */
 angular.module('polizasAngularAppApp')
   .controller('AfianzadosHomeCtrl', function ($scope) {
-  	console.log('Entro a AfianzadosHomeCtrl');  	
+  	
   });

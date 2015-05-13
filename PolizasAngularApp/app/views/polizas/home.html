@@ -1,13 +1,12 @@
-<h4 style="margin: 0px; padding: 0px;"><small>{{ currentTime }}</small></h4>
 <h1 class="page-header">Administrar Polizas</h1>
 <div class="col-md-12">
 	<div class="row">
 		<div class="col-md-3">
 			<ul class="nav nav-pills nav-stacked">
-				<li ui-route="#/polizas/agregar" ng-class="{active: $uiRoute}">
+				<li ng-class="{active: $state.includes('polizas.agregar')}">
 					<a ui-sref="polizas.agregar">Agregar Poliza</a>
 				</li>
-				<li ui-route="#/polizas/listar" ng-class="{active: $uiRoute}">
+				<li ng-class="{ active: $state.includes('polizas.listar') }">
 					<a ui-sref="polizas.listar">Listar Polizas</a>
 				</li>
 			</ul>

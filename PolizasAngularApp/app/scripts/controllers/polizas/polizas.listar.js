@@ -8,8 +8,10 @@
  * Controller of the polizasAngularAppApp
  */
 angular.module('polizasAngularAppApp')
-  .controller('PolizasListarCtrl', function ($scope, PolizasService, toaster, DataTable, utils) {
-    // AuthService.auth();
+  .controller('PolizasListarCtrl', function ($scope, PolizasService, toaster, DataTable, utils, $state) {
+
+    $scope.polizaSelected;
+    $scope.$state = $state;
 
     $scope.table = DataTable.params({
         sorting: { AveriguacionPrevia: 'asc', Descripcion: '', 'Afianzado.Nombre' : '', 'Afianzadora.Nombre': ''},
@@ -24,12 +26,11 @@ angular.module('polizasAngularAppApp')
         return utils.formatDate(utils.toDate(str));
     };
 
-    $scope.mdlEditar = function(item) {
-
-    };
-
-    $scope.mdlEliminar = function(item) {
-
+    $scope.btnSelectPoliza = function(poliza) {
+        $scope.polizaSelected = poliza;
+        if($state.includes('polizas.listar.ingresos') && angular.isDefined(poliza.Id)) {
+            $state.go('polizas.listar.ingresos', {id: poliza.Id});
+        }
     };
 
   });

@@ -154,6 +154,15 @@ angular
       onEnter: auth
     };
 
+    var polizasIngresos = {
+      name: 'polizas.listar.ingresos',
+      url: '/:id/ingresos',
+      templateUrl: view + 'views/polizas/ingresos.html',
+      controller: 'PolizasIngresosCtrl',
+      deepStateRedirect: true,
+      onEnter: auth
+    };
+
     var perfil = {
       name: 'perfil',
       url: '/perfil',
@@ -225,12 +234,27 @@ angular
       .state(areas)
       .state(afianzadoras)
       .state(autoridades)
+
+      /*
+      |-----------------------------
+      |       Polizas
+      |-----------------------------
+      */
       .state(polizas)
       .state(polizasListar)
       .state(polizasAgregar)
-      .state(afianzados)
-      .state(afianzadosListar)
-      .state(afianzadosNuevo)
+      .state(polizasIngresos)
+
+
+      // .state(afianzados)
+      // .state(afianzadosListar)
+      // .state(afianzadosNuevo)
+
+      /*
+      |-----------------------------
+      |       Usuarios
+      |-----------------------------
+      */
       .state('usuarios', usuarios)
       .state(usuariosNuevo)
       .state(usuariosDetalles);

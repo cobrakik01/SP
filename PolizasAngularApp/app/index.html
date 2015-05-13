@@ -54,11 +54,13 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li ui-route="#/polizas/agregar" ng-class="{active: $state.includes('polizas')}">
-                    <a ui-sref="polizas.agregar">Administrar Polizas</a>
+                    <a ui-sref="polizas.agregar">Polizas</a>
                   </li>
+                  <!--
                   <li ui-route="#/afianzados/listar" ng-class="{active: $state.includes('afianzados')}">
                     <a ui-sref="afianzados.listar">Afianzados</a>
                   </li>
+                  -->
                 </ul>
               </li>
               <li class="dropdown" ng-class="{active: $state.includes('areas') || $state.includes('afianzadoras') || $state.includes('autoridades') || $state.includes('usuarios')}">
@@ -229,6 +231,7 @@
         <script src="scripts/controllers/usuarios/usuarios.nuevo.js"></script>
         <script src="scripts/services/userservice.js"></script>
         <script src="scripts/services/usuariosfactory.js"></script>
+        <script src="scripts/controllers/polizas/polizas.ingresos.js"></script>
         <!-- endbuild -->
 </body>
 </html>
