@@ -13,7 +13,7 @@ angular.module('polizasAngularAppApp')
     // ...
 
     var factory = {};
-    factory.params = function(params, service) {
+    factory.params = function(params, service, identity) {
       var data = {};
       data.items = [];
       var NgTable = ngTableParams;
@@ -69,6 +69,13 @@ angular.module('polizasAngularAppApp')
             __params = 'count=' + par.count + '&filter=' + _filter + '&page=' + par.page + '&' + _strSorting;
           }
 
+          if(typeof identity !== 'undefined')
+          {
+            if(typeof identity.key !== 'undefined' && typeof identity.value !== 'undefined')
+            {
+              __params += "&" + identity.key + "=" + identity.value;
+            }
+          }
           data.items = service.query(__params, function(a) {
             $timeout(function() {
                       data.items = [];

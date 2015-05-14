@@ -20,6 +20,13 @@ angular.module('polizasAngularAppApp')
       console.log(d);
     };
 
+    service.query = function(par, fn) {
+      var _url = url + '?' + par;
+      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
+        fn(data);
+      }).error(service.error);
+    };
+
   	service.count = function(par, fn) {
       var _url = url + 'Count?anio=' + par.anio + '&mes=' + par.mes + '&dia' + par.dia;
       $http.get(_url).success(function(data) {
