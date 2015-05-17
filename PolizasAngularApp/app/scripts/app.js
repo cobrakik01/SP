@@ -100,6 +100,11 @@ angular
       controller: 'LoginCtrl'
     };
 
+    /*
+      |-----------------------------
+      |       Afianzadoras
+      |-----------------------------
+      */
     var afianzadoras = {
       name: 'afianzadoras',
       url: '/administrar/afianzadoras',
@@ -109,6 +114,11 @@ angular
       onEnter: auth
     };
 
+    /*
+      |-----------------------------
+      |       Areas
+      |-----------------------------
+      */
     var areas = {
       name: 'areas',
       url: '/administrar/areas',
@@ -118,6 +128,11 @@ angular
       onEnter: auth,
     };
 
+    /*
+      |-----------------------------
+      |       Autoridades
+      |-----------------------------
+      */
     var autoridades = {
       name: 'autoridades',
       url: '/administrar/autoridades',
@@ -127,6 +142,11 @@ angular
       onEnter: auth
     };
 
+    /*
+      |-----------------------------
+      |       Polizas
+      |-----------------------------
+      */
     var polizas = {
       name: 'polizas',
       url: '/polizas',
@@ -156,13 +176,18 @@ angular
 
     var polizasIngresos = {
       name: 'polizas.listar.ingresos',
-      url: '/:id/ingresos',
+      url: '/:idPoliza/:idAfianzado/ingresos',
       templateUrl: view + 'views/polizas/ingresos.html',
       controller: 'PolizasIngresosCtrl',
       deepStateRedirect: true,
       onEnter: auth
     };
 
+    /*
+      |-----------------------------
+      |       Perfil
+      |-----------------------------
+      */
     var perfil = {
       name: 'perfil',
       url: '/perfil',
@@ -172,6 +197,7 @@ angular
       onEnter: auth
     };
 
+    /*
     var afianzados = {
       name: 'afianzados',
       url: '/afianzados',
@@ -195,7 +221,13 @@ angular
       controller: 'AfianzadosNuevoCtrl',
       onEnter: auth
     };
+    */
 
+    /*
+      |-----------------------------
+      |       Usuarios
+      |-----------------------------
+      */
     var usuarios = {
       name: 'usuarios',
       url: '/usuarios',

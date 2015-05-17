@@ -1,22 +1,22 @@
 'use strict';
 
-describe('Controller: AfianzadorasCtrl', function () {
+describe('Controller: UsuariosDetallesCtrl', function () {
 
   // load the controller's module
   beforeEach(module('polizasAngularAppApp'));
 
-  var AfianzadorasCtrl,
+  var UsuariosDetallesCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    AfianzadorasCtrl = $controller('AfianzadorasCtrl', {
+    UsuariosDetallesCtrl = $controller('UsuariosDetallesCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('UnitTest de UsuariosDetallesCtrl', function () {
+    expect(true).toBe(true);
   });
 });

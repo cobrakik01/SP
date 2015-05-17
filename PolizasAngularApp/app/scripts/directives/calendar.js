@@ -33,7 +33,7 @@ angular.module('polizasAngularAppApp')
     $scope.toggleMin = function() {
       // $scope.minDate = $scope.minDate ? null : new Date();
       var d = new Date();
-      $scope.minDate = new Date((d.getFullYear() - 80) + "/07/30");
+      $scope.minDate = new Date((d.getFullYear() - 80) + '/07/30');
     };
 
     $scope.toggleMin();
@@ -70,14 +70,15 @@ angular.module('polizasAngularAppApp')
 							// <cbk-calendar></cbk-calendar>, por elemento
 							// <div cbk-calendar="exprecion"></div>, por atributo
 							// <div class="cbk-calendar: exprecion;"></div>, por clase
-    compile: function(element){
+    /*compile: function(element){
       return function(scope, element, attrs, controller) {
       };
     },
 		link: function postLink(scope, element, attrs) {
 			// element.text('this is the calendar directive');
 			// console.log(attrs);
-			console.log(scope.$parent);
+			// console.log(scope.$parent);
 		}
+    */
 	};
 });

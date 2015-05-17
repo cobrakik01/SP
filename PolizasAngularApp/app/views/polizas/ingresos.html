@@ -1,14 +1,157 @@
 <div class="panel panel-default panel-body">
-	<h3>Ingresos de </h3>
-	<div class="clearfix"></div>
-	<div loading-container="table.params.settings().$loading">
-		<table ng-table="table.params" class="table table-striped table-hover" show-filter="true">
-			<tr ng-repeat="item in table.items" style="cursor: pointer;">
-				<td data-title="'Cantidad'" sortable="'Cantidad'" filter="{ 'Cantidad': 'text' }">
-					{{ item.Cantidad }}
-				</td>
-			</tr>
-		</table>
-		<alert type="info" ng-show="table.items.length<=0">No se encontraron registros</alert>
+
+	<div class="col-md-12 clearfix">
+		<button ng-click="$state.go('polizas.listar')" type="button" class="close" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<div class="row">
+			<div class="col-md-4">
+				<h4 style="margin: 0px; padding: 0px;"><small>Afianzado</small></h4>
+				<h3 style="margin: 0px; padding: 0px;">{{ afianzado.ApellidoPaterno }} {{ afianzado.ApellidoMaterno }} {{ afianzado.Nombre }}</h3>
+				<h4 style="margin: 0px; padding: 0px;"><small>Averiguacion Previa</small></h4>
+				<h3 style="margin: 0px; padding: 0px;">{{ AveriguacionPrevia }}</h3>
+				<div class="rows">
+					<div class="clearfix"></div>
+					<div loading-container="table.depositantes.params.settings().$loading">
+						<div class="table-responsive">
+							<table ng-table="table.depositantes.params" class="table table-striped table-hover" show-filter="true">
+								<tr ng-class="{ info: data.depositante == item }" ng-repeat="item in table.depositantes.items" style="cursor: pointer;" ng-click="btnSelectDepositante(item)">
+									<td data-title="'Depositante'" sortable="'Nombre'" filter="{ 'Nombre': 'text' }">
+										{{ item.ApellidoPaterno }} {{ item.ApellidoMaterno }} {{ item.Nombre }}
+									</td>
+								</tr>
+							</table>
+						</div>
+						<alert type="info" ng-show="table.depositantes.items.length<=0">No se encontraron registros</alert>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<form ng-submit="nuevoIngreso()" name="frmIngreso">
+					<div class="form-group has-{{ (!data.ingreso.Cantidad ? 'warning' : 'success') }} has-feedback">
+						<label class="control-label" for="txtCantidad">Cantidad</label>
+						<input ng-model="data.ingreso.Cantidad" placeholder="Cantidad" type="text" class="form-control" id="txtCantidad">
+
+				 		<span ng-show="data.ingreso.Cantidad" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+				 		<span ng-show="!data.ingreso.Cantidad" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+				 		<span class="sr-only"></span>
+
+				 		<div ng-show="frmIngreso.$submitted && !data.ingreso.Cantidad" class="text-warning">
+							Es requerido el campo cantidad.
+						</div>
+				 	</div>
+				 	<div class="form-group has-{{ (!data.txtDepositante ? 'warning' : 'success') }} has-feedback">
+
+				 		<label class="control-label" for="txtCantidad">Depositante</label>
+				 		<div class="input-group">
+					      <span class="input-group-btn">
+					        <button class="btn btn-default" type="button" ng-click="btnOtroDepositante()" tooltip="Agregar depositante no existente.">
+					        	Otro
+					        </button>
+					      </span>
+					      <input readonly="" ng-model="data.txtDepositante" placeholder="Depositante" type="text" class="form-control" id="txtCantidad">
+					    </div>
+
+				 		<span ng-show="data.txtDepositante" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+				 		<span ng-show="!data.txtDepositante" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+
+				 		<span class="sr-only"></span>
+
+				 		<div ng-show="frmIngreso.$submitted && !data.txtDepositante" class="text-warning">
+							Es requerido seleccionar o dar de alta a un depositante.
+						</div>
+				 	</div>
+				 	<label class="control-label" for="txtDescripcion">Descripción</label>
+					<textarea ng-model="data.ingreso.Descripcion" placeholder="Descripción" class="form-control" id="txtDescripcion" rows="5"></textarea>
+
+					<input type="submit" value="Agregar ingreso" class="btn btn-primary btn-block" style="margin-top: 10px; margin-bottom: 10px;" />
+				 </form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12 clearfix">
+		<div class="row">
+			<hgroup>
+				<h4 style="padding: 0px; margin: 0px;"><small>Poliza</small> {{ poliza.Id }} - <small>Averiguacion previa </small> {{ poliza.AveriguacionPrevia }} - <small>Fecha de alta</small> {{ toDate(poliza.FechaDeAlta ? poliza.FechaDeAlta : '01/01/0001') }} </h4>
+				<h3 class="page-header" style="padding: 0px; margin: 0px 0px 10px 0px;">Lista de Ingresos</h3>
+			</hgroup>
+			<div class="clearfix"></div>
+			<div loading-container="table.ingresos.params.settings().$loading">
+				<div class="table-responsive">
+					<table ng-table="table.ingresos.params" class="table table-striped table-hover" show-filter="true">
+						<tr ng-repeat="item in table.ingresos.items">
+							<td data-title="'Cantidad'" sortable="'Cantidad'" filter="{ 'Cantidad': 'text' }">
+								{{ item.Cantidad }}
+							</td>
+							<td data-title="'Depositante'" sortable="'Cantidad'" filter="{ 'Cantidad': 'text' }">
+								{{ item.Depositante.ApellidoPaterno }} {{ item.Depositante.ApellidoMaterno }} {{ item.Depositante.Nombre }}
+							</td>
+							<td data-title="'Descripción'" sortable="'Descripcion'" filter="{ 'Descripcion': 'text' }">
+								{{ item.Descripcion }}
+							</td>
+							<td data-title="'Fecha de ingreso'" sortable="'FechaDeIngreso'" filter="{ 'FechaDeIngreso': 'text' }">
+								{{ toDate(item.FechaDeIngreso) }}
+							</td>
+						</tr>
+					</table>
+					<alert type="info" ng-show="table.ingresos.items.length<=0">No se encontraron registros</alert>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
+
+
+
+
+<!-- Modal Depositante -->
+<script type="text/ng-template" id="agregarDepositante.html">
+	<form name="frmDepositantentente" ng-submit="agregar()" novalidate>
+		<div class="modal-header">
+			<h3 class="modal-title">Depositante</h3>
+		</div>
+		<div class="modal-body">
+			<div class="form-group has-{{ depositante.Nombre ? 'success' : 'warning' }} has-feedback">
+				<label class="control-label" for="txtDepositanteNombre">Nombre:</label>
+				<input ng-model="depositante.Nombre" name="pNombre" id="txtDepositanteNombre" type="text" class="form-control" required="" placeholder="Nombre de depositante" aria-describedby="txtDepositanteNombreStatus" />
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="depositante.Nombre"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!depositante.Nombre"></span>
+				<span id="txtDepositanteNombreStatus" class="sr-only">(warning)</span>
+
+				<div ng-show="frmDepositante.$submitted && !depositante.Nombre" class="text-warning">
+					Es requerido el campo nombre del depositante.
+				</div>
+			</div>
+
+			<div class="form-group has-{{ depositante.ApellidoPaterno ? 'success' : 'warning' }} has-feedback">
+				<label class="control-label" for="txtDepositanteApellidoPaterno">Apellido Paterno:</label>
+				<input ng-model="depositante.ApellidoPaterno" name="pNombre" id="txtDepositanteApellidoPaterno" type="text" class="form-control" required="" placeholder="Apellido Paterno" aria-describedby="txtDepositanteApellidoPaternoStatus" />
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="depositante.ApellidoPaterno"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!depositante.ApellidoPaterno"></span>
+				<span id="txtDepositanteApellidoPaternoStatus" class="sr-only">(warning)</span>
+				
+				<div ng-show="frmDepositante.$submitted && !depositante.ApellidoPaterno" class="text-warning">
+					Es requerido el campo apellido paterno del depositante.
+				</div>
+			</div>
+
+			<div class="form-group has-{{ depositante.ApellidoMaterno ? 'success' : 'warning' }} has-feedback">
+				<label class="control-label" for="txtDepositanteApellidoMaterno">Apellido Materno:</label>
+				<input ng-model="depositante.ApellidoMaterno" name="pNombre" id="txtDepositanteApellidoMaterno" type="text" class="form-control" required="" placeholder="Apellido Materno" aria-describedby="txtDepositanteApellidoMaternoStatus" />
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="depositante.ApellidoMaterno"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!depositante.ApellidoMaterno"></span>
+				<span id="txtDepositanteApellidoMaternoStatus" class="sr-only">(warning)</span>
+				
+				<div ng-show="frmDepositante.$submitted && !depositante.ApellidoMaterno" class="text-warning">
+					Es requerido el campo apellido materno del depositante.
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="submit" ng-disabled="disabled()">Agregar</button>
+			<button class="btn btn-warning" ng-click="cancelar()" type="button">Cancelar</button>
+		</div>
+	</form>
+</script>

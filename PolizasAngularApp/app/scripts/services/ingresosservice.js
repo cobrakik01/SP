@@ -40,5 +40,12 @@ angular.module('polizasAngularAppApp')
       $http.get(_url).success(fnSuccess).error(service.error);
     };
 
+    service.add = function(idPoliza, ingreso, depositante, fnSuccess) {
+      var _url = url + 'Add';
+      return $http.post(_url, { idPoliza: idPoliza, ingreso : ingreso, depositante: depositante })
+        .success(fnSuccess)
+        .error(service.error);
+    };
+
     return service;
   });

@@ -1,7 +1,17 @@
+
+
+<div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px;">
+	<div ui-view class="slide-down-in">
+		<div class="alert alert-info">
+			<strong>Info!</strong> Seleccione una poliza de la tabla de abajo.
+		</div>
+	</div>
+</div>
+
 <div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px;">
 	<div class="btn-group" role="group">
 		<a ng-disabled="!polizaSelected"
-		 ui-sref="polizas.listar.ingresos({id: polizaSelected.Id})" 
+		 ui-sref="polizas.listar.ingresos({idPoliza: polizaSelected.Id, idAfianzado: polizaSelected.Afianzado.Id})" 
 		 type="button" 
 		 class="btn btn-default"
 		 ng-class="{ active: $state.includes('polizas.listar.ingresos') }">
@@ -15,46 +25,35 @@
 
 
 <div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px;">
-	<div ui-view class="slide-down-in">
-		<div class="alert alert-info">
-			<strong>Info!</strong> Seleccione una poliza de la tabla de abajo.
-		</div>
-	</div>
-</div>
-
-
-<div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px;">
 	<div class="clearfix"></div>
 	<div loading-container="table.params.settings().$loading">
-		<table ng-table="table.params" class="table table-striped table-hover" show-filter="true">
-			<tr ng-repeat="item in table.items" style="cursor: pointer;" ng-class="{info: polizaSelected == item}" ng-click="btnSelectPoliza(item)">
-				<td data-title="'Averiguacion Previa'" sortable="'AveriguacionPrevia'" filter="{ 'AveriguacionPrevia': 'text' }">
-					{{ item.AveriguacionPrevia }}
-				</td>
-				<td data-title="'Descripción'" sortable="'Descripcion'" filter="{ 'Descripcion': 'text' }">
-					{{ item.Descripcion }}
-				</td>
-				<td data-title="'Afianzado'" sortable="'Afianzado.Nombre'" filter="{ 'Afianzado.Nombre': 'text' }">
-					{{ item.Afianzado.ApellidoPaterno }} {{ item.Afianzado.ApellidoMaterno }} {{ item.Afianzado.Nombre }}
-				</td>
-				<td data-title="'Fecha de nacimiento'">
-					{{ toDate(item.Afianzado.FechaDeNacimiento) }}
-				</td>
-				<td data-title="'Afianzadora'" sortable="'Afianzadora.Nombre'" filter="{ 'Afianzadora.Nombre': 'text' }">
-					{{ item.Afianzadora.Nombre }}
-				</td>
-				<!--
-				<td data-title="'Acciones'">
-					<button class="btn btn-default" type="button" ng-click="mdlEditar(item)">
-						Editar
-					</button>
-					<button class="btn btn-warning" type="button" ng-click="mdlEliminar(item)">
-						Eliminar
-					</button>
-				</td>
-				-->
-			</tr>
-		</table>
-		<alert type="info" ng-show="table.items.length<=0">No se encontraron registros</alert>
+		<div class="table-responsive">
+			<table ng-table="table.params" class="table table-striped table-hover" show-filter="true">
+				<tr ng-repeat="item in table.items" style="cursor: pointer;" ng-class="{info: polizaSelected == item}" ng-click="btnSelectPoliza(item)">
+					<td data-title="'Averiguacion Previa'" sortable="'AveriguacionPrevia'" filter="{ 'AveriguacionPrevia': 'text' }">
+						{{ item.AveriguacionPrevia }}
+					</td>
+					<td data-title="'Descripción'" sortable="'Descripcion'" filter="{ 'Descripcion': 'text' }">
+						{{ item.Descripcion }}
+					</td>
+					<td data-title="'Afianzado'" sortable="'Afianzado.Nombre'" filter="{ 'Afianzado.Nombre': 'text' }">
+						{{ item.Afianzado.ApellidoPaterno }} {{ item.Afianzado.ApellidoMaterno }} {{ item.Afianzado.Nombre }}
+					</td>
+					<td data-title="'Fecha de nacimiento'">
+						{{ toDate(item.Afianzado.FechaDeNacimiento) }}
+					</td>
+					<td data-title="'Afianzadora'" sortable="'Afianzadora.Nombre'" filter="{ 'Afianzadora.Nombre': 'text' }">
+						{{ item.Afianzadora.Nombre }}
+					</td>
+					<td data-title="'Fecha de alta'" sortable="'FechaDeAlta'" filter="{ 'FechaDeAlta': 'text' }">
+						{{ toDate(item.FechaDeAlta) }}
+					</td>
+					<td data-title="'No. de Ingresos'" sortable="'FechaDeAlta'" >
+						{{ item.IngresosCount }}
+					</td>
+				</tr>
+			</table>
+			<alert type="info" ng-show="table.items.length<=0">No se encontraron registros</alert>
+		</div>
 	</div>
 </div>

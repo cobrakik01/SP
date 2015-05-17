@@ -16,7 +16,7 @@ angular.module('polizasAngularAppApp')
     $scope.table = DataTable.params({
         sorting: { AveriguacionPrevia: 'asc', Descripcion: '', 'Afianzado.Nombre' : '', 'Afianzadora.Nombre': ''},
         data: {
-        	filerObject: { AveriguacionPrevia: '', Descripcion: '', 'Afianzado.Nombre': '', 'Afianzadora.Nombre': '' }
+        	filerObject: { AveriguacionPrevia: '', Descripcion: '', 'Afianzado.Nombre': '', 'Afianzadora.Nombre': '', FechaDeAlta: '' }
         }
     }, PolizasService);
 
@@ -29,7 +29,7 @@ angular.module('polizasAngularAppApp')
     $scope.btnSelectPoliza = function(poliza) {
         $scope.polizaSelected = poliza;
         if($state.includes('polizas.listar.ingresos') && angular.isDefined(poliza.Id)) {
-            $state.go('polizas.listar.ingresos', {id: poliza.Id});
+            $state.go('polizas.listar.ingresos', {idPoliza: poliza.Id, idAfianzado: poliza.Afianzado.Id});
         }
     };
 

@@ -12,7 +12,7 @@ angular.module('polizasAngularAppApp')
     // Service logic
     // ...
 
-    var scopeController = undefined;
+    var scopeController;
 
     // Public API here
     return {

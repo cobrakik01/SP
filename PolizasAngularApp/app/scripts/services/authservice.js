@@ -8,7 +8,7 @@
  * Service in the polizasAngularAppApp.
  */
 angular.module('polizasAngularAppApp')
-  .service('AuthService', function ($location, $state, api, $http, $window) {
+  .service('AuthService', function ($location, $state, api, $http, $window, toaster) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var url = api + 'Usuarios/';
     var service = {};
@@ -28,7 +28,7 @@ angular.module('polizasAngularAppApp')
 
     service.logout = function() {
         var _url = url + 'Logout';
-        $http.post(_url, {}).success(function(data) {
+        $http.post(_url, {}).success(function() {
             $window.location.reload();
             $state.transitionTo('home');
         });

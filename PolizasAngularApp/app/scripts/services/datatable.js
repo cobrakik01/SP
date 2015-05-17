@@ -62,8 +62,8 @@ angular.module('polizasAngularAppApp')
             __params = 'count=' + par.count + '&page=' + par.page + '&' + strFilterObject + '&' + _strSorting;
           } else if(typeof params.filter !== 'undefined') {
             var _filter = '';
-            for(var obj in params.filter) {
-              _filter = typeof params.filter[obj] === 'undefined' ? '' : params.filter[obj];
+            for(var property in params.filter) {
+              _filter = typeof params.filter[property] === 'undefined' ? '' : params.filter[property];
             } 
             // __params = 'count=' + par.count + '&filter=' + _filter + '&page=' + par.page + '&sorting=' + par.sorting;
             __params = 'count=' + par.count + '&filter=' + _filter + '&page=' + par.page + '&' + _strSorting;
@@ -73,9 +73,14 @@ angular.module('polizasAngularAppApp')
           {
             if(typeof identity.key !== 'undefined' && typeof identity.value !== 'undefined')
             {
-              __params += "&" + identity.key + "=" + identity.value;
+              __params += '&' + identity.key + '=' + identity.value;
+            } else {
+              for (var i = 0; i < identity.length; i++) {
+                __params += '&' + identity[i].key + '=' + identity[i].value;
+              };
             }
           }
+          
           data.items = service.query(__params, function(a) {
             $timeout(function() {
                       data.items = [];

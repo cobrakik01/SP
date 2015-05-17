@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc service
- * @name polizasAngularAppApp.PolizasService
+ * @name polizasAngularAppApp.DepositantesService
  * @description
- * # PolizasService
+ * # DepositantesService
  * Service in the polizasAngularAppApp.
  */
 angular.module('polizasAngularAppApp')
-  .service('PolizasService', function ($http, api, toaster) {
-  	var url = api + 'Polizas/';
+  .service('DepositantesService', function ($http, api, toaster) {
+  	var url = api + 'Depositantes/';
   	var service = {};
 
     service.error = function(a, status, c, d) {
@@ -20,23 +20,6 @@ angular.module('polizasAngularAppApp')
       console.log(d);
     };
 
-    service.all = function(fn) {
-      // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
-      // var _url = url + params;
-      var _url = url + '/All';
-      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
-        fn(data);
-      }).error(service.error);
-    };
-
-    service.create = function(par, fn) {
-    	$http.post(url, par)
-    	.success(function(data) {
-    		fn(data);
-    	})
-    	.error(service.error);
-    };
-
   	service.query = function(par, fn) {
       // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
       // var _url = url + params;
@@ -45,22 +28,13 @@ angular.module('polizasAngularAppApp')
         fn(data);
       }).error(service.error);
     };
-
-    service.find = function(idPoliza, fn) {
-      var _url = url + 'Find/' + idPoliza;
-      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
-        fn(data);
-      }).error(service.error);
-    };
     
-    /*
   	service.create = function(model, fn) {
       var data = {nombre: model.nombre};
       $http.post(url, data).success(function(data) {
         fn(data);
       }).error(service.error);
     };
-    */
 
     service.delete = function(model, fn) {
       var _url = url + '?id=' + model.id;
@@ -74,5 +48,13 @@ angular.module('polizasAngularAppApp')
         fn(data);
       }).error(service.error);
     };
+
+    service.all = function(fn) {
+      var _url = url + 'All';
+      $http({ method: 'GET', url: _url, cache: false }).success(function(data) {
+        fn(data);
+      }).error(service.error);
+    };
+    
   	return service;
   });

@@ -1,22 +1,22 @@
 'use strict';
 
-describe('Controller: AboutCtrl', function () {
+describe('Controller: AutoridadesCtrl', function () {
 
   // load the controller's module
   beforeEach(module('polizasAngularAppApp'));
 
-  var AboutCtrl,
+  var AutoridadesCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    AboutCtrl = $controller('AboutCtrl', {
+    AutoridadesCtrl = $controller('AutoridadesCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('UnitTes de AutoridadesCtrl', function () {
+    expect(true).toBe(true);
   });
 });

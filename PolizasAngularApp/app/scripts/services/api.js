@@ -7,18 +7,21 @@
  * # api
  * Constant in the polizasAngularAppApp.
  */
+var host = 'http://localhost:49531/';
+var view = ''; // 'Content/';
+var assets = '../';
+
 angular.module('polizasAngularAppApp')
-  .constant('api', 'http://localhost:49531/api/')
-  //.constant('view', 'Content/')
-  .constant('view', '')
-  .constant('loader', '../images/loading.GIF')
+  .constant('api', host + 'api/')
+  .constant('view', view)
+  .constant('loader', assets + 'images/loading.GIF')
   .constant('img', {
-  	header: '../images/cabAx.jpg',
-  	fondo: '../images/Pdp_fondo.gif',
-  	login: '../images/login.jpg',
-  	home: '../images/home.png',
+  	header: assets + 'images/cabAx.jpg',
+  	fondo: assets + 'images/Pdp_fondo.gif',
+  	login: assets + 'images/login.jpg',
+  	home: assets + 'images/home.png',
   	logo: {
-  		pgj: '../images/pgj_df.png',
-  		df: '../images/cdmx.png'
+  		pgj: assets + 'images/pgj_df.png',
+  		df: assets + 'images/cdmx.png'
   	}
   });

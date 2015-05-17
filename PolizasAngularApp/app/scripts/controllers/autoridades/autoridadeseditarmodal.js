@@ -8,7 +8,12 @@
  * Controller of the polizasAngularAppApp
  */
 angular.module('polizasAngularAppApp')
-  .controller('AutoridadesEditarModalCtrl', function ($scope, $modalInstance, params, AutoridadesService, toaster) {
+  .controller('AutoridadesEditarModalCtrl', function (
+    $scope, 
+    $modalInstance, 
+    params, 
+    AutoridadesService, 
+    toaster) {
 
   	$scope.title = 'Editar Autoridad';
   	$scope.msg = 'Mi mensaje de prueba';

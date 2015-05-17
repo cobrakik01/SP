@@ -1,22 +1,22 @@
 'use strict';
 
-describe('Controller: LoginCtrl', function () {
+describe('Controller: PolizasListarCtrl', function () {
 
   // load the controller's module
   beforeEach(module('polizasAngularAppApp'));
 
-  var LoginCtrl,
+  var PolizaslistarCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    LoginCtrl = $controller('LoginCtrl', {
+    PolizaslistarCtrl = $controller('PolizasListarCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('UnitTest de PolizasListarCtrl', function () {
+    expect(true).toBe(true);
   });
 });
