@@ -1,0 +1,214 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Sistema de polizas | PGJ</title>
+    <meta name="description" content="Sistema de polizas" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="fragment" content="!" />
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/ico" />
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" />
+    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css" />
+    <link rel="stylesheet" href="styles/sticky-footer.css" />
+    <!-- endbuild -->
+  </head>
+  <body ng-app="sistemaPolizasPgApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <img ng-src="{{ img.header }}" alt="Header" width="100%" height="80px;" />
+    <nav class="navbar navbar-static-top navbar-cbk" ng-show="session.loginActive">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" style="color: white;">PGJ</a>
+        </div>
+
+        <div id="js-navbar-collapse" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li ng-class="{active: $state.includes('home')}">
+              <a ui-sref="home">Inicio</a>
+            </li>
+            <li class="dropdown" ng-class="{active: $state.includes('polizas') || $state.includes('afianzados')}">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                Operaciones <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li ui-route="#/polizas/agregar" ng-class="{active: $state.includes('polizas')}">
+                  <a ui-sref="polizas.agregar">Polizas</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown" ng-class="{active: $state.includes('areas') || $state.includes('afianzadoras') || $state.includes('autoridades') || $state.includes('usuarios')}">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                Administración <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li ui-route="#/administrar/areas" ng-class="{active: $state.includes('areas')}">
+                  <a ng-href="#!/administrar/areas">Areas</a>
+                </li>
+                <li ui-route="#/administrar/afianzadoras" ng-class="{active: $state.includes('afianzadoras')}">
+                  <a ng-href="#!/administrar/afianzadoras">Afianzadoras</a>
+                </li>
+                <li ui-route="#/administrar/autoridades" ng-class="{active: $state.includes('autoridades')}">
+                  <a ng-href="#!/administrar/autoridades">Autoridades</a>
+                </li>
+                <li ui-route="#/usuarios" ng-class="{active: $state.includes('usuarios')}">
+                  <a ui-sref="usuarios">Usuarios</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <p class="navbar-text">
+                <span style="color: white;">
+                  {{ currentTime }}
+                </span>
+              </p>
+            </li>
+            <li ui-route="#/perfil" ng-class="{active: $uiRoute}">
+              <a ui-sref="perfil">
+                Sesion de {{ user.UserName }}
+              </a>
+            </li>
+            <li>
+              <a ui-sref="login" ng-click="session.logout()">
+                <span class="glyphicon glyphicon-log-out"></span> Salir
+              </a>
+            </li>
+            <li>
+              <p class="navbar-text">&nbsp;</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <toaster-container toaster-options="{'close-button': true}"></toaster-container>
+    <div class="col-md-10 col-md-offset-1 clearfix">
+      <div class="container-fluid">
+        <div class="view-animate-container clearfix">
+          <div ui-view class="view-animate clearfix"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/ng-template" id="mdlDefaultModal.html">
+      <div class="modal-header">
+        <h3 class="modal-title">{{ title }}</h3>
+      </div>
+      <div class="modal-body">
+        {{ msg }}
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="accept()">Aceptar</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+      </div>
+    </script>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
+    <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-ui-scroll/dist/ui-scroll.js"></script>
+    <script src="bower_components/angular-ui-scrollpoint/dist/scrollpoint.js"></script>
+    <script src="bower_components/angular-ui-event/dist/event.js"></script>
+    <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+    <script src="bower_components/angular-ui-validate/dist/validate.js"></script>
+    <script src="bower_components/angular-ui-indeterminate/dist/indeterminate.js"></script>
+    <script src="bower_components/angular-ui-uploader/dist/uploader.js"></script>
+    <script src="bower_components/angular-ui-utils/index.js"></script>
+    <script src="bower_components/ng-loaders/ngLoader.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/usuarios/home.js"></script>
+        <script src="scripts/controllers/usuarios/nuevo.js"></script>
+        <script src="scripts/controllers/usuarios/detalles.js"></script>
+        <script src="scripts/controllers/session/login.js"></script>
+        <script src="scripts/controllers/polizas/listar.js"></script>
+        <script src="scripts/controllers/polizas/ingresos.js"></script>
+        <script src="scripts/controllers/polizas/home.js"></script>
+        <script src="scripts/controllers/polizas/agregar.js"></script>
+        <script src="scripts/controllers/polizas/agregar.depositante.modal.js"></script>
+        <script src="scripts/controllers/polizas/agregar.afianzado.modal.js"></script>
+        <script src="scripts/controllers/perfil/home.js"></script>
+        <script src="scripts/controllers/autoridades/home.js"></script>
+        <script src="scripts/controllers/autoridades/editar.modal.js"></script>
+        <script src="scripts/controllers/areas/home.js"></script>
+        <script src="scripts/controllers/areas/editar.modal.js"></script>
+        <script src="scripts/controllers/afianzados/home.js"></script>
+        <script src="scripts/controllers/afianzados/listar.js"></script>
+        <script src="scripts/controllers/afianzados/nuevo.js"></script>
+        <script src="scripts/controllers/afianzadoras/home.js"></script>
+        <script src="scripts/controllers/afianzadoras/editar.modal.js"></script>
+        <script src="scripts/controllers/default.modal.instance.js"></script>
+        <script src="scripts/directives/calendar.js"></script>
+        <script src="scripts/directives/loading.container.js"></script>
+        <script src="scripts/services/utils.js"></script>
+        <script src="scripts/services/usuarios.factory.js"></script>
+        <script src="scripts/services/usuarios.service.js"></script>
+        <script src="scripts/services/polizas.service.js"></script>
+        <script src="scripts/services/perfil.service.js"></script>
+        <script src="scripts/services/ingresos.service.js"></script>
+        <script src="scripts/services/depositantes.service.js"></script>
+        <script src="scripts/services/datatable.service.js"></script>
+        <script src="scripts/services/cbk.service.js"></script>
+        <script src="scripts/services/autoridades.service.js"></script>
+        <script src="scripts/services/auth.service.js"></script>
+        <script src="scripts/services/auth.provider.js"></script>
+        <script src="scripts/services/areas.service.js"></script>
+        <script src="scripts/services/api.constants.js"></script>
+        <script src="scripts/services/afianzados.service.js"></script>
+        <script src="scripts/services/afianzadoras.service.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
