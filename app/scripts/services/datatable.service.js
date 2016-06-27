@@ -57,7 +57,7 @@ angular.module('sistemaPolizasPgApp')
           data.items = [];
 
           var __params = '';
-          if(typeof params.data !== 'undefined' && typeof params.data.filerObject !== 'undefined') {
+          if(typeof params.data !== 'undefined' && typeof params.data.filterObject !== 'undefined') {
             // __params = 'count=' + par.count + '&page=' + par.page + '&sorting=' + par.sorting + '&' + strFilterObject;
             __params = 'count=' + par.count + '&page=' + par.page + '&' + strFilterObject + '&' + _strSorting;
           } else if(typeof params.filter !== 'undefined') {

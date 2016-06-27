@@ -44,7 +44,6 @@ angular.module('sistemaPolizasPgApp')
 
     $scope.table.depositantes = DataTable.params({
       sorting: { Nombre: 'asc'},
-      filter: { Nombre: '' },
       data: {
         filterObject: { Nombre: '' }
       }
