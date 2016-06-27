@@ -8,10 +8,9 @@
  * Controller of the sistemaPolizasPgApp
  */
 angular.module('sistemaPolizasPgApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, IngresosService) {
+  	$scope.ingresos = IngresosService.total(function(data) {
+  		return $scope.ingresos = data;
+  	});
+  	$scope.egresos = 2345324;
   });
