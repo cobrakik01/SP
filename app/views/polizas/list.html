@@ -1,28 +1,13 @@
-
-
-<div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px;">
-	<div ui-view class="slide-down-in">
-		<div class="alert alert-info">
-			<strong>Info!</strong> Seleccione una poliza de la tabla de abajo.
-		</div>
-	</div>
-</div>
-
 <div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px;">
 	<div class="btn-group" role="group">
-		<a ng-disabled="!polizaSelected"
-		 ui-sref="polizas.listar.ingresos({idPoliza: polizaSelected.Id, idAfianzado: polizaSelected.Afianzado.Id})" 
-		 type="button" 
-		 class="btn btn-default"
-		 ng-class="{ active: $state.includes('polizas.listar.ingresos') }">
+		<button ng-disabled="!polizaSelected" type="button" class="btn btn-default" ng-click="$state.go('polizas.ingresos', {idPoliza: polizaSelected.Id, idAfianzado: polizaSelected.Afianzado.Id})">
 			Ver Ingresos
-		</a>
-		<button ng-disabled="!polizaSelected" type="button" class="btn btn-default">
+		</button>
+		<button ng-disabled="!polizaSelected" type="button" class="btn btn-default" ng-click="$state.go('polizas.editar', {idPoliza: polizaSelected.Id})">
 			Editar Detalles
 		</button>
 	</div>
 </div>
-
 
 <div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px;">
 	<div class="clearfix"></div>

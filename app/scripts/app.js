@@ -174,8 +174,17 @@ angular
       onEnter: auth
     };
 
+    var polizasEditar = {
+      name: 'polizas.editar',
+      url: '/:idPoliza/editar',
+      templateUrl: view + 'views/polizas/editar.html',
+      controller: 'PolizasEditarCtrl',
+      deepStateRedirect: true,
+      onEnter: auth
+    };
+
     var polizasIngresos = {
-      name: 'polizas.listar.ingresos',
+      name: 'polizas.ingresos',
       url: '/:idPoliza/:idAfianzado/ingresos',
       templateUrl: view + 'views/polizas/ingresos.html',
       controller: 'PolizasIngresosCtrl',
@@ -275,6 +284,7 @@ angular
       .state(polizas)
       .state(polizasListar)
       .state(polizasAgregar)
+      .state(polizasEditar)
       .state(polizasIngresos)
 
 
