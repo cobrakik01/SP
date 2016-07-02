@@ -116,6 +116,8 @@ angular.module('sistemaPolizasPgApp')
         && $scope.data.ingreso.Cantidad;
     };
 
+    $scope.formatMony = utils.formatMony;
+
     $scope.cargarDatosPoliza();
     // $scope.table.ingresos.params.reload();
     // $scope.table.depositantes.params.reload();

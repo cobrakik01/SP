@@ -78,15 +78,15 @@
 			<div class="row">
 				<hgroup>
 					<h4 style="padding: 0px; margin: 0px;"><small>Poliza</small> {{ poliza.Id }} - <small>Averiguacion previa </small> {{ poliza.AveriguacionPrevia }} - <small>Fecha de alta</small> {{ toDate(poliza.FechaDeAlta ? poliza.FechaDeAlta : '01/01/0001') }} </h4>
-					<h3 class="page-header" style="padding: 0px; margin: 0px 0px 10px 0px;">Lista de Ingresos</h3>
+					<h3 class="page-header" style="padding: 0px; margin: 0px 0px 10px 0px;">Lista de Ingresos <small>Total: {{ formatMony(poliza.TotalIngresos) }}</small></h3>
 				</hgroup>
 				<div class="clearfix"></div>
 				<div loading-container="table.ingresos.params.settings().$loading">
 					<div class="table-responsive">
 						<table ng-table="table.ingresos.params" class="table table-striped table-hover" show-filter="true">
 							<tr ng-repeat="item in table.ingresos.items">
-								<td data-title="'Cantidad'" sortable="'Cantidad'" filter="{ 'Cantidad': 'text' }">
-									{{ item.Cantidad }}
+								<td data-title="'Cantidad'" sortable="'Cantidad'" filter="{ 'Cantidad': 'text' }" class="text-right">
+									{{ formatMony(item.Cantidad) }}
 								</td>
 								<td data-title="'Depositante'" sortable="'Cantidad'" filter="{ 'Cantidad': 'text' }">
 									{{ item.Depositante.ApellidoPaterno }} {{ item.Depositante.ApellidoMaterno }} {{ item.Depositante.Nombre }}
