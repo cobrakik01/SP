@@ -77,6 +77,31 @@ angular.module('sistemaPolizasPgApp')
       return factory.parseDateTime(new Date());
     };
 
+    factory.formatMony = function(num) {
+        var strNum = num.toString();
+        var strEnteros = '';
+        var strEnterosConComas = '';
+        var strDecimales = '00';
+        if(strNum.indexOf('.') != -1) { // tiene decimales
+            strEnteros = strNum.toString().substr(0, strNum.indexOf('.'));
+            strDecimales = strNum.toString().substr(strNum.indexOf('.') + 1, strNum.length);
+        } else {
+            strEnteros = strNum;
+        }
+        strEnteros = strEnteros.split('').reverse().join('');
+        var numCount = 3;
+        for(var i = strEnteros.length - 1; i >= 0; i--) {
+            if(numCount == 0) {
+                strEnterosConComas += ',' + strEnteros[i];
+                numCount = 3;
+            } else {
+                strEnterosConComas += strEnteros[i];
+                numCount--;
+            }
+        }
+        return strEnterosConComas + '.' + strDecimales;
+    };
+
     // Public API here
     return factory;
   });
