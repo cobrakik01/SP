@@ -11,21 +11,28 @@
 
 <div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px;">
 	<div class="clearfix"></div>
-	<div loading-container="table.params.settings().$loading">
+	<div loading-container="table.polizas.params.settings().$loading">
 		<div class="table-responsive">
-			<table ng-table="table.params" class="table table-striped table-hover" show-filter="true">
-				<tr ng-repeat="item in table.items" style="cursor: pointer;" ng-class="{info: polizaSelected == item}" ng-click="btnSelectPoliza(item)">
+			<table ng-table="table.polizas.params" class="table table-striped table-hover" show-filter="true">
+				<tr ng-repeat="item in table.polizas.items" style="cursor: pointer;" ng-class="{info: polizaSelected == item}" ng-click="btnSelectPoliza(item)">
 					<td data-title="'Averiguacion Previa'" sortable="'AveriguacionPrevia'" filter="{ 'AveriguacionPrevia': 'text' }">
 						{{ item.AveriguacionPrevia }}
 					</td>
+					<!--
 					<td data-title="'Descripción'" sortable="'Descripcion'" filter="{ 'Descripcion': 'text' }">
 						{{ item.Descripcion }}
 					</td>
+				-->
 					<td data-title="'Afianzado'" sortable="'Afianzado.Nombre'" filter="{ 'Afianzado.Nombre': 'text' }">
 						{{ item.Afianzado.ApellidoPaterno }} {{ item.Afianzado.ApellidoMaterno }} {{ item.Afianzado.Nombre }}
 					</td>
+					<!--
 					<td data-title="'Fecha de nacimiento'">
 						{{ toDate(item.Afianzado.FechaDeNacimiento) }}
+					</td>
+					-->
+					<td data-title="'Ingresos'" sortable="'TotalIngresos'" filter="{ 'TotalIngresos': 'text' }" class="text-right">
+						{{ formatMony(item.TotalIngresos) }}
 					</td>
 					<td data-title="'Afianzadora'" sortable="'Afianzadora.Nombre'" filter="{ 'Afianzadora.Nombre': 'text' }">
 						{{ item.Afianzadora.Nombre }}
@@ -33,9 +40,11 @@
 					<td data-title="'Fecha de alta'" sortable="'FechaDeAlta'" filter="{ 'FechaDeAlta': 'text' }">
 						{{ toDate(item.FechaDeAlta) }}
 					</td>
+					<!--
 					<td data-title="'No. de Ingresos'" sortable="'FechaDeAlta'" >
 						{{ item.IngresosCount }}
 					</td>
+				-->
 				</tr>
 			</table>
 			<alert type="info" ng-show="table.items.length<=0">No se encontraron registros</alert>

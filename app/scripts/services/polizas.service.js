@@ -40,7 +40,7 @@ angular.module('sistemaPolizasPgApp')
   	service.query = function(par, fn) {
       // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
       // var _url = url + params;
-      var _url = url + '?' + par;
+      var _url = url + 'Index/?' + par;
       $http({method: 'GET', url: _url, cache: false}).success(function(data) {
         fn(data);
       }).error(service.error);

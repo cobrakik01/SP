@@ -13,18 +13,21 @@ angular.module('sistemaPolizasPgApp')
     $scope.polizaSelected;
     $scope.$state = $state;
 
-    $scope.table = DataTable.params({
-        sorting: { AveriguacionPrevia: 'asc', Descripcion: '', 'Afianzado.Nombre' : '', 'Afianzadora.Nombre': ''},
+    $scope.table = {};
+    $scope.table.polizas = DataTable.params({
+        sorting: { AveriguacionPrevia: 'asc', TotalIngresos: '', 'TotalIngresos' : '', 'Afianzadora.Nombre': ''},
         data: {
-        	filerObject: { AveriguacionPrevia: '', Descripcion: '', 'Afianzado.Nombre': '', 'Afianzadora.Nombre': '', FechaDeAlta: '' }
+        	filterObject: { AveriguacionPrevia: '', TotalIngresos: '', 'TotalIngresos': '', 'Afianzadora.Nombre': '', FechaDeAlta: '' }
         }
     }, PolizasService);
 
-    $scope.table.params.reload();
+    // $scope.table.polizas.params.reload();
 
     $scope.toDate = function(str) {
         return utils.formatDate(utils.toDate(str));
     };
+
+    $scope.formatMony = utils.formatMony;
 
     $scope.btnSelectPoliza = function(poliza) {
         $scope.polizaSelected = poliza;
