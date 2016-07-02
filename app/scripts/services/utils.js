@@ -88,7 +88,7 @@ angular.module('sistemaPolizasPgApp')
         } else {
             strEnteros = strNum;
         }
-        strEnteros = strEnteros.split('').reverse().join('');
+        //strEnteros = strEnteros.split('').reverse().join('');
         var numCount = 3;
         for(var i = strEnteros.length - 1; i >= 0; i--) {
             if(numCount == 0) {
@@ -99,6 +99,7 @@ angular.module('sistemaPolizasPgApp')
                 numCount--;
             }
         }
+        strEnterosConComas = strEnterosConComas.split('').reverse().join('');
         return strEnterosConComas + '.' + strDecimales;
     };
 
