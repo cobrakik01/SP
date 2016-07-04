@@ -1,6 +1,27 @@
-<div class="panel panel-default panel-body">
-	<button ng-click="$state.go('polizas.listar')" type="button" class="close" aria-label="Close">
-		<span aria-hidden="true">&times;</span>
-	</button>
-	<p>This is the polizas/editar view.</p>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<button ng-click="$state.go('polizas.listar')" type="button" class="close" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<h3>Editar Poliza {{ poliza.Id }}</h3>
+	</div>
+	<div class="panel-body">
+		<label for="AveriguacionPrevia">Averiguación Previa:</label>
+		<input type="text" id="AveriguacionPrevia" class="form-control" ng-model="poliza.AveriguacionPrevia" />
+		<div class="row">
+			<div class="col-md-6">
+				<label for="Afianzado">Afianzado: </label>
+				<input type="text" id="Afianzado" class="form-control" ng-model="poliza.Afianzado.ApellidoPaterno + ' ' + poliza.Afianzado.ApellidoMaterno + ' ' + poliza.Afianzado.Nombre" />
+			</div>
+			<div class="col-md-6">
+				<label for="Afianzadora">Afianzadora: </label>
+				<input type="text" id="Afianzadora" class="form-control" ng-model="poliza.Afianzadora.Nombre" />
+			</div>
+			<div class="col-md-12">
+				<label for="Descripcion">Descripcion: </label>
+				<textarea id="Descripcion" class="form-control" ng-model="poliza.Descripcion"></textarea>
+			</div>
+		</div>
+		{{ poliza }}
+	</div>
 </div>
