@@ -11,11 +11,40 @@
 		<div class="row">
 			<div class="col-md-6">
 				<label for="Afianzado">Afianzado: </label>
-				<input type="text" id="Afianzado" class="form-control" ng-model="poliza.Afianzado.ApellidoPaterno + ' ' + poliza.Afianzado.ApellidoMaterno + ' ' + poliza.Afianzado.Nombre" />
+				<input type="text" id="Afianzado" readonly="readonly" class="form-control" ng-model="nomCompletoAfianzado" />
 			</div>
 			<div class="col-md-6">
+				<!--
 				<label for="Afianzadora">Afianzadora: </label>
 				<input type="text" id="Afianzadora" class="form-control" ng-model="poliza.Afianzadora.Nombre" />
+			-->
+			<div class="clearfix">
+				<div class="form-group has-{{ data.afianzadora ? 'success' : 'warning' }} has-feedback">
+					<loader
+						working="loaderAfianzadora"
+						message="cargando..."
+						template="8">
+					</loader>
+					<label class="control-label" for="lstAfianzadora">Afianzadora:</label>
+					<select 
+						id="lstAfianzadora"
+						name="lstAfianzadora"
+						class="form-control"
+						ng-model="data.afianzadora"
+						ng-options="item.Nombre for item in afianzadoras">
+							<option value="">[ Afianzadora ]</option>
+					</select>
+
+					<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.afianzadora"></span>
+					<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.afianzadora"></span>
+					<span id="txtAfianzadoStatus" class="sr-only">(warning)</span>
+
+					<div ng-show="frmPoliza.$submitted && !data.afianzadora" class="text-warning">
+						Es requerida la seleccion de una afianzadora.
+					</div>
+				</div>
+				<label class="control-label">Afianzadora actual: {{ nomAfianzadoraActual }}</label>
+			</div>
 			</div>
 			<div class="col-md-12">
 				<label for="Descripcion">Descripcion: </label>
