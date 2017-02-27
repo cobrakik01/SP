@@ -21,7 +21,8 @@ angular
     'ui.bootstrap', // https://angular-ui.github.io/bootstrap/
     'ui.utils', // http://angular-ui.github.io/ui-utils/#/routing
     'ui.router', // https://github.com/angular-ui/ui-router
-    'ngLoader' // https://github.com/jfeigel/ngLoader
+    'ngLoader', // https://github.com/jfeigel/ngLoader
+    'ngStorage'
   ])
   .run(function($rootScope, $interval, utils, AuthService, img, $state, $stateParams) {
 
@@ -110,8 +111,9 @@ angular
       url: '/administrar/afianzadoras',
       templateUrl: view + 'views/afianzadoras/afianzadoras.html',
       controller: 'AfianzadorasCtrl',
-      deepStateRedirect: true,
-      onEnter: auth
+      deepStateRedirect: true
+      //,
+      //onEnter: auth
     };
 
     /*
@@ -124,8 +126,9 @@ angular
       url: '/administrar/areas',
       templateUrl: view + 'views/areas/areas.html',
       controller: 'AreasCtrl',
-      deepStateRedirect: true,
-      onEnter: auth,
+      deepStateRedirect: true
+      //,
+      //onEnter: auth,
     };
 
     /*
@@ -138,8 +141,9 @@ angular
       url: '/administrar/autoridades',
       controller: 'AutoridadesCtrl',
       templateUrl: view + 'views/autoridades/home.html',
-      deepStateRedirect: true,
-      onEnter: auth
+      deepStateRedirect: true
+      //,
+      //onEnter: auth
     };
 
     /*
@@ -152,17 +156,19 @@ angular
       url: '/polizas',
       controller: 'PolizasCtrl',
       templateUrl: view + 'views/polizas/home.html',
-      deepStateRedirect: true,
-      onEnter: auth
+      deepStateRedirect: true
+      //,
+      //onEnter: auth
     };
 
     var polizasListar = {
       name: 'polizas.listar',
       url: '/listar',
-      controller: 'PolizasListarCtrl',
       templateUrl: view + 'views/polizas/list.html',
-      deepStateRedirect: true,
-      onEnter: auth
+      controller: 'PolizasListarCtrl',
+      deepStateRedirect: true
+      //,
+      //onEnter: auth
     };
 
     var polizasAgregar = {
@@ -170,8 +176,9 @@ angular
       url: '/agregar',
       templateUrl: view + 'views/polizas/agregar.html',
       controller: 'PolizasAgregarCtrl',
-      deepStateRedirect: true,
-      onEnter: auth
+      deepStateRedirect: true
+      //,
+      //onEnter: auth
     };
 
     var polizasEditar = {
@@ -179,8 +186,9 @@ angular
       url: '/:idPoliza/editar',
       templateUrl: view + 'views/polizas/editar.html',
       controller: 'PolizasEditarCtrl',
-      deepStateRedirect: true,
-      onEnter: auth
+      deepStateRedirect: true
+      //,
+      //onEnter: auth
     };
 
     var polizasIngresos = {
@@ -188,8 +196,9 @@ angular
       url: '/:idPoliza/:idAfianzado/ingresos',
       templateUrl: view + 'views/polizas/ingresos.html',
       controller: 'PolizasIngresosCtrl',
-      deepStateRedirect: true,
-      onEnter: auth
+      deepStateRedirect: true
+      //,
+      //onEnter: auth
     };
 
     /*
@@ -202,8 +211,9 @@ angular
       url: '/perfil',
       templateUrl: view + 'views/perfil/home.html',
       controller: 'PerfilHomeCtrl',
-      deepStateRedirect: true,
-      onEnter: auth
+      deepStateRedirect: true
+      //,
+      //onEnter: auth
     };
 
     /*
@@ -211,24 +221,27 @@ angular
       name: 'afianzados',
       url: '/afianzados',
       templateUrl: view + 'views/afianzados/home.html',
-      controller: 'AfianzadosHomeCtrl',
-      onEnter: auth
+      controller: 'AfianzadosHomeCtrl'
+      //,
+      //onEnter: auth
     };
 
     var afianzadosListar = {
       name: 'afianzados.listar',
       url: '/listar',
       templateUrl: view + 'views/afianzados/listar.html',
-      controller: 'AfianzadosListarCtrl',
-      onEnter: auth
+      controller: 'AfianzadosListarCtrl'
+      //,
+      //onEnter: auth
     };
 
     var afianzadosNuevo = {
       name: 'afianzados.nuevo',
       url: '/nuevo',
       templateUrl: view + 'views/afianzados/nuevo.html',
-      controller: 'AfianzadosNuevoCtrl',
-      onEnter: auth
+      controller: 'AfianzadosNuevoCtrl'
+      //,
+      //onEnter: auth
     };
     */
 
@@ -241,24 +254,27 @@ angular
       name: 'usuarios',
       url: '/usuarios',
       templateUrl: view + 'views/usuarios/home.html',
-      controller: 'UsuariosHomeCtrl',
-      onEnter: auth
+      controller: 'UsuariosHomeCtrl'
+      //,
+      //onEnter: auth
     };
 
     var usuariosDetalles = {
       name: 'usuarios.detalles',
       url: '/:id/detalles',
       templateUrl: view + 'views/usuarios/detalles.html',
-      controller: 'UsuariosDetallesCtrl',
-      onEnter: auth
+      controller: 'UsuariosDetallesCtrl'
+      //,
+      //onEnter: auth
     };
 
     var usuariosNuevo = {
       name: 'usuarios.nuevo',
       url: '/nuevo',
       templateUrl: view + 'views/usuarios/nuevo.html',
-      controller: 'UsuariosNuevoCtrl',
-      onEnter: auth
+      controller: 'UsuariosNuevoCtrl'
+      //,
+      //onEnter: auth
     };
 
     $stateProvider

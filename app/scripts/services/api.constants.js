@@ -7,7 +7,7 @@
  * # api.constants
  * Service in the sistemaPolizasPgApp.
  */
-var host = 'http://localhost:49531/';
+var host = 'http://localhost:51275/';
 var view = ''; // 'Content/';
 var assets = '../';
 

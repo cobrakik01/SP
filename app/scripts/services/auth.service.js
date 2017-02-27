@@ -8,9 +8,14 @@
  * Service in the sistemaPolizasPgApp.
  */
 angular.module('sistemaPolizasPgApp')
-  .service('AuthService', function ($location, $state, api, $http, $window, toaster) {
+  .service('AuthService', function ($location, $state, api, $http, $window, toaster, $localStorage) {
     // AngularJS will instantiate a singleton by calling "new" on this function
-    var url = api + 'Usuarios/';
+    $.support.cors = true;
+    var token = $localStorage.token;
+    var headers = {};
+    headers = getHeader();
+
+    var url = api + 'security/';
     var service = {};
 
     service.error = function(a, status, c, d) {
@@ -22,26 +27,73 @@ angular.module('sistemaPolizasPgApp')
     };
 
     service.login= function(model, fnSuccess, fnError) {
-        var _url = url + 'Login';
+        var _url = url + 'login';
         $http.post(_url, model).success(fnSuccess).error(fnError);
     };
 
-    service.logout = function() {
-        var _url = url + 'Logout';
-        $http.post(_url, {}).success(function() {
-            $window.location.reload();
-            $state.transitionTo('home');
+    service.OAuthLogin= function(model, fnSuccess, fnError) {
+        var _url = api + 'token';
+        _url = _url.replace('/api', '');
+        var loginData = {
+            grant_type: 'password',
+            username: model.email,
+            password: model.password
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: _url,
+            data: loginData
+        }).done(function(_data, c, b){
+            var data = {};
+            if(typeof _data.data != 'undefined') {
+                data = _data.data;
+            } else {
+                data = _data;
+            }
+            $localStorage.token = data.access_token;
+            $localStorage.sessionInfo = data;
+            service.loginActive = true;
+            fnSuccess(data);
+        }).fail(function(data) {
+            $localStorage.token = '';
+            fnError(data);
         });
     };
+
+    service.logout = function() {
+        $localStorage.token = '';
+        $window.location.reload();
+        $state.transitionTo('home');
+    };
+
+    function getHeader() {
+        var token = $localStorage.token;
+        if (token) {
+            headers.Authorization = 'Bearer ' + token;
+        }
+        return headers;
+    }
 
     service.loginActive = false;
 
     service.check = function(fnSuccess, fnError) {
-        var _url = url + 'IsLogin';
-        $http.post(_url, {}).success(function(data) {
-            service.loginActive = data.Login;
+        var _url = url + 'islogin';
+        var req = {
+            method: 'GET',
+            url: _url,
+            headers: getHeader()
+        }
+        $http(req).then(function(data) {
+            if(typeof data.data != 'undefined') {
+                service.loginActive = data.data.Login;
+            } else {
+                service.loginActive = data.Login;
+            }
             fnSuccess(data);
-        }).error(fnError);
+        }, function(a,b,c) {
+            fnError(a);
+        });
     };
 
     service.auth = function() {
@@ -58,10 +110,21 @@ angular.module('sistemaPolizasPgApp')
     };
 
     service.user = function(fnSuccess) {
-        var _url = url + 'UserInfo';
-        $http.post(_url, {}).success(function(data) {
+        var _url = url + 'user/info';
+        var req = {
+            method: 'GET',
+            url: _url,
+            headers: headers
+        }
+        $http(req).then(function(a) {
+            var data = {};
+            if(typeof a.data.data != 'undefined') {
+                data = a.data.data;
+            } else {
+                data = a.data;
+            }
             fnSuccess(data);
-        });  
+        });
     };
 
     service.update = function(userId, detalles, area, fnSuccess) {
@@ -73,9 +136,15 @@ angular.module('sistemaPolizasPgApp')
     };
 
     service.details = function(userId, fnSuccess) {
-        var _url = url + 'UserDetails';
-        var data = {userId: userId};
-        $http.post(_url, data).success(function(data) {
+        var _url = url + 'user/details';
+        //var data = {userId: userId};
+        $http({
+            method: 'GET',
+            url: _url,
+            headers: headers
+            //,data: data
+            //params: data
+        }).success(function(data) {
             fnSuccess(data);
         });  
     };

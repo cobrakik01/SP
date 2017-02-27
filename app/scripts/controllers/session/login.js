@@ -8,7 +8,7 @@
  * Controller of the sistemaPolizasPgApp
  */
 angular.module('sistemaPolizasPgApp')
-  .controller('LoginCtrl', function ($scope, $state, AuthService, $timeout, $rootScope, loader, img, toaster) {
+  .controller('LoginCtrl', function ($scope, $state, AuthService, $timeout, $rootScope, loader, img, toaster, $localStorage) {
 
     $scope.img = img;
 
@@ -22,14 +22,40 @@ angular.module('sistemaPolizasPgApp')
 
     $scope.ready = function() {
       var user = $scope.data.usuario;
-      return user && user.username && user.password;
+      return user && user.email && user.password;
     };
 
   	$scope.entrar = function() {
       $scope.starting = true;
+      
+
+  		//var login = function() {
+        if($scope.ready()) {
+          AuthService.OAuthLogin($scope.data.usuario, function(data) {
+            $state.transitionTo('home');
+          }, function(a, b, c) {
+            console.log(a);
+            toaster.pop('warning', 'Error', 'Ocurrio un error.');
+            $scope.starting = false;
+          });
+        } else {
+          $scope.starting = false;
+          toaster.pop('warning', 'Cuidado!', 'Es nesesario el nombre de usuario y password.');
+        }
+      //};
+      //login();
+      /*
+      $timeout(function(){
+        login();
+      }, 3000);
+      */
+  	};
+
+    $scope._entrar = function() {
+      $scope.starting = true;
       var attemp = 1;
 
-  		var login = function() {
+      var login = function() {
         if($scope.ready()) {
           AuthService.login($scope.data.usuario, function(data) {
             if(attemp === 2)
@@ -65,7 +91,7 @@ angular.module('sistemaPolizasPgApp')
       $timeout(function(){
         login();
       }, 3000);
-  	};
+    };
 
 
   });

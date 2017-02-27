@@ -12,7 +12,10 @@ angular.module('sistemaPolizasPgApp')
 
   	$scope.ingresos = IngresosService.total(function(data) {
   		return $scope.ingresos = data;
+  	}, function(a, b, c) {
+  		console.log(a);
   	});
+
   	$scope.egresos = 2345324;
 
   	$scope.formatMony = function(num) {

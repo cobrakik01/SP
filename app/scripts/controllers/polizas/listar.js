@@ -8,7 +8,13 @@
  * Controller of the sistemaPolizasPgApp
  */
 angular.module('sistemaPolizasPgApp')
-  .controller('PolizasListarCtrl', function ($scope, PolizasService, toaster, DataTable, utils, $state) {
+  .controller('PolizasListarCtrl', function (
+    $scope,
+    PolizasService, 
+    toaster, 
+    DataTable, 
+    utils, 
+    $state) {
 
     $scope.polizaSelected;
     $scope.$state = $state;
