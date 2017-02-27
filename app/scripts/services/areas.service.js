@@ -39,10 +39,13 @@ angular.module('sistemaPolizasPgApp')
     };
     
   	service.create = function(model, fn) {
-      var data = {nombre: model.nombre};
+      var _url = url + 'new';
+      //var data = {nombre: model.nombre};
+      //var data = model.nombre;
+      var data = JSON.stringify(model.nombre);
       $http({
         method: 'POST',
-        url: url,
+        url: _url,
         headers: getHeader(),
         data: data
       }).success(function(data) {
