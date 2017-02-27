@@ -10,10 +10,18 @@
 angular.module('sistemaPolizasPgApp')
   .service('AuthService', function ($location, $state, api, $http, $window, toaster, $localStorage) {
     // AngularJS will instantiate a singleton by calling "new" on this function
+    function getHeader() {
+        var headers = {};
+        var token = $localStorage.token;
+        if (token) {
+            headers.Authorization = 'Bearer ' + token;
+        }
+        return headers;
+    }
+
     $.support.cors = true;
     var token = $localStorage.token;
-    var headers = {};
-    headers = getHeader();
+    var headers = getHeader();
 
     var url = api + 'security/';
     var service = {};
@@ -57,6 +65,8 @@ angular.module('sistemaPolizasPgApp')
             fnSuccess(data);
         }).fail(function(data) {
             $localStorage.token = '';
+            $localStorage.sessionInfo = undefined;
+            service.loginActive = false;
             fnError(data);
         });
     };
@@ -66,14 +76,6 @@ angular.module('sistemaPolizasPgApp')
         $window.location.reload();
         $state.transitionTo('home');
     };
-
-    function getHeader() {
-        var token = $localStorage.token;
-        if (token) {
-            headers.Authorization = 'Bearer ' + token;
-        }
-        return headers;
-    }
 
     service.loginActive = false;
 
@@ -92,6 +94,9 @@ angular.module('sistemaPolizasPgApp')
             }
             fnSuccess(data);
         }, function(a,b,c) {
+            $localStorage.token = '';
+            $localStorage.sessionInfo = undefined;
+            service.loginActive = false;
             fnError(a);
         });
     };
@@ -114,7 +119,7 @@ angular.module('sistemaPolizasPgApp')
         var req = {
             method: 'GET',
             url: _url,
-            headers: headers
+            headers: getHeader()
         }
         $http(req).then(function(a) {
             var data = {};
@@ -130,40 +135,47 @@ angular.module('sistemaPolizasPgApp')
     service.update = function(userId, detalles, area, fnSuccess) {
         var _url = url + 'UpdateUserDetails';
         var data = {userId: userId, detalles: detalles, area: area};
-        $http.post(_url, data).success(function(data) {
-            fnSuccess(data);
+        $http({
+            method: 'POST',
+            url: _url,
+            headers: getHeader(),
+            data: data
+        }).then(function(_data) {
+            fnSuccess(_data);
         });  
     };
 
     service.details = function(userId, fnSuccess) {
         var _url = url + 'user/details';
-        //var data = {userId: userId};
         $http({
             method: 'GET',
             url: _url,
-            headers: headers
-            //,data: data
-            //params: data
+            headers: getHeader()
         }).success(function(data) {
             fnSuccess(data);
         });  
     };
 
     service.query = function(par, fn) {
-      var _url = url + '?' + par;
-      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
-        fn(data);
-      }).error(service.error);
+        var _url = url + '?' + par;
+        $http({
+            method: 'GET',
+            url: _url,
+            headers: getHeader(),
+            cache: false
+        }).success(function(data) {
+            fn(data);
+        }).error(service.error);
     };
 
     service.userInRole = function(UserName, fnSuccess) {
         var _url = url + 'UserInRoles?UserName=' + UserName;
-        $http({method: 'GET', url: _url, cache: false}).success(fnSuccess).error(service.error);
+        $http({method: 'GET', url: _url, headers: getHeader(), cache: false}).success(fnSuccess).error(service.error);
     };
 
     service.changePassword = function(oldPassword, newPassword, fnSuccess) {
         var _url = url + 'ChangePassword';
-        $http({ method: 'POST', url: _url, data: { oldPassword: oldPassword, newPassword: newPassword } }).success(fnSuccess).error(service.error);
+        $http({ method: 'POST', url: _url, headers: getHeader(), data: { oldPassword: oldPassword, newPassword: newPassword } }).success(fnSuccess).error(service.error);
     };
 
     return service;
