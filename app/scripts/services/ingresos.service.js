@@ -8,7 +8,7 @@
  * Service in the sistemaPolizasPgApp.
  */
 angular.module('sistemaPolizasPgApp')
-  .service('IngresosService', function ($http, api, toaster, $localStorage) {
+  .service('IngresosService', function ($http, api, toaster, utils, $localStorage) {
   	var url = api + 'ingresos/';
   	var service = {};
 
@@ -49,24 +49,21 @@ angular.module('sistemaPolizasPgApp')
 
     service.total = function(fnSuccess, fnError) {
       var _url = url + 'total';
-      var token = $localStorage.token;
-      var headers = {};
-      if (token) {
-        headers.Authorization = 'Bearer ' + token;
-      }
 
       return $http({
         type: 'GET',
         url: _url,
-        headers: headers
-      }).then(fnSuccess, fnError);
-      /*
-      $.ajax({
-        type: 'GET',
-        url: _url,
-        headers: headers
-      }).done(fnSuccess).fail(fnError);
-      */
+        headers: utils.getHeader()
+      }).then(function(_data) {
+        var data = {};
+        if(typeof _data.data != 'undefined') {
+          data = _data.data;
+        } else {
+          data = _data;
+        }
+
+        fnSuccess(data);
+      }, fnError);
     };
 
     return service;
