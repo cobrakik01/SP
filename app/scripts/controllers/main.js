@@ -8,7 +8,7 @@
  * Controller of the sistemaPolizasPgApp
  */
 angular.module('sistemaPolizasPgApp')
-  .controller('MainCtrl', function ($scope, utils, IngresosService) {
+  .controller('MainCtrl', function ($scope, $rootScope, utils, IngresosService) {
 
   	$scope.ingresos = IngresosService.total(function(data) {
   		return $scope.ingresos = data;
@@ -21,4 +21,6 @@ angular.module('sistemaPolizasPgApp')
   	$scope.formatMony = function(num) {
   		return utils.formatMony(num);
   	};
+
+    $rootScope.loadUser();
   });

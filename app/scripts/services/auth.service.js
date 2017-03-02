@@ -16,11 +16,11 @@ angular.module('sistemaPolizasPgApp')
     var service = {};
 
     service.error = function(a, status, c, d) {
-      toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
-      console.log(a);
-      console.log(status);
-      console.log(c);
-      console.log(d);
+        if(typeof status == 'undefined') {
+            toaster.pop('error', 'Error', a.data.Message);
+        } else {
+            toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
+        }
     };
 
     service.login= function(model, fnSuccess, fnError) {
@@ -61,8 +61,8 @@ angular.module('sistemaPolizasPgApp')
     service.logout = function() {
         utils.endSession();
         service.loginActive = false;
-        $window.location.reload();
-        $state.transitionTo('home');
+        //$window.location.reload();
+        $state.transitionTo('login');
     };
 
     service.loginActive = false;
@@ -116,11 +116,11 @@ angular.module('sistemaPolizasPgApp')
                 data = a.data;
             }
             fnSuccess(data);
-        });
+        }, service.error);
     };
 
     service.update = function(userId, detalles, area, fnSuccess) {
-        var _url = url + 'UpdateUserDetails';
+        var _url = url + 'user/update-details';
         var data = {userId: userId, detalles: detalles, area: area};
         $http({
             method: 'POST',
@@ -129,7 +129,7 @@ angular.module('sistemaPolizasPgApp')
             data: data
         }).then(function(_data) {
             fnSuccess(_data);
-        });  
+        }, service.error);
     };
 
     service.details = function(userId, fnSuccess) {
@@ -140,7 +140,7 @@ angular.module('sistemaPolizasPgApp')
             headers: utils.getHeader()
         }).success(function(data) {
             fnSuccess(data);
-        });  
+        });
     };
 
     service.query = function(par, fn) {
@@ -161,8 +161,8 @@ angular.module('sistemaPolizasPgApp')
     };
 
     service.changePassword = function(oldPassword, newPassword, fnSuccess) {
-        var _url = url + 'ChangePassword';
-        $http({ method: 'POST', url: _url, headers: utils.getHeader(), data: { oldPassword: oldPassword, newPassword: newPassword } }).success(fnSuccess).error(service.error);
+        var _url = url + 'user/change-password';
+        $http({ method: 'POST', url: _url, headers: utils.getHeader(), data: { OldPassword: oldPassword, NewPassword: newPassword } }).success(fnSuccess).error(service.error);
     };
 
     return service;
