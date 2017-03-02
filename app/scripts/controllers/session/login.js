@@ -8,7 +8,7 @@
  * Controller of the sistemaPolizasPgApp
  */
 angular.module('sistemaPolizasPgApp')
-  .controller('LoginCtrl', function ($scope, $state, AuthService, $timeout, $rootScope, loader, img, toaster, $localStorage) {
+  .controller('LoginCtrl', function ($scope, $state, AuthService, loader, img, toaster) {
 
     $scope.img = img;
 
@@ -41,5 +41,5 @@ angular.module('sistemaPolizasPgApp')
         toaster.pop('warning', 'Cuidado!', 'Es nesesario el nombre de usuario y password.');
       }
   	};
-    
+
   });
