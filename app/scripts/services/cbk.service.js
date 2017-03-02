@@ -13,6 +13,7 @@ angular.module('sistemaPolizasPgApp')
     // ...
 
     var factory = {};
+
     factory.alert = function(params) {
 
       var modalInstance = $modal.open({

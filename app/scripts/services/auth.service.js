@@ -8,21 +8,10 @@
  * Service in the sistemaPolizasPgApp.
  */
 angular.module('sistemaPolizasPgApp')
-  .service('AuthService', function ($location, $state, api, $http, $window, toaster, $localStorage) {
+  .service('AuthService', function ($location, $state, api, $http, $window, toaster, utils) {
     // AngularJS will instantiate a singleton by calling "new" on this function
-    function getHeader() {
-        var headers = {};
-        var token = $localStorage.token;
-        if (token) {
-            headers.Authorization = 'Bearer ' + token;
-        }
-        return headers;
-    }
 
     $.support.cors = true;
-    var token = $localStorage.token;
-    var headers = getHeader();
-
     var url = api + 'security/';
     var service = {};
 
@@ -59,20 +48,19 @@ angular.module('sistemaPolizasPgApp')
             } else {
                 data = _data;
             }
-            $localStorage.token = data.access_token;
-            $localStorage.sessionInfo = data;
+            utils.startSession(data);
             service.loginActive = true;
             fnSuccess(data);
         }).fail(function(data) {
-            $localStorage.token = '';
-            $localStorage.sessionInfo = undefined;
+            utils.endSession();
             service.loginActive = false;
             fnError(data);
         });
     };
 
     service.logout = function() {
-        $localStorage.token = '';
+        utils.endSession();
+        service.loginActive = false;
         $window.location.reload();
         $state.transitionTo('home');
     };
@@ -84,7 +72,7 @@ angular.module('sistemaPolizasPgApp')
         var req = {
             method: 'GET',
             url: _url,
-            headers: getHeader()
+            headers: utils.getHeader()
         }
         $http(req).then(function(data) {
             if(typeof data.data != 'undefined') {
@@ -94,8 +82,7 @@ angular.module('sistemaPolizasPgApp')
             }
             fnSuccess(data);
         }, function(a,b,c) {
-            $localStorage.token = '';
-            $localStorage.sessionInfo = undefined;
+            utils.endSession();
             service.loginActive = false;
             fnError(a);
         });
@@ -119,7 +106,7 @@ angular.module('sistemaPolizasPgApp')
         var req = {
             method: 'GET',
             url: _url,
-            headers: getHeader()
+            headers: utils.getHeader()
         }
         $http(req).then(function(a) {
             var data = {};
@@ -138,7 +125,7 @@ angular.module('sistemaPolizasPgApp')
         $http({
             method: 'POST',
             url: _url,
-            headers: getHeader(),
+            headers: utils.getHeader(),
             data: data
         }).then(function(_data) {
             fnSuccess(_data);
@@ -150,7 +137,7 @@ angular.module('sistemaPolizasPgApp')
         $http({
             method: 'GET',
             url: _url,
-            headers: getHeader()
+            headers: utils.getHeader()
         }).success(function(data) {
             fnSuccess(data);
         });  
@@ -161,7 +148,7 @@ angular.module('sistemaPolizasPgApp')
         $http({
             method: 'GET',
             url: _url,
-            headers: getHeader(),
+            headers: utils.getHeader(),
             cache: false
         }).success(function(data) {
             fn(data);
@@ -170,12 +157,12 @@ angular.module('sistemaPolizasPgApp')
 
     service.userInRole = function(UserName, fnSuccess) {
         var _url = url + 'UserInRoles?UserName=' + UserName;
-        $http({method: 'GET', url: _url, headers: getHeader(), cache: false}).success(fnSuccess).error(service.error);
+        $http({method: 'GET', url: _url, headers: utils.getHeader(), cache: false}).success(fnSuccess).error(service.error);
     };
 
     service.changePassword = function(oldPassword, newPassword, fnSuccess) {
         var _url = url + 'ChangePassword';
-        $http({ method: 'POST', url: _url, headers: getHeader(), data: { oldPassword: oldPassword, newPassword: newPassword } }).success(fnSuccess).error(service.error);
+        $http({ method: 'POST', url: _url, headers: utils.getHeader(), data: { oldPassword: oldPassword, newPassword: newPassword } }).success(fnSuccess).error(service.error);
     };
 
     return service;

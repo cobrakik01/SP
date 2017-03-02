@@ -8,7 +8,7 @@
  * Service in the sistemaPolizasPgApp.
  */
 angular.module('sistemaPolizasPgApp')
-  .factory('utils', function () {
+  .factory('utils', function ($localStorage) {
     // Service logic
     // ...
 
@@ -102,6 +102,25 @@ angular.module('sistemaPolizasPgApp')
         strEnterosConComas = strEnterosConComas.split('').reverse().join('');
         return strEnterosConComas + '.' + strDecimales;
     };
+
+    factory.startSession = function(data) {
+        $localStorage.token = data.access_token;
+        $localStorage.sessionInfo = data;
+    };
+
+    factory.endSession = function() {
+        $localStorage.token = '';
+        $localStorage.sessionInfo = undefined;
+    };
+
+    factory.getHeader = function() {
+        var headers = {};
+        var token = $localStorage.token;
+        if (token) {
+            headers.Authorization = 'Bearer ' + token;
+        }
+        return headers;
+    }
 
     // Public API here
     return factory;

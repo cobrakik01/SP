@@ -8,15 +8,7 @@
  * Service in the sistemaPolizasPgApp.
  */
 angular.module('sistemaPolizasPgApp')
-  .service('AreasService', function ($http, api, toaster, $localStorage) {
-    function getHeader() {
-        var headers = {};
-        var token = $localStorage.token;
-        if (token) {
-            headers.Authorization = 'Bearer ' + token;
-        }
-        return headers;
-    }
+  .service('AreasService', function ($http, api, toaster, utils) {
 
   	var url = api + 'areas/';
   	var service = {};
@@ -33,32 +25,30 @@ angular.module('sistemaPolizasPgApp')
       // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
       // var _url = url + params;
       var _url = url + '?' + par;
-      $http({method: 'GET', url: _url, headers: getHeader(), cache: false}).success(function(data) {
+      $http({method: 'GET', url: _url, headers: utils.getHeader(), cache: false}).success(function(data) {
         fn(data);
       }).error(service.error);
     };
     
   	service.create = function(model, fn) {
-      var _url = url + 'new';
-      //var data = {nombre: model.nombre};
-      //var data = model.nombre;
+      var _url = url;
       var data = JSON.stringify(model.nombre);
       $http({
         method: 'POST',
         url: _url,
-        headers: getHeader(),
-        data: data
+        headers: utils.getHeader(),
+        data: model
       }).success(function(data) {
         fn(data);
       }).error(service.error);
     };
 
     service.delete = function(model, fn) {
-      var _url = url + '?id=' + model.id;
+      var _url = url +  model.id;
       $http({
         method: 'DELETE',
         url: _url,
-        headers: getHeader()
+        headers: utils.getHeader()
       }).success(function(data) {
         fn(data);
       }).error(service.error);
@@ -68,7 +58,7 @@ angular.module('sistemaPolizasPgApp')
       $http({
         method: 'PATCH',
         url: url,
-        headers: getHeader(),
+        headers: utils.getHeader(),
         data: model
       }).success(function(data) {
         fn(data);
@@ -77,7 +67,7 @@ angular.module('sistemaPolizasPgApp')
 
     service.all = function(fn) {
       var _url = url + 'all';
-      $http({ method: 'GET', url: _url, headers: getHeader(), cache: false }).success(function(data) {
+      $http({ method: 'GET', url: _url, headers: utils.getHeader(), cache: false }).success(function(data) {
         fn(data);
       }).error(service.error);
     };
