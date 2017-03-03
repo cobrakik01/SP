@@ -14,11 +14,11 @@ angular.module('sistemaPolizasPgApp')
   	var service = {};
 
     service.error = function(a, status, c, d) {
-      toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
-      console.log(a);
-      console.log(status);
-      console.log(c);
-      console.log(d);
+      if(typeof status == 'undefined') {
+            toaster.pop('error', 'Error', a.data.Message);
+        } else {
+            toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
+        }
     };
 
   	service.query = function(par, fn) {
@@ -32,35 +32,20 @@ angular.module('sistemaPolizasPgApp')
     
   	service.create = function(model, fn) {
       var _url = url;
-      var data = JSON.stringify(model.nombre);
-      $http({
-        method: 'POST',
-        url: _url,
-        headers: utils.getHeader(),
-        data: model
-      }).success(function(data) {
+      $http({ method: 'POST', url: _url, headers: utils.getHeader(), data: model}).success(function(data) {
         fn(data);
       }).error(service.error);
     };
 
     service.delete = function(model, fn) {
       var _url = url +  model.id;
-      $http({
-        method: 'DELETE',
-        url: _url,
-        headers: utils.getHeader()
-      }).success(function(data) {
+      $http({ method: 'DELETE', url: _url, headers: utils.getHeader()}).success(function(data) {
         fn(data);
       }).error(service.error);
     };
 
     service.edit = function(model, fn) {
-      $http({
-        method: 'PATCH',
-        url: url,
-        headers: utils.getHeader(),
-        data: model
-      }).success(function(data) {
+      $http({ method: 'PATCH', url: url, headers: utils.getHeader(), data: model }).success(function(data) {
         fn(data);
       }).error(service.error);
     };
