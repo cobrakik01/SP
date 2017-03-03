@@ -14,10 +14,10 @@ angular.module('sistemaPolizasPgApp')
 
     service.error = function(a, status, c, d) {
       if(typeof status == 'undefined') {
-            toaster.pop('error', 'Error', a.data.Message);
-        } else {
-            toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
-        }
+        toaster.pop('error', 'Error', a.data.Message);
+      } else {
+        toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
+      }
     };
 
     service.query = function(par, fn) {
