@@ -8,14 +8,14 @@
  * Controller of the sistemaPolizasPgApp
  */
 angular.module('sistemaPolizasPgApp')
-  .controller('UsuariosHomeCtrl', function ($scope, $state, AuthService, toaster, DataTable, UsuariosFactory) {
+  .controller('UsuariosHomeCtrl', function ($scope, $state, UserService, toaster, DataTable, UsuariosFactory) {
 
     $scope.$state = $state;
 
     $scope.table = DataTable.params({
         sorting: { UserName: 'asc' },
         filter: { 'filterObject.UserName': '' }
-    }, AuthService);
+    }, UserService);
 
     $scope.table.params.reload();
 

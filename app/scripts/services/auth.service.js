@@ -23,11 +23,6 @@ angular.module('sistemaPolizasPgApp')
         }
     };
 
-    service.login= function(model, fnSuccess, fnError) {
-        var _url = url + 'login';
-        $http.post(_url, model).success(fnSuccess).error(fnError);
-    };
-
     service.OAuthLogin= function(model, fnSuccess, fnError) {
         var _url = api + 'token';
         _url = _url.replace('/api', '');
@@ -141,18 +136,6 @@ angular.module('sistemaPolizasPgApp')
         }).success(function(data) {
             fnSuccess(data);
         });
-    };
-
-    service.query = function(par, fn) {
-        var _url = url + '?' + par;
-        $http({
-            method: 'GET',
-            url: _url,
-            headers: utils.getHeader(),
-            cache: false
-        }).success(function(data) {
-            fn(data);
-        }).error(service.error);
     };
 
     service.userInRole = function(UserName, fnSuccess) {
