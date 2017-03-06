@@ -25,7 +25,7 @@ angular.module('sistemaPolizasPgApp')
         AuthService.details(userData.UserId, function(data) {
           if(data.detalles) {
             $scope.data.detalles = data.detalles;
-            $scope.data.detalles.FechaDeNacimiento = utils.formatDate(utils.toDate(data.detalles.FechaDeNacimiento));
+            //$scope.data.detalles.FechaDeNacimiento = utils.formatDate(utils.toDate(data.detalles.FechaDeNacimiento));
 
             angular.forEach($scope.data.areas, function(value, key) {
               if(data.area.Id === value.Id) {

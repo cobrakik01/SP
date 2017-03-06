@@ -47,8 +47,14 @@ angular.module('sistemaPolizasPgApp')
     };
 
     service.createAccount = function(userAccount, fnSuccess) {
-      var _url = url + 'CreateAccount';
-      $http.post(_url, { roles: userAccount.roles, userName: userAccount.userName }).success(fnSuccess).error(service.error);
+      var _url = url;
+      // $http.post(_url, { roles: userAccount.roles, userName: userAccount.userName }).success(fnSuccess).error(service.error);
+      var roles = [];
+      angular.forEach(userAccount.roles, function(a, b) {
+        roles.push(a.Name);
+      });
+      var data = { UserName: userAccount.userName, Roles: roles };
+      $http({method: 'POST', url: _url, data: data,headers: utils.getHeader(), cache: false}).success(fnSuccess).error(service.error);
     };
 
     service.createRol = function(rolName, fnSuccess) {

@@ -116,6 +116,11 @@ angular.module('sistemaPolizasPgApp')
 
     service.update = function(userId, detalles, area, fnSuccess) {
         var _url = url + 'user/update-details';
+        var splitDate = detalles.FechaDeNacimiento.toString().split('/');
+        if(splitDate.length == 3) {
+            detalles.FechaDeNacimiento = splitDate[2] + '-' + splitDate[1] + '-' + splitDate[0];
+            detalles.FechaDeNacimiento = new Date(detalles.FechaDeNacimiento);
+        }
         var data = {userId: userId, detalles: detalles, area: area};
         $http({
             method: 'POST',
@@ -123,7 +128,13 @@ angular.module('sistemaPolizasPgApp')
             headers: utils.getHeader(),
             data: data
         }).then(function(_data) {
-            fnSuccess(_data);
+            var data = {};
+            if(typeof _data.data != 'undefined') {
+                data = _data.data;
+            } else {
+                data = _data;
+            }
+            fnSuccess(data);
         }, service.error);
     };
 
@@ -134,6 +145,7 @@ angular.module('sistemaPolizasPgApp')
             url: _url,
             headers: utils.getHeader()
         }).success(function(data) {
+            data.detalles.FechaDeNacimiento = new Date(data.detalles.FechaDeNacimiento);
             fnSuccess(data);
         });
     };

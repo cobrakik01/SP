@@ -64,7 +64,9 @@ angular.module('sistemaPolizasPgApp')
     factory.toDate = function(strDate) {
         // console.log(strDate);
         if(typeof strDate !== 'undefined') {
-            return new Date(parseInt(strDate.substr(6)));
+            var substr = strDate.substr(6);
+            var n = parseInt(substr);
+            return new Date(n);
         }
         return "";
     };
