@@ -27,7 +27,7 @@ angular.module('sistemaPolizasPgApp')
         }
     }, PolizasService);
 
-    // $scope.table.polizas.params.reload();
+    $scope.table.polizas.params.reload();
 
     $scope.toDate = function(str) {
         return utils.formatDate(utils.toDate(str));

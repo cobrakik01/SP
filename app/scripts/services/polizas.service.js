@@ -8,59 +8,39 @@
  * Service in the sistemaPolizasPgApp.
  */
 angular.module('sistemaPolizasPgApp')
-  .service('PolizasService', function ($http, api, toaster) {
-  	var url = api + 'Polizas/';
+  .service('PolizasService', function ($http, api, toaster, utils) {
+  	var url = api + 'polizas/';
   	var service = {};
 
     service.error = function(a, status, c, d) {
-      toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
-      console.log(a);
-      console.log(status);
-      console.log(c);
-      console.log(d);
+      if(typeof status == 'undefined') {
+        toaster.pop('error', 'Error', a.data.Message);
+      } else {
+        toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
+      }
     };
 
-    service.all = function(fn) {
+    service.query = function(par, fn) {
       // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
       // var _url = url + params;
-      var _url = url + '/All';
+      /*
+      var _url = url + '?' + par;
       $http({method: 'GET', url: _url, cache: false}).success(function(data) {
+        fn(data);
+      }).error(service.error);
+      */
+      var _url = url + '?' + par;
+      $http({method: 'GET', url: _url, headers: utils.getHeader(), cache: false}).success(function(data) {
         fn(data);
       }).error(service.error);
     };
 
-    service.create = function(par, fn) {
-    	$http.post(url, par)
-    	.success(function(data) {
-    		fn(data);
-    	})
-    	.error(service.error);
-    };
-
-  	service.query = function(par, fn) {
-      // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
-      // var _url = url + params;
-      var _url = url + 'Index/?' + par;
-      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
+    service.create = function(model, fn) {
+      var _url = url;
+      $http({ method: 'POST', url: _url, headers: utils.getHeader(), data: model}).success(function(data) {
         fn(data);
       }).error(service.error);
     };
-
-    service.find = function(idPoliza, fn) {
-      var _url = url + 'Find/' + idPoliza;
-      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
-        fn(data);
-      }).error(service.error);
-    };
-    
-    /*
-  	service.create = function(model, fn) {
-      var data = {nombre: model.nombre};
-      $http.post(url, data).success(function(data) {
-        fn(data);
-      }).error(service.error);
-    };
-    */
 
     service.delete = function(model, fn) {
       var _url = url + '?id=' + model.id;
@@ -74,5 +54,35 @@ angular.module('sistemaPolizasPgApp')
         fn(data);
       }).error(service.error);
     };
+
+    service.all = function(fn) {
+      // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
+      // var _url = url + params;
+      var _url = url + '/All';
+      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
+        fn(data);
+      }).error(service.error);
+    };
+
+    service.find = function(idPoliza, fn) {
+      var _url = url + idPoliza;
+      /*
+      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
+        fn(data);
+      }).error(service.error);
+      */
+      $http({method: 'GET', url: _url, headers: utils.getHeader(), cache: false}).success(function(data) {
+        fn(data);
+      }).error(service.error);
+    };
+    
+    /*
+  	service.create = function(model, fn) {
+      var data = {nombre: model.nombre};
+      $http.post(url, data).success(function(data) {
+        fn(data);
+      }).error(service.error);
+    };
+    */
   	return service;
   });
