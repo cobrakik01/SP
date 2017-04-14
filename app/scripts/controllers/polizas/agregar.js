@@ -10,7 +10,7 @@
 angular.module('sistemaPolizasPgApp')
   .controller('PolizasAgregarCtrl', function ($scope, $modal, PolizasService, $log, AuthService, toaster) {
     
-    AuthService.auth();
+    // AuthService.auth();
 
     $scope.data = {
       depositante: undefined,

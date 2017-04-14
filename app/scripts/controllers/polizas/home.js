@@ -10,7 +10,7 @@
 angular.module('sistemaPolizasPgApp')
   .controller('PolizasCtrl', function ($scope, AfianzadoraService, AuthService) {
 
-  	AuthService.auth();
+  	//AuthService.auth();
 
     $scope.loaderAfianzadora = true;
     $scope.afianzadoras = AfianzadoraService.all(function(data) {

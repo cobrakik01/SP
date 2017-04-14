@@ -145,7 +145,9 @@ angular.module('sistemaPolizasPgApp')
             url: _url,
             headers: utils.getHeader()
         }).success(function(data) {
-            data.detalles.FechaDeNacimiento = new Date(data.detalles.FechaDeNacimiento);
+            if(data != "") {
+                data.detalles.FechaDeNacimiento = new Date(data.detalles.FechaDeNacimiento);
+            }
             fnSuccess(data);
         });
     };

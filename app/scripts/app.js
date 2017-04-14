@@ -73,7 +73,7 @@ angular
         } else {
           $state.transitionTo('login');
         }
-      }, function() {
+      }, function(data) {
         $state.transitionTo('login');
       });
     };
