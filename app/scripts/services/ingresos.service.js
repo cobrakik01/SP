@@ -41,10 +41,17 @@ angular.module('sistemaPolizasPgApp')
     };
 
     service.add = function(idPoliza, ingreso, depositante, fnSuccess) {
+      /*
       var _url = url + 'Add';
       return $http.post(_url, { idPoliza: idPoliza, ingreso : ingreso, depositante: depositante })
         .success(fnSuccess)
         .error(service.error);
+      */
+      var data = { Ingreso : ingreso, Depositante: depositante };
+      var _url = api + 'polizas/' + idPoliza + '/ingresos';
+      $http({method: 'POST', url: _url, data: data, headers: utils.getHeader(), cache: false}).success(function(data) {
+        fnSuccess(data);
+      }).error(service.error);
     };
 
     service.total = function(fnSuccess, fnError) {
