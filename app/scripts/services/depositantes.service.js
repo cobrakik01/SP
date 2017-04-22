@@ -8,23 +8,23 @@
  * Service in the sistemaPolizasPgApp.
  */
 angular.module('sistemaPolizasPgApp')
-  .service('DepositantesService', function ($http, api, toaster) {
-  	var url = api + 'Depositantes/';
+  .service('DepositantesService', function ($http, api, toaster, utils) {
+  	var url = api + 'depositantes/';
   	var service = {};
 
     service.error = function(a, status, c, d) {
-      toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
-      console.log(a);
-      console.log(status);
-      console.log(c);
-      console.log(d);
+      if(typeof status == 'undefined') {
+        toaster.pop('error', 'Error', a.data.Message);
+      } else {
+        toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
+      }
     };
 
-  	service.query = function(par, fn) {
+  	service.query = function(par, fn, urlParams) {
       // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
       // var _url = url + params;
-      var _url = url + '?' + par;
-      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
+      var _url = api + 'afianzados/' + urlParams + 'depositantes' + '?' + par;
+      $http({method: 'GET', url: _url, headers: utils.getHeader(), cache: false}).success(function(data) {
         fn(data);
       }).error(service.error);
     };

@@ -8,21 +8,27 @@
  * Service in the sistemaPolizasPgApp.
  */
 angular.module('sistemaPolizasPgApp')
-  .service('IngresosService', function ($http, api, toaster, utils, $localStorage) {
+  .service('IngresosService', function ($http, api, toaster, utils) {
   	var url = api + 'ingresos/';
   	var service = {};
 
     service.error = function(a, status, c, d) {
-      toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
-      console.log(a);
-      console.log(status);
-      console.log(c);
-      console.log(d);
+      if(typeof status == 'undefined') {
+        toaster.pop('error', 'Error', a.data.Message);
+      } else {
+        toaster.pop('error', 'Error', 'Ocurrio un error ' + status);
+      }
     };
 
-    service.query = function(par, fn) {
+    service.query = function(par, fn, urlParams) {
+      /*
       var _url = url + '?' + par;
       $http({method: 'GET', url: _url, cache: false}).success(function(data) {
+        fn(data);
+      }).error(service.error);
+      */
+      var _url = api + 'polizas/' + urlParams + 'ingresos' + '?' + par;
+      $http({method: 'GET', url: _url, headers: utils.getHeader(), cache: false}).success(function(data) {
         fn(data);
       }).error(service.error);
     };

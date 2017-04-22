@@ -80,6 +80,9 @@ angular.module('sistemaPolizasPgApp')
     };
 
     factory.formatMony = function(num) {
+        if(typeof num == 'undefined') {
+            return '0.00';
+        }
         var strNum = num.toString();
         var strEnteros = '';
         var strEnterosConComas = '';

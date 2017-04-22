@@ -69,8 +69,10 @@ angular.module('sistemaPolizasPgApp')
             __params = 'count=' + par.count + '&filter=' + _filter + '&page=' + par.page + '&' + _strSorting;
           }
 
+          var urlParams = '';
           if(typeof identity !== 'undefined')
           {
+            /*
             if(typeof identity.key !== 'undefined' && typeof identity.value !== 'undefined')
             {
               __params += '&' + identity.key + '=' + identity.value;
@@ -78,6 +80,21 @@ angular.module('sistemaPolizasPgApp')
               for (var i = 0; i < identity.length; i++) {
                 __params += '&' + identity[i].key + '=' + identity[i].value;
               }
+            }
+            */
+            if(identity.urlParams !== 'undefined') {
+              urlParams = '';
+              for(var i = 0; i < identity.urlParams.length; i++) {
+                urlParams += identity.urlParams[i] +'/';
+              }
+            } else {
+              angular.forEach(identity, function(index, value) {
+                if(__params.length > 0) {
+                  __params += '&filterObject.' + value + '=' + index;
+                } else {
+                  __params += 'filterObject.' + value + '=' + index;
+                }
+              });
             }
           }
           
@@ -88,7 +105,7 @@ angular.module('sistemaPolizasPgApp')
                       _params.total(a.total); // Total de registros
                       $defer.resolve(a.result); // Datos de todas las paginas
                   }, 500);
-          });
+          }, urlParams);
         }
       });
       return data;
