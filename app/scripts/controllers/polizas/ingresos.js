@@ -35,11 +35,11 @@ angular.module('sistemaPolizasPgApp')
     $scope.data.txtDepositante = '';
 
     $scope.table = {};
-    $scope.table.ingresos = [];// quitar despues del test
-    
     $scope.table.ingresos = DataTable.params({
       sorting: { FechaDeIngreso: 'desc' },
-      filter: { Cantidad: '', Descripcion: '', FechaDeIngreso: '' }
+      data: {
+        filterObject: { Cantidad: '', Depositante: '', Descripcion: '', FechaDeIngreso: '' }
+      }
     }, IngresosService, {urlParams: [idPoliza]});
     
 
@@ -49,7 +49,7 @@ angular.module('sistemaPolizasPgApp')
     }, DepositantesService, {urlParams: [idAfianzado]});
 
     $scope.toDate = function(str) {
-        return utils.formatDate(utils.toDate(str));
+        return utils.formatDate(new Date(str));
     };
 
     $scope.cargarDatosPoliza = function() {

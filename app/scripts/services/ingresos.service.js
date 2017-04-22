@@ -21,12 +21,6 @@ angular.module('sistemaPolizasPgApp')
     };
 
     service.query = function(par, fn, urlParams) {
-      /*
-      var _url = url + '?' + par;
-      $http({method: 'GET', url: _url, cache: false}).success(function(data) {
-        fn(data);
-      }).error(service.error);
-      */
       var _url = api + 'polizas/' + urlParams + 'ingresos' + '?' + par;
       $http({method: 'GET', url: _url, headers: utils.getHeader(), cache: false}).success(function(data) {
         fn(data);
