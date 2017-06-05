@@ -12,6 +12,21 @@ angular.module('sistemaPolizasPgApp')
     // Service logic
     // ...
 
+    function deepen(o) {
+      var oo = {}, t, parts, part;
+      for (var k in o) {
+        t = oo;
+        parts = k.split('.');
+        var key = parts.pop();
+        while (parts.length) {
+          part = parts.shift();
+          t = t[part] = t[part] || {};
+        }
+        t[key] = o[k]
+      }
+      return oo;
+    }
+
     var factory = {};
     factory.params = function(params, service, identity) {
       var data = {};
@@ -37,7 +52,7 @@ angular.module('sistemaPolizasPgApp')
           var par = _params.url();
           var filterObject = { filterObject: _params.filter() };
 
-          var strFilterObject = 'filterObject=' + JSON.stringify(filterObject.filterObject);
+          var strFilterObject = 'filterObject=' + JSON.stringify(deepen(filterObject.filterObject));
 
           var _strSorting = '';
           for(var s in _params.sorting()) {

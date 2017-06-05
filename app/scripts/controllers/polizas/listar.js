@@ -23,7 +23,7 @@ angular.module('sistemaPolizasPgApp')
     $scope.table.polizas = DataTable.params({
         sorting: { AveriguacionPrevia: 'asc', TotalIngresos: '', 'TotalIngresos' : '', 'Afianzadora.Nombre': ''},
         data: {
-        	filterObject: { AveriguacionPrevia: '', TotalIngresos: '', 'TotalIngresos': '', 'Afianzadora.Nombre': '', FechaDeAlta: '' }
+            filterObject: { AveriguacionPrevia: '', TotalIngresos: '', TotalIngresos: '', 'Afianzadora.Nombre': '', FechaDeAlta: '' }
         }
     }, PolizasService);
 

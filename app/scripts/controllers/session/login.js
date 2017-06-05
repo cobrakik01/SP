@@ -33,7 +33,12 @@ angular.module('sistemaPolizasPgApp')
           $state.transitionTo('home');
         }, function(a, b, c) {
           console.log(a);
-          toaster.pop('warning', 'Error', 'Ocurrio un error.');
+          if(a.responseJSON) {
+            toaster.pop('warning', 'Error', a.responseJSON.error_description);
+
+          } else {
+            toaster.pop('warning', 'Error', 'Ocurrio un error.');
+          }
           $scope.starting = false;
         });
       } else {
