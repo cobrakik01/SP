@@ -35,16 +35,17 @@ angular.module('sistemaPolizasPgApp')
       }).error(service.error);
     };
 
-    /*
-    service.delete = function(model, fn) {
-      var _url = url + '?id=' + model.id;
-      $http.delete(_url).success(function(data) {
+    service.update = function(model, fn) {
+      var _url = url;
+      $http({ method: 'PATCH', url: _url, headers: utils.getHeader(), data: model}).success(function(data) {
         fn(data);
       }).error(service.error);
     };
 
-    service.edit = function(model, fn) {
-      $http.patch(url, model).success(function(data) {
+    /*
+    service.delete = function(model, fn) {
+      var _url = url + '?id=' + model.id;
+      $http.delete(_url).success(function(data) {
         fn(data);
       }).error(service.error);
     };

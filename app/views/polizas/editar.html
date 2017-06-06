@@ -4,14 +4,14 @@
 			<span aria-hidden="true">&times;</span>
 		</button>
 		<div class="col-md-8">
-			<h3>Editar Póliza {{ poliza.Id }}</h3>
+			<h3>Editar Póliza {{ polizaUpdated.Id }}</h3>
 		</div>
 		<div class="col-md-4">
 			<div class="btn-group nav navbar-nav navbar-right" role="group" aria-label="Herramientas de administración">
-				<button type="submit" class="btn btn-primary" ng-disabled="disabled()">
+				<button type="submit" class="btn btn-primary" ng-click="update(polizaUpdated)">
 					Actualizar
 				</button>
-				<button type="reset" class="btn btn-default" ng-click="reset(data)">
+				<button type="reset" class="btn btn-default" ng-click="reset(polizaUpdated)">
 					Limpiar
 				</button>
 			</div>
@@ -20,7 +20,7 @@
 
 	<div class="panel-body">
 		<label for="AveriguacionPrevia">Averiguación Previa:</label>
-		<input type="text" id="AveriguacionPrevia" class="form-control" ng-model="poliza.AveriguacionPrevia" />
+		<input type="text" id="AveriguacionPrevia" class="form-control" ng-model="polizaUpdated.AveriguacionPrevia" />
 		<div class="row">
 			<div class="col-md-6">
 				<label for="Afianzado">Afianzado: </label>
@@ -29,41 +29,40 @@
 			<div class="col-md-6">
 				<!--
 				<label for="Afianzadora">Afianzadora: </label>
-				<input type="text" id="Afianzadora" class="form-control" ng-model="poliza.Afianzadora.Nombre" />
-			-->
-			<div class="clearfix">
-				<div class="form-group has-{{ data.afianzadora ? 'success' : 'warning' }} has-feedback">
-					<loader
-						working="loaderAfianzadora"
-						message="cargando..."
-						template="8">
-					</loader>
-					<label class="control-label" for="lstAfianzadora">Afianzadora:</label>
-					<select 
-						id="lstAfianzadora"
-						name="lstAfianzadora"
-						class="form-control"
-						ng-model="data.afianzadora"
-						ng-options="item.Nombre for item in afianzadoras">
-							<option value="">[ Afianzadora ]</option>
-					</select>
+				<input type="text" id="Afianzadora" class="form-control" ng-model="polizaUpdated.Afianzadora.Nombre" />
+				-->
+				<div class="clearfix">
+					<div class="form-group has-{{ data.afianzadora ? 'success' : 'warning' }} has-feedback">
+						<loader
+							working="loaderAfianzadora"
+							message="cargando..."
+							template="8">
+						</loader>
+						<label class="control-label" for="lstAfianzadora">Afianzadora:</label>
+						<select 
+							id="lstAfianzadora"
+							name="lstAfianzadora"
+							class="form-control"
+							ng-model="polizaUpdated.Afianzadoras"
+							ng-options="item.Nombre for item in afianzadoras">
+								<option value="">[ Afianzadora ]</option>
+						</select>
 
-					<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.afianzadora"></span>
-					<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.afianzadora"></span>
-					<span id="txtAfianzadoStatus" class="sr-only">(warning)</span>
+						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.afianzadora"></span>
+						<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.afianzadora"></span>
+						<span id="txtAfianzadoStatus" class="sr-only">(warning)</span>
 
-					<div ng-show="frmPoliza.$submitted && !data.afianzadora" class="text-warning">
-						Es requerida la seleccion de una afianzadora.
+						<div ng-show="frmPoliza.$submitted && !data.afianzadora" class="text-warning">
+							Es requerida la seleccion de una afianzadora.
+						</div>
 					</div>
+					<label class="control-label">Afianzadora actual: {{ nomAfianzadoraActual }}</label>
 				</div>
-				<label class="control-label">Afianzadora actual: {{ nomAfianzadoraActual }}</label>
-			</div>
 			</div>
 			<div class="col-md-12">
 				<label for="Descripcion">Descripcion: </label>
-				<textarea id="Descripcion" class="form-control" ng-model="poliza.Descripcion"></textarea>
+				<textarea id="Descripcion" class="form-control" ng-model="polizaUpdated.Descripcion"></textarea>
 			</div>
 		</div>
-		{{ poliza }}
 	</div>
 </div>
