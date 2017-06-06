@@ -27,7 +27,7 @@ angular.module('sistemaPolizasPgApp')
     	$state.go('polizas.listar');
     }
 
-    $scope.poliza;
+    $scope.ingreso;
     $scope.data = {
       depositante: {},
       ingreso: {}
@@ -54,7 +54,7 @@ angular.module('sistemaPolizasPgApp')
 
     $scope.cargarDatosPoliza = function() {
       PolizasService.find(idPoliza, function(data) {
-        $scope.poliza = data;
+        $scope.ingreso = data;
         $scope.afianzado = data.Afianzado;
         $scope.AveriguacionPrevia = data.AveriguacionPrevia;
       });
@@ -88,13 +88,13 @@ angular.module('sistemaPolizasPgApp')
 
     $scope.nuevoIngreso = function() {
       if($scope.ingresoListo()) {
-        console.log('Se agregara un nuevo ingreso.');
         IngresosService.add(idPoliza, $scope.data.ingreso, $scope.data.depositante, function(data) {
           if(data.Message)
           {
             toaster.pop(data.Message.Type, data.Message.Title, data.Message.Message);
             $scope.table.ingresos.params.reload();
             $scope.table.depositantes.params.reload();
+            $scope.cargarDatosPoliza();
             $scope.reset();
           }
         });

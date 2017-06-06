@@ -21,12 +21,14 @@ angular.module('sistemaPolizasPgApp')
 
     var idPoliza = $stateParams.idPoliza;
 
-    PolizasService.find(idPoliza, function(data) {
-    	$scope.poliza = data;
-      $scope.polizaUpdated = angular.copy(data);
-      $scope.nomCompletoAfianzado = $scope.poliza.Afianzado.ApellidoPaterno + ' ' + $scope.poliza.Afianzado.ApellidoMaterno + ' ' + $scope.poliza.Afianzado.Nombre;
-      $scope.nomAfianzadoraActual = $scope.poliza.Afianzadoras.Nombre;
-    });
+    $scope.cargarInfoPoliza = function() {
+      PolizasService.find(idPoliza, function(data) {
+        $scope.poliza = data.Poliza;
+        $scope.polizaUpdated = angular.copy(data.Poliza);
+        $scope.nomCompletoAfianzado = $scope.poliza.Afianzado.ApellidoPaterno + ' ' + $scope.poliza.Afianzado.ApellidoMaterno + ' ' + $scope.poliza.Afianzado.Nombre;
+        $scope.nomAfianzadoraActual = $scope.poliza.Afianzadoras.Nombre;
+      });
+    };
 
     $scope.loaderAfianzadora = true;
     $scope.afianzadoras = AfianzadoraService.all(function(data) {
@@ -37,9 +39,12 @@ angular.module('sistemaPolizasPgApp')
     $scope.update = function(data) {
       PolizasService.update(data, function(res) {
         if (res.Message) {
+          $scope.cargarInfoPoliza();
           toaster.pop(res.Message.Type, res.Message.Title, res.Message.Message);
         }
       });
     };
+
+    $scope.cargarInfoPoliza();
 
   });

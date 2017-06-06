@@ -3,7 +3,7 @@
 		<button ng-click="$state.go('polizas.listar')" type="button" class="close" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		 <h1 class="panel-title">Ingresos de afianzado - {{ afianzado.ApellidoPaterno }} {{ afianzado.ApellidoMaterno }} {{ afianzado.Nombre }}</h1>
+		 <h1 class="panel-title">Ingresos de afianzado - {{ ingreso.Poliza.Afianzado.ApellidoPaterno }} {{ ingreso.Poliza.Afianzado.ApellidoMaterno }} {{ ingreso.Poliza.Afianzado.Nombre }}</h1>
 	</div>
 	<div class="panel-body">
 		<div class="col-md-12">
@@ -77,8 +77,8 @@
 		<div class="col-md-12 clearfix">
 			<div class="row">
 				<hgroup>
-					<h4 style="padding: 0px; margin: 0px;"><small>Poliza</small> {{ poliza.Id }} - <small>Averiguacion previa </small> {{ poliza.AveriguacionPrevia }} - <small>Fecha de alta</small> {{ toDate(poliza.FechaDeAlta ? poliza.FechaDeAlta : '01/01/0001') }} </h4>
-					<h3 class="page-header" style="padding: 0px; margin: 0px 0px 10px 0px;">Lista de Ingresos <small>Total: {{ formatMony(poliza.TotalIngresos) }}</small></h3>
+					<h4 style="padding: 0px; margin: 0px;"><small>Poliza</small> {{ ingreso.Poliza.Id }} - <small>Averiguacion previa </small> {{ ingreso.Poliza.AveriguacionPrevia }} - <small>Fecha de alta</small> {{ toDate(ingreso.Poliza.FechaDeAlta ? ingreso.Poliza.FechaDeAlta : '01/01/0001') }} </h4>
+					<h3 class="page-header" style="padding: 0px; margin: 0px 0px 10px 0px;">Lista de Ingresos <small>Total: {{ formatMony(ingreso.TotalIngresos) }}</small></h3>
 				</hgroup>
 				<div class="clearfix"></div>
 				<div loading-container="table.ingresos.params.settings().$loading">
