@@ -101,14 +101,14 @@
 					 		template="8">
 					 	</loader>
 
-					 	<label class="control-label" for="lstAreas">Area:</label>
+					 	<label class="control-label" for="lstAreas">Área:</label>
 					 	<select 
 				 			id="lstAreas"
 				 			name="lstAreas"
 							class="form-control" 
 							ng-model="data.area" 
 							ng-options="area.Nombre for area in data.areas">
-								<option value="">[ Area ]</option>
+								<option value="">[ Área ]</option>
 						</select>
 
 						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.area.Nombre"></span>
@@ -116,7 +116,7 @@
 						<span id="txtAfianzadoStatus" class="sr-only">(warning)</span>
 
 						<div ng-show="frmDetalles.$submitted && !data.area.Nombre" class="text-warning">
-							Es requerida la selección de un area.
+							Es requerida la selección de un área.
 						</div>
 					</div>
 

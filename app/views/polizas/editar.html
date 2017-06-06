@@ -1,10 +1,23 @@
 <div class="panel panel-default">
-	<div class="panel-heading">
+	<div class="panel-heading clearfix">
 		<button ng-click="$state.go('polizas.listar')" type="button" class="close" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		<h3>Editar Poliza {{ poliza.Id }}</h3>
+		<div class="col-md-8">
+			<h3>Editar Póliza {{ poliza.Id }}</h3>
+		</div>
+		<div class="col-md-4">
+			<div class="btn-group nav navbar-nav navbar-right" role="group" aria-label="Herramientas de administración">
+				<button type="submit" class="btn btn-primary" ng-disabled="disabled()">
+					Actualizar
+				</button>
+				<button type="reset" class="btn btn-default" ng-click="reset(data)">
+					Limpiar
+				</button>
+			</div>
+		</div>
 	</div>
+
 	<div class="panel-body">
 		<label for="AveriguacionPrevia">Averiguación Previa:</label>
 		<input type="text" id="AveriguacionPrevia" class="form-control" ng-model="poliza.AveriguacionPrevia" />
