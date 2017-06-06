@@ -30,6 +30,7 @@ angular.module('sistemaPolizasPgApp')
 
     service.create = function(model, fn) {
       var _url = url;
+      model.poliza.Cantidad = model.cantidad;
       $http({ method: 'POST', url: _url, headers: utils.getHeader(), data: model}).success(function(data) {
         fn(data);
       }).error(service.error);

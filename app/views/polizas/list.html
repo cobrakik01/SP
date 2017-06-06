@@ -31,6 +31,9 @@
 						{{ toDate(item.Afianzado.FechaDeNacimiento) }}
 					</td>
 					-->
+					<td data-title="'A cubrir'" sortable="'Cantidad'" filter="{ 'Cantidad': 'text' }" class="text-right">
+						{{ formatMony(item.Cantidad) }}
+					</td>
 					<td data-title="'Ingresos'" sortable="'TotalIngresos'" filter="{ 'TotalIngresos': 'text' }" class="text-right">
 						{{ formatMony(item.TotalIngresos) }}
 					</td>

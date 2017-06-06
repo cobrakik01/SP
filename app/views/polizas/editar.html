@@ -25,12 +25,11 @@
 			<div class="col-md-6">
 				<label for="Afianzado">Afianzado: </label>
 				<input type="text" id="Afianzado" readonly="readonly" class="form-control" ng-model="nomCompletoAfianzado" />
+
+				<label for="Cantidad">Cantidad: </label>
+				<input type="text" id="Cantidad" class="form-control" ng-model="polizaUpdated.Cantidad" />
 			</div>
 			<div class="col-md-6">
-				<!--
-				<label for="Afianzadora">Afianzadora: </label>
-				<input type="text" id="Afianzadora" class="form-control" ng-model="polizaUpdated.Afianzadora.Nombre" />
-				-->
 				<div class="clearfix">
 					<div class="form-group has-{{ data.afianzadora ? 'success' : 'warning' }} has-feedback">
 						<loader
