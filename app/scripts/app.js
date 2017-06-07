@@ -145,6 +145,20 @@ angular
 
     /*
       |-----------------------------
+      |       Ministerios
+      |-----------------------------
+      */
+    var ministerios = {
+      name: 'ministerios',
+      url: '/administrar/ministerios',
+      controller: 'MinisteriosHomeCtrl',
+      templateUrl: view + 'views/ministerios/home.html',
+      deepStateRedirect: true,
+      onEnter: auth
+    };
+
+    /*
+      |-----------------------------
       |       Polizas
       |-----------------------------
       */
@@ -276,6 +290,7 @@ angular
       .state(areas)
       .state(afianzadoras)
       .state(autoridades)
+      .state(ministerios)
 
       /*
       |-----------------------------

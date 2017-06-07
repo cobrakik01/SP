@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc function
- * @name sistemaPolizasPgApp.controller:AreasEditarModalCtrl
+ * @name sistemaPolizasPgApp.controller:MinisteriosEditarCtrl
  * @description
- * # AreasEditarModalCtrl
+ * # MinisteriosEditarCtrl
  * Controller of the sistemaPolizasPgApp
  */
 angular.module('sistemaPolizasPgApp')
-  .controller('AreasEditarModalCtrl', function ($scope, $modalInstance, params, AreasService, toaster) {
-    $scope.title = 'Editar Área';
+  .controller('MinisteriosEditarCtrl', function ($scope, $modalInstance, params, MinisteriosService, toaster) {
+    $scope.title = 'Editar Ministerio';
   	$scope.msg = 'Mi mensaje de prueba';
 
   	$scope.item = {
@@ -18,7 +18,7 @@ angular.module('sistemaPolizasPgApp')
   	};
 
   	$scope.editar = function() {
-  		AreasService.edit($scope.item, function(data) {
+  		MinisteriosService.edit($scope.item, function(data) {
   			if (data.Message) {
   				toaster.pop(data.Message.Type, data.Message.Title, data.Message.Message);
   				params.table.params.reload();

@@ -1,8 +1,8 @@
-<h1 class="page-header">Administrar Áreas</h1>
+<h1 class="page-header">Administrar Ministerios</h1>
 
 <div class="col-md-12 col-sm-12">
 	<tabset>
-		<tab heading="Listar Áreas">
+		<tab heading="Listar Ministerios">
 			<div class="row">
 				<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
 					<div class="clearfix"></div>
@@ -28,20 +28,20 @@
 			</div>
 		</tab>
 
-		<tab heading="Agregar Área">
+		<tab heading="Agregar Ministerio">
 		 	<div class="row">
 		 		<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
 		 			<form ng-submit="nuevo()">
-		 				<div class="form-group has-{{ (!area.nombre ? 'warning' : 'success') }} has-feedback">
-					 		<label class="control-label" for="txtAreaNombre">Nombre de Área</label>
-					 		<input ng-model="area.nombre" placeholder="Nombre de Área" type="text" class="form-control" id="txtAreaNombre">
+		 				<div class="form-group has-{{ (!ministerio.nombre ? 'warning' : 'success') }} has-feedback">
+					 		<label class="control-label" for="txtAreaNombre">Nombre de Ministerio</label>
+					 		<input ng-model="ministerio.nombre" placeholder="Nombre de Ministerio" type="text" class="form-control" id="txtAreaNombre">
 
-					 		<span ng-show="area.nombre" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-					 		<span ng-show="!area.nombre" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+					 		<span ng-show="ministerio.nombre" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					 		<span ng-show="!ministerio.nombre" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
 
 					 		<span class="sr-only"></span>
 					 	</div>
-					 	<button ng-disabled="!area.nombre" class="btn btn-primary btn-block" type="submit">
+					 	<button ng-disabled="!ministerio.nombre" class="btn btn-primary btn-block" type="submit">
 					 		Guardar
 					 	</button>
 		 			</form>
@@ -51,13 +51,13 @@
 	</tabset>
 </div>
 
-<script type="text/ng-template" id="mdlEditarArea.html">
+<script type="text/ng-template" id="mdlEditarMinisterio.html">
 	<form ng-submit="editar()">
 		<div class="modal-header">
 			<h3 class="modal-title">{{ title }}</h3>
 		</div>
 	    <div class="modal-body">
-	    	<input type="text" ng-model="item.nombre" class="form-control" placeholder="Nombre de Área" />
+	    	<input type="text" ng-model="item.nombre" class="form-control" placeholder="Nombre de Ministerio" />
 	    </div>
 	    <div class="modal-footer">
 		    <button class="btn btn-primary" type="submit">Aceptar</button>

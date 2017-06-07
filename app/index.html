@@ -72,6 +72,9 @@
                 <li ui-route="#/administrar/autoridades" ng-class="{active: $state.includes('autoridades')}">
                   <a ng-href="#!/administrar/autoridades">Autoridades</a>
                 </li>
+                <li ui-route="#/administrar/ministerios" ng-class="{active: $state.includes('ministerios')}">
+                  <a ng-href="#!/administrar/ministerios">Ministerios</a>
+                </li>
                 <li ui-route="#/usuarios" ng-class="{active: $state.includes('usuarios')}">
                   <a ui-sref="usuarios">Usuarios</a>
                 </li>
@@ -212,6 +215,9 @@
         <script src="scripts/services/api.constants.js"></script>
         <script src="scripts/services/afianzados.service.js"></script>
         <script src="scripts/services/afianzadoras.service.js"></script>
+        <script src="scripts/controllers/ministerios/home.js"></script>
+        <script src="scripts/controllers/ministerios/editar.modal.js"></script>
+        <script src="scripts/services/ministerios.service.js"></script>
         <!-- endbuild -->
 </body>
 </html>
