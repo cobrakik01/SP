@@ -56,6 +56,9 @@
                 <li ui-route="#/polizas/agregar" ng-class="{active: $state.includes('polizas')}">
                   <a ui-sref="polizas.agregar">Pólizas</a>
                 </li>
+                <li ui-route="#/egresos" ng-class="{active: $state.includes('egresos')}">
+                  <a ui-sref="egresos">Egresos</a>
+                </li>
               </ul>
             </li>
             <li class="dropdown" ng-class="{active: $state.includes('areas') || $state.includes('afianzadoras') || $state.includes('autoridades') || $state.includes('usuarios')}">
@@ -218,6 +221,8 @@
         <script src="scripts/controllers/ministerios/home.js"></script>
         <script src="scripts/controllers/ministerios/editar.modal.js"></script>
         <script src="scripts/services/ministerios.service.js"></script>
+        <script src="scripts/controllers/egresos/home.js"></script>
+        <script src="scripts/services/egresos.service.js"></script>
         <!-- endbuild -->
 </body>
 </html>

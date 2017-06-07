@@ -208,6 +208,20 @@ angular
     };
 
     /*
+    |-----------------------------
+    |       Egresos
+    |-----------------------------
+    */
+    var egresos = {
+      name: 'egresos',
+      url: '/egresos',
+      controller: 'EgresosHomeCtrl',
+      templateUrl: view + 'views/egresos/home.html',
+      deepStateRedirect: true,
+      onEnter: auth
+    };
+
+    /*
       |-----------------------------
       |       Perfil
       |-----------------------------
@@ -302,6 +316,13 @@ angular
       .state(polizasAgregar)
       .state(polizasEditar)
       .state(polizasIngresos)
+
+      /*
+      |-----------------------------
+      |       Egresos
+      |-----------------------------
+      */
+      .state(egresos)
 
 
       // .state(afianzados)
