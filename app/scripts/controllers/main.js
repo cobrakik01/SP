@@ -10,17 +10,33 @@
 angular.module('sistemaPolizasPgApp')
   .controller('MainCtrl', function ($scope, $rootScope, utils, IngresosService, EgresosService) {
 
-  	$scope.ingresos = IngresosService.total(function(data) {
-  		return $scope.ingresos = data;
+    $scope.getCurrentYear = function() {
+      return utils.formatDate(new Date()).split('/')[2];
+    };
+
+  	$scope.totalIngresos = IngresosService.total(function(data) {
+  		return $scope.totalIngresos = data;
   	}, function(a, b, c) {
   		console.log(a);
   	});
 
-  	$scope.egresos = EgresosService.total(function(data) {
-      return $scope.egresos = data;
+    $scope.totalIngresosAnioActual = IngresosService.total(function(data) {
+      return $scope.totalIngresosAnioActual = data;
+    }, function(a, b, c) {
+      console.log(a);
+    }, $scope.getCurrentYear());
+
+  	$scope.totalEgresos = EgresosService.total(function(data) {
+      return $scope.totalEgresos = data;
     }, function(a, b, c) {
       console.log(a);
     });
+
+    $scope.totalEgresosAnioActual = EgresosService.total(function(data) {
+      return $scope.totalEgresosAnioActual = data;
+    }, function(a, b, c) {
+      console.log(a);
+    }, $scope.getCurrentYear());
 
   	$scope.formatMony = function(num) {
   		return utils.formatMony(num);

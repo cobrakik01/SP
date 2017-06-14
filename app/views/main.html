@@ -7,10 +7,10 @@
           <h1 class="panel-title">INFORME DEL SISTEMA DE POLIZAS  </h1>
         </div>
         <div class="panel-body">
-          <strong>Ingresos:</strong> {{ formatMony(ingresos) }}<br />
-          <strong>Egresos:</strong> {{ formatMony(egresos) }}<br />
-          <strong>Ingresos 2012:</strong> {{ 'ingresos 2012' }}<br />
-          <strong>Egresos 2012:</strong> {{ 'egresos 2012' }}<br />
+          <strong>Ingresos:</strong> {{ formatMony(totalIngresos) }}<br />
+          <strong>Egresos:</strong> {{ formatMony(totalEgresos) }}<br />
+          <strong>Ingresos {{ getCurrentYear() }}:</strong> {{ formatMony(totalIngresosAnioActual) }}<br />
+          <strong>Egresos {{ getCurrentYear() }}:</strong> {{ formatMony(totalEgresosAnioActual) }}<br />
         </div>
       </div>
     </div>
