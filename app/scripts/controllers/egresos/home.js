@@ -28,7 +28,7 @@ angular.module('sistemaPolizasPgApp')
     $scope.formatMony = utils.formatMony;
 
     $scope.toDate = function(str) {
-        return utils.formatDate(utils.toDate(str));
+        return utils.formatDate(new Date(str));
     };
 
     $scope.cargarMinisterios = function() {

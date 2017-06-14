@@ -30,7 +30,7 @@ angular.module('sistemaPolizasPgApp')
     $scope.table.polizas.params.reload();
 
     $scope.toDate = function(str) {
-        return utils.formatDate(utils.toDate(str));
+        return utils.formatDate(new Date(str));
     };
 
     $scope.formatMony = utils.formatMony;
