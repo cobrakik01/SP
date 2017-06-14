@@ -56,6 +56,25 @@ angular.module('sistemaPolizasPgApp')
         fn(data);
       }).error(service.error);
     };
+
+    service.total = function(fnSuccess, fnError) {
+      var _url = url + 'total';
+
+      return $http({
+        type: 'GET',
+        url: _url,
+        headers: utils.getHeader()
+      }).then(function(_data) {
+        var data = {};
+        if(typeof _data.data != 'undefined') {
+          data = _data.data;
+        } else {
+          data = _data;
+        }
+
+        fnSuccess(data);
+      }, fnError);
+    };
     
   	return service;
   });

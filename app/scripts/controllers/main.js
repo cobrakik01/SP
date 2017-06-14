@@ -8,7 +8,7 @@
  * Controller of the sistemaPolizasPgApp
  */
 angular.module('sistemaPolizasPgApp')
-  .controller('MainCtrl', function ($scope, $rootScope, utils, IngresosService) {
+  .controller('MainCtrl', function ($scope, $rootScope, utils, IngresosService, EgresosService) {
 
   	$scope.ingresos = IngresosService.total(function(data) {
   		return $scope.ingresos = data;
@@ -16,7 +16,11 @@ angular.module('sistemaPolizasPgApp')
   		console.log(a);
   	});
 
-  	$scope.egresos = 2345324;
+  	$scope.egresos = EgresosService.total(function(data) {
+      return $scope.egresos = data;
+    }, function(a, b, c) {
+      console.log(a);
+    });
 
   	$scope.formatMony = function(num) {
   		return utils.formatMony(num);

@@ -2,20 +2,86 @@
 <div class="col-md-12 col-sm-12">
 	<div class="row">
 		<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
+			<form name="frmEgresos" ng-submit="nuevo(data) && frmEgresos.$valid">
+
+				<div class="col-md-4">
+	 				<div class="form-group has-{{ (!data.Cantidad ? 'warning' : 'success') }} has-feedback">
+				 		<label class="control-label" for="txtCantidad">Cantidad</label>
+				 		<input ng-model="data.Cantidad" required placeholder="Cantidad" type="text" class="form-control" id="txtCantidad">
+
+				 		<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.Cantidad"></span>
+						<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.Cantidad"></span>
+
+						<!--
+						<div ng-show="frmEgresos.$submitted && !data.Cantidad" class="text-warning">
+							Es requerida la cantidad.
+						</div>
+						-->
+				 	</div>
+				</div>
+
+				<div class="col-md-4">
+			 		<label class="control-label" for="txtDescripcion">Descripción</label>
+			 		<input ng-model="data.Descripcion" placeholder="Descripción" type="text" class="form-control" id="txtDescripcion">
+				</div>
+
+				<div class="col-md-4">
+				 	<div class="form-group has-{{ data.MinisteriosPublicos.Nombre ? 'success' : 'warning' }} has-feedback">
+				 		<loader
+					 		working="loaderAfianzadora"
+					 		message="cargando..."
+					 		template="8">
+					 	</loader>
+
+					 	<label class="control-label" for="lstMinisterios">Ministerio público:</label>
+					 	<select 
+				 			id="lstMinisterios"
+				 			name="lstMinisterios"
+							class="form-control" 
+							ng-model="data.MinisteriosPublicos" 
+							ng-options="ministerio.Nombre for ministerio in MinisteriosPublicos">
+								<option value="">[ Ministerio público ]</option>
+						</select>
+
+						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.MinisteriosPublicos.Nombre"></span>
+						<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.MinisteriosPublicos.Nombre"></span>
+
+						<!--
+						<div ng-show="frmEgresos.$submitted && !data.MinisteriosPublicos.Nombre" class="text-warning">
+							Es requerida la selección de un ministerio público.
+						</div>
+						-->
+					</div>
+				</div>
+
+				<div class="col-md-12">
+				 	<button ng-disabled="!data.Cantidad || !data.MinisteriosPublicos.Nombre" class="btn btn-primary btn-block" type="submit">
+				 		Guardar
+				 	</button>
+				</div>
+
+ 			</form>
+ 		</div>
+
+		<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
 			<div class="clearfix"></div>
 			<div loading-container="table.params.settings().$loading">
 				<table ng-table="table.params" class="table table-striped table-hover" show-filter="true">
 					<tr ng-repeat="item in table.items" style="cursor: pointer;">
-						<td data-title="'Nombre'" sortable="'Nombre'" filter="{ 'Nombre': 'text' }">
-							{{ item.Nombre }}
+						<td data-title="'Descripcion'" sortable="'Descripcion'" filter="{ 'Descripcion': 'text' }">
+							{{ item.Descripcion }}
 						</td>
-						<td data-title="'Acciones'">
-							<button class="btn btn-default" type="button" ng-click="mdlEditar(item)">
-								Editar
-							</button>
-							<button class="btn btn-warning" type="button" ng-click="mdlEliminar(item)">
-								Eliminar
-							</button>
+						<td data-title="'Ministerio público'" sortable="'MinisteriosPublicos.Nombre'" filter="{ 'MinisteriosPublicos.Nombre': 'text' }">
+							{{ item.MinisteriosPublicos.Nombre }}
+						</td>
+						<td data-title="'Autoridad'" sortable="'MinisteriosPublicos.Autoridad.Nombre'" filter="{ 'MinisteriosPublicos.Autoridad.Nombre': 'text' }">
+							{{ item.MinisteriosPublicos.Autoridad.Nombre }}
+						</td>
+						<td class="text-right" data-title="'Cantidad'" sortable="'Cantidad'" filter="{ 'Cantidad': 'text' }">
+							{{ formatMony(item.Cantidad) }}
+						</td>
+						<td data-title="'FechaDeEgreso'" sortable="'FechaDeEgreso'" filter="{ 'FechaDeEgreso': 'text' }">
+							{{ toDate(item.FechaDeEgreso) }}
 						</td>
 					</tr>
 				</table>

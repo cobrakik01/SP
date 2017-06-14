@@ -1,4 +1,4 @@
-<h1 class="page-header">Administrar ministerios publicos</h1>
+<h1 class="page-header">Administrar ministerios públicos</h1>
 
 <div class="col-md-12 col-sm-12">
 	<tabset>
@@ -81,50 +81,49 @@
 </div>
 
 <script type="text/ng-template" id="mdlEditarMinisterio.html">
-	<form ng-submit="editar(data)">
+	<form name="frmMinisterio" ng-submit="editar(data)">
 		<div class="modal-header">
 			<h3 class="modal-title">{{ title }}</h3>
 		</div>
 	    <div class="modal-body">
-	    	<input type="text" ng-model="data.Nombre" class="form-control" placeholder="Nombre de Ministerio" />
-	    </div>
-	    <div class="form-group has-{{ data.Autoridad.Nombre ? 'success' : 'warning' }} has-feedback">
-	    	<loader
-				working="loaderAfianzadora"
-		 		message="cargando..."
-		 		template="8">
-		 	</loader>
+	    	<div class="form-group has-{{ data.Nombre ? 'success' : 'warning' }} has-feedback">
+	    		<input type="text" name="nombre" ng-model="data.Nombre" class="form-control" placeholder="Nombre de Ministerio" />
 
-		 	<label class="control-label" for="lstAutoridad">Autoridad:</label>
-		 	<!--
-		 	<select 
-	 			id="lstAutoridad"
-	 			name="lstAutoridad"
-				class="form-control" 
-				ng-model="data.Autoridad"
-				ng-options="autoridad.Nombre for autoridad in Autoridades">
-					<option value="">[ Autoridad ]</option>
-			</select>
-			-->
-			<select 
-	 			id="lstAutoridad"
-	 			name="lstAutoridad"
-				class="form-control"
-				ng-model="data.Autoridad"
-				ng-options="autoridad.Nombre for autoridad in Autoridades track by autoridad.Id">
-					<option value="">[ Autoridad ]</option>
-			</select>
+	    		<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.Nombre"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.Nombre"></span>
 
-			<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.Autoridad.Nombre"></span>
-			<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.Autoridad.Nombre"></span>
-			<span id="txtAfianzadoStatus" class="sr-only">(warning)</span>
+				<div ng-show="frmMinisterio.$submitted && !data.Nombre" class="text-warning">
+					Es requerido el nombre
+				</div>
+	    	</div>
 
-			<div ng-show="frmDetalles.$submitted && !data.Autoridad.Nombre" class="text-warning">
-				Es requerida la selección de un área.
+		    <div class="form-group has-{{ data.Autoridad.Nombre ? 'success' : 'warning' }} has-feedback">
+		    	<loader
+					working="loaderAfianzadora"
+			 		message="cargando..."
+			 		template="8">
+			 	</loader>
+
+			 	<label class="control-label" for="lstAutoridad">Autoridad:</label>
+				<select 
+		 			id="lstAutoridad"
+		 			name="lstAutoridad"
+					class="form-control"
+					ng-model="data.Autoridad"
+					ng-options="autoridad.Nombre for autoridad in Autoridades track by autoridad.Id">
+						<option value="">[ Autoridad ]</option>
+				</select>
+
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.Autoridad.Nombre"></span>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.Autoridad.Nombre"></span>
+
+				<div ng-show="frmMinisterio.$submitted && !data.Autoridad.Nombre" class="text-warning">
+					Es requerida la selección de una autoridad
+				</div>
 			</div>
-		</div>
+	    </div>
 	    <div class="modal-footer">
-		    <button class="btn btn-primary" type="submit">Aceptar</button>
+		    <button ng-disabled="!data.Nombre || !data.Autoridad.Nombre" class="btn btn-primary" type="submit">Aceptar</button>
 		    <button class="btn btn-warning" type="button" ng-click="cancelar()">Cancelar</button>
 	    </div>
     </form>

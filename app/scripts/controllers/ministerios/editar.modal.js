@@ -22,6 +22,7 @@ angular.module('sistemaPolizasPgApp')
     $scope.data = angular.copy(params.model);
 
   	$scope.editar = function(dataEdited) {
+      if(!dataEdited.Nombre || !dataEdited.Autoridad.Nombre){ return; }
   		MinisteriosService.edit(dataEdited, function(data) {
   			if (data.Message) {
   				toaster.pop(data.Message.Type, data.Message.Title, data.Message.Message);
