@@ -1,4 +1,4 @@
-<h1 class="page-header">Administrar Ministerios</h1>
+<h1 class="page-header">Administrar ministerios publicos</h1>
 
 <div class="col-md-12 col-sm-12">
 	<tabset>
@@ -11,6 +11,9 @@
 							<tr ng-repeat="item in table.items" style="cursor: pointer;">
 								<td data-title="'Nombre'" sortable="'Nombre'" filter="{ 'Nombre': 'text' }">
 									{{ item.Nombre }}
+								</td>
+								<td data-title="'Autoridad'" sortable="'Autoridad.Nombre'" filter="{ 'Autoridad.Nombre': 'text' }">
+									{{ item.Autoridad.Nombre }}
 								</td>
 								<td data-title="'Acciones'">
 									<button class="btn btn-default" type="button" ng-click="mdlEditar(item)">
@@ -30,18 +33,44 @@
 
 		<tab heading="Agregar Ministerio">
 		 	<div class="row">
-		 		<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
-		 			<form ng-submit="nuevo()">
-		 				<div class="form-group has-{{ (!ministerio.nombre ? 'warning' : 'success') }} has-feedback">
-					 		<label class="control-label" for="txtAreaNombre">Nombre de Ministerio</label>
-					 		<input ng-model="ministerio.nombre" placeholder="Nombre de Ministerio" type="text" class="form-control" id="txtAreaNombre">
+				<div class="col-md-12 col-sm-12" style="padding-top: 20px;">
+					<form ng-submit="nuevo()">
+		 				<div class="form-group has-{{ (!data.Ministerio.Nombre ? 'warning' : 'success') }} has-feedback">
+					 		<label class="control-label" for="txtNombre">Nombre del ministerio publico</label>
+					 		<input ng-model="data.Ministerio.Nombre" placeholder="Nombre del ministerio publico" type="text" class="form-control" id="txtNombre">
 
-					 		<span ng-show="ministerio.nombre" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-					 		<span ng-show="!ministerio.nombre" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+					 		<span ng-show="data.Ministerio.Nombre" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					 		<span ng-show="!data.Ministerio.Nombre" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
 
 					 		<span class="sr-only"></span>
 					 	</div>
-					 	<button ng-disabled="!ministerio.nombre" class="btn btn-primary btn-block" type="submit">
+
+					 	<div class="form-group has-{{ data.autoridad.Nombre ? 'success' : 'warning' }} has-feedback">
+					 		<loader
+						 		working="loaderAfianzadora"
+						 		message="cargando..."
+						 		template="8">
+						 	</loader>
+
+						 	<label class="control-label" for="lstAreas">Autoridad:</label>
+						 	<select 
+					 			id="lstAreas"
+					 			name="lstAreas"
+								class="form-control" 
+								ng-model="data.autoridad" 
+								ng-options="autoridad.Nombre for autoridad in data.autoridades">
+									<option value="">[ Autoridad ]</option>
+							</select>
+
+							<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.autoridad.Nombre"></span>
+							<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.autoridad.Nombre"></span>
+							<span id="txtAfianzadoStatus" class="sr-only">(warning)</span>
+
+							<div ng-show="frmDetalles.$submitted && !data.autoridad.Nombre" class="text-warning">
+								Es requerida la selección de un área.
+							</div>
+						</div>
+					 	<button ng-disabled="!data.Ministerio.Nombre || !data.autoridad.Nombre" class="btn btn-primary btn-block" type="submit">
 					 		Guardar
 					 	</button>
 		 			</form>
@@ -52,13 +81,48 @@
 </div>
 
 <script type="text/ng-template" id="mdlEditarMinisterio.html">
-	<form ng-submit="editar()">
+	<form ng-submit="editar(data)">
 		<div class="modal-header">
 			<h3 class="modal-title">{{ title }}</h3>
 		</div>
 	    <div class="modal-body">
-	    	<input type="text" ng-model="item.nombre" class="form-control" placeholder="Nombre de Ministerio" />
+	    	<input type="text" ng-model="data.Nombre" class="form-control" placeholder="Nombre de Ministerio" />
 	    </div>
+	    <div class="form-group has-{{ data.Autoridad.Nombre ? 'success' : 'warning' }} has-feedback">
+	    	<loader
+				working="loaderAfianzadora"
+		 		message="cargando..."
+		 		template="8">
+		 	</loader>
+
+		 	<label class="control-label" for="lstAutoridad">Autoridad:</label>
+		 	<!--
+		 	<select 
+	 			id="lstAutoridad"
+	 			name="lstAutoridad"
+				class="form-control" 
+				ng-model="data.Autoridad"
+				ng-options="autoridad.Nombre for autoridad in Autoridades">
+					<option value="">[ Autoridad ]</option>
+			</select>
+			-->
+			<select 
+	 			id="lstAutoridad"
+	 			name="lstAutoridad"
+				class="form-control"
+				ng-model="data.Autoridad"
+				ng-options="autoridad.Nombre for autoridad in Autoridades track by autoridad.Id">
+					<option value="">[ Autoridad ]</option>
+			</select>
+
+			<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="data.Autoridad.Nombre"></span>
+			<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-show="!data.Autoridad.Nombre"></span>
+			<span id="txtAfianzadoStatus" class="sr-only">(warning)</span>
+
+			<div ng-show="frmDetalles.$submitted && !data.Autoridad.Nombre" class="text-warning">
+				Es requerida la selección de un área.
+			</div>
+		</div>
 	    <div class="modal-footer">
 		    <button class="btn btn-primary" type="submit">Aceptar</button>
 		    <button class="btn btn-warning" type="button" ng-click="cancelar()">Cancelar</button>

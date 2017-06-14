@@ -20,6 +20,13 @@ angular.module('sistemaPolizasPgApp')
       }
     };
 
+    service.all = function(fn) {
+      var _url = url;
+      $http({method: 'GET', url: _url, headers: utils.getHeader(), cache: false}).success(function(data) {
+        fn(data.result);
+      }).error(service.error);
+    };
+
     service.query = function(par, fn) {
       // var params = '?count=' + par.count + '&filter=' + par.filter + '&page=' + par.page + '&sorting=' + par.sorting;
       //var _url = url + params;

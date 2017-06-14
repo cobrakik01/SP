@@ -11,23 +11,38 @@ angular.module('sistemaPolizasPgApp')
   .controller('MinisteriosHomeCtrl', function (
     $scope,
     MinisteriosService,
+    AutoridadesService,
     toaster, 
     DataTable,
     cbk,
     $modal) {
 
-    $scope.ministerio = { nombre: '' };
+    $scope.data = {
+        autoridades: [],
+        Autoridad: {},
+        Ministerio: {}
+    };
 
     $scope.table = DataTable.params({
-        sorting: { Nombre: 'asc' },
-        filter: { Nombre: '' }
+        sorting: { 'Ministerio.Nombre': 'asc' },
+        data: {
+            filterObject: { 'Nombre': '', 'Autoridad.Nombre': '' }
+        }
     }, MinisteriosService);
 
     $scope.table.params.reload();
 
+    $scope.cargarAutoridades = function() {
+        AutoridadesService.all(function(data) {
+            $scope.data.autoridades = data;
+        });
+    };
+
     $scope.nuevo = function() {
-      MinisteriosService.create($scope.ministerio, function(data) {
-        $scope.ministerio = {};
+      MinisteriosService.create($scope.data, function(data) {
+        $scope.cargarAutoridades();
+        $scope.data.Ministerio = {};
+        $scope.data.Autoridad = {};
         if(data.Message)
         {
           toaster.pop(data.Message.Type, data.Message.Title, data.Message.Message);
@@ -69,5 +84,7 @@ angular.module('sistemaPolizasPgApp')
             }
         });
     };
+
+    $scope.cargarAutoridades();
 
   });
