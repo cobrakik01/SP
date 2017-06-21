@@ -57,6 +57,36 @@ angular.module('sistemaPolizasPgApp')
       }).error(service.error);
     };
 
+    service.report = function(anio) {
+      var _url = url + 'reporte/' + anio;
+      $http({ method: 'GET', url: _url, headers: utils.getHeader(), cache: false, responseType: 'arraybuffer' })
+      .success(function(data, status, _headers) {
+        var headers = _headers();
+ 
+        var filename = headers['x-filename'];
+        var contentType = headers['content-type'];
+ 
+        var linkElement = document.createElement('a');
+        try {
+          var urlCreator = window.URL || window.webkitURL || window.mozURL || window.msURL;
+            var blob = new Blob([data], { type: contentType });
+            var url = urlCreator.createObjectURL(blob);
+ 
+            linkElement.setAttribute('href', url);
+            linkElement.setAttribute("download", filename);
+ 
+            var clickEvent = new MouseEvent("click", {
+                "view": window,
+                "bubbles": true,
+                "cancelable": false
+            });
+            linkElement.dispatchEvent(clickEvent);
+        } catch (ex) {
+            console.log(ex);
+        }
+      }).error(service.error);
+    };
+
     service.total = function(fnSuccess, fnError, anio) {
       var _url = url + 'total';
       if(anio) {

@@ -38,6 +38,10 @@ angular.module('sistemaPolizasPgApp')
       console.log(a);
     }, $scope.getCurrentYear());
 
+    $scope.reporteEgresos = function() {
+      EgresosService.report($scope.getCurrentYear());
+    };
+
   	$scope.formatMony = function(num) {
   		return utils.formatMony(num);
   	};

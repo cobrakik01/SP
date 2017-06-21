@@ -4,7 +4,12 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h1 class="panel-title">INFORME DEL SISTEMA DE POLIZAS  </h1>
+          <h1 class="panel-title">
+          INFORME DEL SISTEMA DE POLIZAS
+            <button class="btn btn-xs btn-default" ng-click="reporteEgresos()">
+              Reporte de egresos {{ getCurrentYear() }}
+            </button>
+          </h1>
         </div>
         <div class="panel-body">
           <strong>Ingresos:</strong> {{ formatMony(totalIngresos) }}<br />

@@ -21,7 +21,7 @@ angular.module('sistemaPolizasPgApp')
   	$scope.table = DataTable.params({
       sorting: { Cantidad: 'asc' },
       data: {
-        filterObject: { Descripcion: '', 'MinisteriosPublicos.Nombre': '', 'MinisteriosPublicos.Autoridad.Nombre': '', Cantidad: '', FechaDeEgreso: '' }
+        filterObject: { Descripcion: '', 'MinisteriosPublicos.Nombre': '', 'MinisteriosPublicos.Autoridad.Nombre': '', Cantidad: '', StrFechaDeEgreso: '' }
       }
     }, EgresosService);
 
