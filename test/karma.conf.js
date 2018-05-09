@@ -45,6 +45,7 @@ module.exports = function(config) {
       'bower_components/angular-ui-utils/index.js',
       'bower_components/ng-loaders/ngLoader.js',
       'bower_components/ngstorage/ngStorage.js',
+      'bower_components/jspdf/dist/jspdf.debug.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

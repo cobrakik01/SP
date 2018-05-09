@@ -16,7 +16,9 @@
     "angular-ui-router": "~0.2.15",
     "angular-ui-utils": "~3.0.0",
     "ng-loaders": "~0.2.0",
-    "ngstorage": "^0.3.11"
+    "ngstorage": "^0.3.11",
+    "jspdf": "^1.3.4",
+    "jspdf-plugins": "jsPDF-plugins#*"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

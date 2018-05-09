@@ -53,6 +53,30 @@ angular.module('sistemaPolizasPgApp')
       });
     };
 
+    $scope.generarReporte = function() {
+      var element = window.document.getElementById('egresosReport');
+       var specialElementHandlers = {
+                '#bypassme': function (element, renderer) {
+                    return true;
+                }
+            };
+      var doc = new jsPDF(); 
+      doc.fromHTML(element, 15, 15, {
+                'width': 75,'elementHandlers': specialElementHandlers
+            }, function(data){
+                console.log(data);
+                var string = 'Hola mundo!';
+                $('.previewIFRAME').html(string);
+                if (navigator.msSaveBlob) {
+                    string = doc.output('datauristring');
+                } else {
+                    string = doc.output('bloburi');
+                }
+            });
+      //doc.output("dataurlnewwindow");
+      doc.save('Test.pdf');
+    };
+
     $scope.resetData();
     
   });
